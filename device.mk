@@ -316,6 +316,7 @@ PRODUCT_PACKAGES += \
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
+    fstab.qcom.vendor_ramdisk \
     init.class_main.sh \
     init.qcom.class_core.sh \
     init.qcom.early_boot.sh \
