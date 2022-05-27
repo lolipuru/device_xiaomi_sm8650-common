@@ -15,11 +15,6 @@
 #include <thread>
 #include <unistd.h>
 
-#include <vendor/xiaomi/hardware/displayfeature/1.0/IDisplayFeature.h>
-
-using ::android::sp;
-using ::vendor::xiaomi::hardware::displayfeature::V1_0::IDisplayFeature;
-
 #define COMMAND_NIT 10
 #define PARAM_NIT_FOD 1
 #define PARAM_NIT_NONE 0
@@ -40,17 +35,12 @@ class XiaomiSm8550UdfpsHander : public UdfpsHandler {
   public:
     void init(fingerprint_device_t *device) {
         mDevice = device;
-
         touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
-
-        xiaomiDisplayFeatureService = IDisplayFeature::getService();
     }
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
         int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_ON};
         ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
-
-        xiaomiDisplayFeatureService->setFeature(0, 17, 1, 1);
 
         mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_FOD);
     }
@@ -60,16 +50,11 @@ class XiaomiSm8550UdfpsHander : public UdfpsHandler {
 
         int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_OFF};
         ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
-
-        xiaomiDisplayFeatureService->setFeature(0, 17, 0, 1);
     }
 
   private:
     fingerprint_device_t *mDevice;
-
     android::base::unique_fd touch_fd_;
-
-    sp<IDisplayFeature> xiaomiDisplayFeatureService;
 };
 
 static UdfpsHandler* create() {

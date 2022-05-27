@@ -12,7 +12,6 @@ cc_library {
         "libbase",
         "libhidlbase",
         "libutils",
-        "vendor.xiaomi.hardware.displayfeature@1.0",
     ],
     header_libs: [
         "//hardware/xiaomi:xiaomifingerprint_headers",
