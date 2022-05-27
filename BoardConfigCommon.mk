@@ -70,6 +70,9 @@ TARGET_USES_UEFI := true
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
 
+# Fingerprint
+TARGET_SURFACEFLINGER_UDFPS_LIB := //$(DEVICE_PATH):libudfps_extension.xiaomi_sm8550
+
 # Display
 TARGET_SCREEN_DENSITY := 480
 

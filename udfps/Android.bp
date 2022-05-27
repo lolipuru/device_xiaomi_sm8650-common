@@ -1,0 +1,28 @@
+//
+// Copyright (C) 2022 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library {
+    name: "libudfpshandler",
+    vendor: true,
+    srcs: ["UdfpsHandler.cpp"],
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "libutils",
+        "vendor.xiaomi.hardware.displayfeature@1.0",
+    ],
+    header_libs: [
+        "//hardware/xiaomi:xiaomifingerprint_headers",
+    ],
+}
+
+cc_library_static {
+    name: "libudfps_extension.xiaomi_sm8550",
+    srcs: ["UdfpsExtension.cpp"],
+    include_dirs: [
+        "frameworks/native/services/surfaceflinger/CompositionEngine/include"
+    ],
+}
