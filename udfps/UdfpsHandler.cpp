@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#define LOG_TAG "UdfpsHander.xiaomi_sm8550"
+#define LOG_TAG "UdfpsHandler.xiaomi_sm8550"
 
 #include "UdfpsHandler.h"
 
@@ -31,25 +31,79 @@
 #define TOUCH_MAGIC 0x5400
 #define TOUCH_IOC_SETMODE TOUCH_MAGIC + SET_CUR_VALUE
 
+#define FOD_PRESS_STATUS_PATH "/sys/devices/virtual/touch/touch_dev/fod_press_status"
+
+static bool readBool(int fd) {
+    char c;
+    int rc;
+
+    rc = lseek(fd, 0, SEEK_SET);
+    if (rc) {
+        LOG(ERROR) << "failed to seek fd, err: " << rc;
+        return false;
+    }
+
+    rc = read(fd, &c, sizeof(char));
+    if (rc != 1) {
+        LOG(ERROR) << "failed to read bool from fd, err: " << rc;
+        return false;
+    }
+
+    return c != '0';
+}
+
 class XiaomiSm8550UdfpsHander : public UdfpsHandler {
   public:
     void init(fingerprint_device_t *device) {
         mDevice = device;
         touch_fd_ = android::base::unique_fd(open(TOUCH_DEV_PATH, O_RDWR));
+
+        std::thread([this]() {
+            int fd = open(FOD_PRESS_STATUS_PATH, O_RDONLY);
+            if (fd < 0) {
+                LOG(ERROR) << "failed to open fd, err: " << fd;
+                return;
+            }
+
+            struct pollfd fodUiPoll = {
+                    .fd = fd,
+                    .events = POLLERR | POLLPRI,
+                    .revents = 0,
+            };
+
+            while (true) {
+                int rc = poll(&fodUiPoll, 1, -1);
+                if (rc < 0) {
+                    LOG(ERROR) << "failed to poll fd, err: " << rc;
+                    continue;
+                }
+
+                mDevice->extCmd(mDevice, COMMAND_NIT,
+                                readBool(fd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+            }
+        }).detach();
     }
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
-        int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_ON};
-        ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
-
-        mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_FOD);
+        // nothing
     }
 
     void onFingerUp() {
-        mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_NONE);
+        // nothing
+    }
 
-        int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_OFF};
-        ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+    void onAcquired(int32_t vendorCode) {
+        LOG(INFO) << __func__ << " vendorCode: " << vendorCode;
+        // vendorCode 21 means listening for fingerprint
+        // vendorCode 22 means not listening for fingerprint
+        if (vendorCode == 21) {
+            int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_ON};
+            ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+
+        } else if (vendorCode == 22) {
+            int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_OFF};
+            ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+        }
     }
 
   private:
