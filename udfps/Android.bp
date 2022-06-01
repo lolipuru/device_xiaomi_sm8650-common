@@ -17,11 +17,3 @@ cc_library {
         "//hardware/xiaomi:xiaomifingerprint_headers",
     ],
 }
-
-cc_library_static {
-    name: "libudfps_extension.xiaomi_sm8550",
-    srcs: ["UdfpsExtension.cpp"],
-    include_dirs: [
-        "frameworks/native/services/surfaceflinger/CompositionEngine/include"
-    ],
-}
