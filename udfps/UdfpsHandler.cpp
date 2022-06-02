@@ -15,12 +15,41 @@
 #include <thread>
 #include <unistd.h>
 
+#define THP_CMD_BASE	1000
+
+enum MODE_TYPE {
+    Touch_Game_Mode				= 0,
+    Touch_Active_MODE      		= 1,
+    Touch_UP_THRESHOLD			= 2,
+    Touch_Tolerance				= 3,
+    Touch_Aim_Sensitivity       = 4,
+    Touch_Tap_Stability         = 5,
+    Touch_Expert_Mode           = 6,
+    Touch_Edge_Filter      		= 7,
+    Touch_Panel_Orientation 	= 8,
+    Touch_Report_Rate      		= 9,
+    Touch_Fod_Enable       		= 10,
+    Touch_Aod_Enable       		= 11,
+    Touch_Resist_RF        		= 12,
+    Touch_Idle_Time        		= 13,
+    Touch_Doubletap_Mode   		= 14,
+    Touch_Grip_Mode        		= 15,
+    Touch_FodIcon_Enable   		= 16,
+    Touch_Nonui_Mode       		= 17,
+    Touch_Debug_Level      		= 18,
+    Touch_Power_Status     		= 19,
+    Touch_Mode_NUM         		= 20,
+    THP_LOCK_SCAN_MODE      	= THP_CMD_BASE + 0,
+    THP_FOD_DOWNUP		      	= THP_CMD_BASE + 1,
+    THP_SET_REPORT_RATE      	= THP_CMD_BASE + 11,
+};
+
 #define COMMAND_NIT 10
 #define PARAM_NIT_FOD 1
 #define PARAM_NIT_NONE 0
 
 #define FOD_STATUS_ON 1
-#define FOD_STATUS_OFF -1
+#define FOD_STATUS_OFF 0
 
 // defines from drivers/input/touchscreen/xiaomi/xiaomi_touch.h
 #define SET_CUR_VALUE 0
@@ -80,6 +109,10 @@ class XiaomiSm8550UdfpsHander : public UdfpsHandler {
 
                 mDevice->extCmd(mDevice, COMMAND_NIT,
                                 readBool(fd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+
+                int arg[3] = {TOUCH_ID, THP_FOD_DOWNUP, readBool(fd) ? 1 : 0};
+                ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
+
             }
         }).detach();
     }
@@ -92,18 +125,23 @@ class XiaomiSm8550UdfpsHander : public UdfpsHandler {
         // nothing
     }
 
-    void onAcquired(int32_t vendorCode) {
-        LOG(INFO) << __func__ << " vendorCode: " << vendorCode;
-        // vendorCode 21 means listening for fingerprint
-        // vendorCode 22 means not listening for fingerprint
-        if (vendorCode == 21) {
+    void onAcquired(int32_t result, int32_t vendorCode) {
+        LOG(INFO) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
+        // vendorCode 21 means waiting for fingerprint
+        // result 0 means fingerprint detected successfully
+        if (vendorCode == 21 || vendorCode == 22 || vendorCode == 23) {
             int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_ON};
             ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
-
-        } else if (vendorCode == 22) {
+        } else if (result == 0) {
             int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_OFF};
             ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
         }
+    }
+
+    void cancel() {
+        LOG(INFO) << __func__;
+        int arg[3] = {TOUCH_ID, Touch_Fod_Enable, FOD_STATUS_OFF};
+        ioctl(touch_fd_.get(), TOUCH_IOC_SETMODE, &arg);
     }
 
   private:
