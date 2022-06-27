@@ -46,6 +46,13 @@ PRODUCT_PACKAGES += \
 TARGET_SCREEN_HEIGHT := 2670
 TARGET_SCREEN_WIDTH := 1200
 
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health-service.qti \
+    android.hardware.health-service.qti_recovery \
+    android.hardware.health@1.0.vendor \
+    android.hardware.health@2.1.vendor
+
 # Partitions
 PRODUCT_BUILD_SUPER_PARTITION := true
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
