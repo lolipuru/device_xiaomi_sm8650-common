@@ -1865,10 +1865,6 @@ vendor/lib64/vendor.qti.hardware.trustedui@1.2.so
 # Trustzone
 vendor/app/TrustZoneAccessService/TrustZoneAccessService.apk
 
-# USB
-vendor/bin/init.qcom.usb.sh
-vendor/etc/init/hw/init.qcom.usb.rc
-
 # Video
 vendor/lib64/libstreamparser.so
 vendor/lib64/libubwcp.so
