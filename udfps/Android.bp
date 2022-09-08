@@ -10,8 +10,6 @@ cc_library {
     srcs: ["UdfpsHandler.cpp"],
     shared_libs: [
         "libbase",
-        "libhidlbase",
-        "libutils",
     ],
     header_libs: [
         "//hardware/xiaomi:xiaomifingerprint_headers",
