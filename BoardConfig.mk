@@ -120,5 +120,8 @@ ENABLE_VENDOR_RIL_SERVICE := true
 # Sepolicy
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 
+# Verified Boot
+BOARD_MOVE_GSI_AVB_KEYS_TO_VENDOR_BOOT := true
+
 # Inherit from the proprietary version
 -include vendor/xiaomi/houji/BoardConfigVendor.mk
