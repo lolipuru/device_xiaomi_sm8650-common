@@ -141,6 +141,9 @@ ro.vendor.radio.features_common=3
 # RCS
 persist.vendor.rcs.singlereg.feature=1
 
+# Update engine
+ro.virtual_ab.compression.threads=true
+
 # USB
 sys.usb.mtp.batchcancel=1
 vendor.usb.product_string=Xiaomi 14
