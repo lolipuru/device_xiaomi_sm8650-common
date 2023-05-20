@@ -318,6 +318,9 @@ subsystem mem_buf_vm
 /dev/dvb/adapter0/dvr*    0660   media       media
 /dev/dvb/adapter0/video*  0660   media       media
 
+# Battery
+/sys/class/qcom-battery  input_suspend  0660    system  system
+
 # Broadcast devices
 /dev/tsc_mux0             0660   media       media
 /dev/tsc_ci0              0660   media       media
