@@ -21,6 +21,9 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 # Enforce generic ramdisk allow list
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 
+# Virtualization service
+$(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk)
+
 # SHIPPING API
 BOARD_API_LEVEL := 34
 BOARD_SHIPPING_API_LEVEL := 34
