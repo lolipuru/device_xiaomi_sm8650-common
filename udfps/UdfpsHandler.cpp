@@ -231,18 +231,42 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
             req.base.disp_id = MI_DISP_PRIMARY;
             req.local_hbm_value = LHBM_TARGET_BRIGHTNESS_OFF_FINGER_UP;
             ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_LOCAL_HBM, &req);
-            setFodStatus(FOD_STATUS_OFF);
-        } else if (vendorCode == 20 || vendorCode == 22) {
-            /*
-             * vendorCode = 20 waiting for fingerprint authentication
-             * vendorCode = 22 waiting for fingerprint enroll
-             */
+            if (!enrolling) {
+                setFodStatus(FOD_STATUS_OFF);
+            }
+        }
+
+        /* vendorCode (xiaomi 14, since oss kernel doesn't exist yet)
+         * 20: waiting for finger
+         * 21: finger down
+         * 22: finger up
+         */
+        if (vendorCode == 20 || vendorCode == 22) {
             setFodStatus(FOD_STATUS_ON);
         }
     }
 
     void cancel() {
         LOG(DEBUG) << __func__;
+        enrolling = false;
+
+        setFodStatus(FOD_STATUS_OFF);
+    }
+
+    void preEnroll() {
+        LOG(DEBUG) << __func__;
+        enrolling = true;
+    }
+
+    void enroll() {
+        LOG(DEBUG) << __func__;
+        enrolling = true;
+    }
+
+    void postEnroll() {
+        LOG(DEBUG) << __func__;
+        enrolling = false;
+
         setFodStatus(FOD_STATUS_OFF);
     }
 
@@ -250,6 +274,7 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
     fingerprint_device_t* mDevice;
     android::base::unique_fd touch_fd_;
     android::base::unique_fd disp_fd_;
+    bool enrolling = false;
     uint32_t lastPressX, lastPressY;
 
     void setFodStatus(int value) {
