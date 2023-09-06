@@ -32,5 +32,10 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name=".display.ColorModeService"
+            android:permission="ColorModeService">
+        </service>
+
     </application>
 </manifest>

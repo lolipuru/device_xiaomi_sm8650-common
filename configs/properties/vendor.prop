@@ -107,6 +107,7 @@ vendor.display.vds_allow_hwc=1
 vendor.display.enable_spr=1
 
 # displayfeature (vendor)
+persist.sys.sf.native_mode=258
 ro.vendor.beluga.c=0x4800
 ro.vendor.beluga.p=0x3
 ro.vendor.beluga.s=0x900
