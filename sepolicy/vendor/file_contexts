@@ -14,18 +14,6 @@
 /mnt/vendor/persist/camera(/.*)?                                              u:object_r:camera_persist_file:s0
 /persist/camera(/.*)?                                                         u:object_r:camera_persist_file:s0
 /vendor/bin/camera_cal                                                        u:object_r:DualCameraCal_exec:s0
-/vendor/lib(64)?/libSNPE\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libSnpeHtpPrepare\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libSnpeHtpV75Stub\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libc\+\+_shared\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/libmialgo_ai_vision\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/rfsa/adsp/libSnpeHtpV75Skel\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/rfsa/adsp/libcalculator_skel\.so u:object_r:same_process_hal_file:s0
-/vendor/lib(64)?/rfsa/adsp/libmialgo_basic_cdsp_skel\.so u:object_r:same_process_hal_file:s0
-/odm/lib(64)?/libmiocr\.so u:object_r:same_process_hal_file:s0
-/odm/lib(64)?/libmialgo_utils\.so u:object_r:same_process_hal_file:s0
-/odm/lib(64)?/libxmi_slow_motion_mein\.so u:object_r:same_process_hal_file:s0
-/odm/lib(64)?/rfsa/adsp/libmialgo_bokeh_effect_cdsp_skel\.so            u:object_r:same_process_hal_file:s0
 
 # Display
 /sys/class/backlight(/.*)?                                                    u:object_r:vendor_sysfs_graphics:s0
