@@ -98,7 +98,7 @@ PRODUCT_COPY_FILES += \
 
 # Kernel modules
 BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/system_dlkm/modules.load))
-BOARD_SYSTEM_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/system_dlkm/, $(BOARD_SYSTEM_KERNEL_MODULES_LOAD))
+SYSTEM_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/system_dlkm/, $(BOARD_SYSTEM_KERNEL_MODULES_LOAD))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/vendor_ramdisk/modules.load))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/vendor_ramdisk/, $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(KERNEL_PATH)/vendor_ramdisk/modules.blocklist
