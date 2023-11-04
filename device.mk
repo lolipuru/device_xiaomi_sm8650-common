@@ -46,6 +46,12 @@ PRODUCT_PACKAGES += \
 TARGET_SCREEN_HEIGHT := 2670
 TARGET_SCREEN_WIDTH := 1200
 
+# Boot control
+PRODUCT_PACKAGES += \
+    android.hardware.boot-service.qti \
+    android.hardware.boot-service.qti_recovery \
+    libboot_control_qti
+
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health-service.xiaomi \
