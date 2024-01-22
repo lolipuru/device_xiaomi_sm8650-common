@@ -373,6 +373,10 @@ on charger
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
 
+on property:vendor.post_boot.parsed=1
+    # Set default thermal profile
+    write /sys/class/thermal/thermal_message/sconfig 0
+
 #service vendor.lowi /vendor/bin/sscrpcd
 #   class core
 #   user system
