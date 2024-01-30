@@ -20,4 +20,6 @@ allow vendor_wcnss_service vendor_modem_data_file:dir { add_name getattr open re
 allow vendor_wcnss_service vendor_modem_data_file:file { append create getattr open read rename setattr unlink write };
 allow vendor_wcnss_service fuse:dir { add_name getattr open read remove_name search setattr write };
 allow vendor_wcnss_service fuse:file { append create getattr open read rename setattr unlink write };
+allow vendor_wcnss_service mnt_vendor_file:dir create_dir_perms;
+allow vendor_wcnss_service mnt_vendor_file:file create_file_perms;
 set_prop(vendor_wcnss_service, vendor_radio_prop)
