@@ -171,17 +171,20 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
         LOG(INFO) << __func__;
+        // Ensure touchscreen is aware of the press state, ideally this is not needed
         setFingerDown(true);
     }
 
     void onFingerUp() {
         LOG(INFO) << __func__;
+        // Ensure touchscreen is aware of the press state, ideally this is not needed
         setFingerDown(false);
     }
 
     void onAcquired(int32_t result, int32_t vendorCode) {
         LOG(INFO) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
         if (result == FINGERPRINT_ACQUIRED_GOOD) {
+            // Set finger as up to disable HBM already, even if the finger is still pressed
             setFingerDown(false);
             setFodStatus(FOD_STATUS_OFF);
         } else if (vendorCode == 20 || vendorCode == 22) {
