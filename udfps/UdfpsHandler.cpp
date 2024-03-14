@@ -215,8 +215,12 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
     void onAcquired(int32_t result, int32_t vendorCode) {
         LOG(DEBUG) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
         if (result == FINGERPRINT_ACQUIRED_GOOD) {
-            // Set finger as up to disable HBM already, even if the finger is still pressed
-            setFingerDown(false);
+            // Request to disable HBM already, even if the finger is still pressed
+            disp_local_hbm_req req;
+            req.base.flag = 0;
+            req.base.disp_id = MI_DISP_PRIMARY;
+            req.local_hbm_value = LHBM_TARGET_BRIGHTNESS_OFF_FINGER_UP;
+            ioctl(disp_fd_.get(), MI_DISP_IOCTL_SET_LOCAL_HBM, &req);
             setFodStatus(FOD_STATUS_OFF);
         } else if (vendorCode == 20 || vendorCode == 22) {
             /*
