@@ -47,6 +47,7 @@ android.hardware.wifi-V1-ndk
 android.hardware.wifi.hostapd-V1-ndk
 android.hardware.wifi.supplicant-V1-ndk
 android.hardware.wifi.supplicant-V2-ndk
+android.media.audio.common.types-V2-cpp
 android.system.net.netd-V1-ndk
 vendor.qti.hardware.bluetooth.audio-V1-ndk
 vendor.qti.hardware.camera.aon-V1-ndk
