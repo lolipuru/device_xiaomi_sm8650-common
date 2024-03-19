@@ -139,7 +139,7 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
                     brightness = brightness_req.brightness;
                 }
                 LOG(DEBUG) << "brightness is: " << (int)brightness_req.brightness;
-                bool requestLowBrightness = brightness < LOW_BRIGHTNESS_THRESHHOLD;
+                bool requestLowBrightness = !enrolling && brightness < LOW_BRIGHTNESS_THRESHHOLD;
 
                 // Request HBM
                 disp_local_hbm_req req;
