@@ -71,11 +71,20 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # PRODUCT_PACKAGES += \
 #     android.hardware.power-service-qti
 
+
 # Rootdir
 PRODUCT_PACKAGES += \
-    fstab.qcom.vendor_ramdisk \
+    fstab.qcom \
+    init.class_main.sh \
+    init.qcom.class_core.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.rc \
+    init.qcom.sh \
     init.recovery.qcom.rc \
-    init.recovery.usb.rc
+    init.target.rc \
+    ueventd.xiaomi.rc \
+    ueventd.qcom.rc
 
 # Shipping API
 PRODUCT_SHIPPING_API_LEVEL := 34

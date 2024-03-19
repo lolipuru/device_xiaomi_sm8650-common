@@ -1,0 +1,14 @@
+## All proprietary files from this list, unless pinned and noted otherwise,
+## are from Xiaomi 14 (OS1.0.2.0.UNCMIXM). 
+
+# Kernel
+vendor/bin/init.kernel.post_boot-pineapple.sh
+vendor/bin/init.kernel.post_boot.sh
+vendor/bin/init.qti.kernel.sh
+vendor/bin/system_dlkm_modprobe.sh
+vendor/bin/vendor_modprobe.sh
+vendor/etc/init/hw/init.qti.kernel.rc
+
+# USB
+vendor/bin/init.qcom.usb.sh
+vendor/etc/init/hw/init.qcom.usb.rc

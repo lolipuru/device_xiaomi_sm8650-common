@@ -1,0 +1,539 @@
+
+# Copyright (c) 2019-2021, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of The Linux Foundation nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+# Changes from Qualcomm Innovation Center are provided under the following license:
+# Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted (subject to the limitations in the
+# disclaimer below) provided that the following conditions are met:
+#
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#
+#     * Neither the name of Qualcomm Innovation Center, Inc. nor the names of
+#       its contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE
+# GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
+# HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+# GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+# IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import /vendor/etc/init/hw/init.qti.kernel.rc
+import /vendor/etc/init/hw/init.batterysecret.rc
+import /vendor/etc/init/hw/init.charge_logger.rc
+import /vendor/etc/init/hw/init.mi_thermald.rc
+
+on early-init
+    write /proc/sys/kernel/printk_devkmsg ratelimited
+    export MEMTAG_OPTIONS off
+    export ADSP_LIBRARY_PATH /odm/lib/rfsa/adsp;/vendor/lib/rfsa/adsp/;/system/lib/rfsa/adsp;/system/vendor/lib/rfsa/adsp;/dsp
+    # set tcp_mtu_probing to 1
+    write /proc/sys/net/ipv4/tcp_mtu_probing 1
+
+on init
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    chown system system /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
+    chmod 0660 /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
+    start logd
+
+# MIUI ADD: Performance_BoostFramework
+    mkdir /dev/cpuctl/misc
+    chown system system /dev/cpuctl/misc
+    chown system system /dev/cpuctl/misc/tasks
+    chown system system /dev/cpuctl/misc/cgroup.procs
+    chmod 0664 /dev/cpuctl/misc/cgroup.procs
+    chmod 0664 /dev/cpuctl/misc/tasks
+# END Performance_BoostFramework
+# MIUI ADD: Game_GameSmallWindow
+    mkdir /dev/cpuset/small-window
+    mkdir /dev/cpuctl/small-window
+# END Game_SmallWindow
+
+on early-fs
+    start vold
+
+on fs
+    start hwservicemanager
+    mount_all /vendor/etc/fstab.qcom --early
+    chown root system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon_recursive /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/secnvm 0770 system system
+    mkdir /mnt/vendor/persist/data 0700 system system
+    mkdir /dev/logfs 0771 system system
+    mount vfat /dev/block/bootdevice/by-name/logfs /dev/logfs noatime umask=006,uid=1000,gid=1000
+    mount ext4 /dev/block/bootdevice/by-name/rescue /mnt/rescue noatime
+    restorecon_recursive /mnt/rescue
+    # add Audio_DataWhale
+    chmod 0666 /dev/xlog
+
+on post-fs
+    #Execute virtualization manager
+    enable vendor.qvirtservice_rs
+    start  vendor.qvirtservice_rs
+
+on late-fs
+    wait_for_prop hwservicemanager.ready true
+    #exec_start wait_for_keymaster
+    mount_all /vendor/etc/fstab.qcom --late
+
+on post-fs-data
+    chmod 0666 /dev/migt
+    restorecon /dev/migt
+    chmod 0777 /sys/module/migt/parameters/migt_freq
+    restorecon /sys/module/migt/parameters/migt_freq
+    chmod 0777 /sys/module/migt/parameters/migt_ms
+    restorecon /sys/module/migt/parameters/migt_ms
+    chmod 0777 /sys/module/migt/parameters/migt_thresh
+    restorecon /sys/module/migt/parameters/migt_thresh
+    chmod 0777 /sys/module/migt/parameters/boost_policy
+    restorecon /sys/module/migt/parameters/boost_policy
+    chmod 0777 /sys/module/migt/parameters/fps_variance_ratio
+    restorecon /sys/module/migt/parameters/fps_variance_ratio
+    chmod 0777 /sys/module/migt/parameters/super_task_max_num
+    restorecon /sys/module/migt/parameters/super_task_max_num
+    chmod 0777 /sys/module/migt/parameters/migt_ceiling_freq
+    restorecon /sys/module/migt/parameters/migt_ceiling_freq
+    chmod 0777 /sys/module/migt/parameters/stask_candidate_num
+    restorecon /sys/module/migt/parameters/stask_candidate_num
+    chmod 0666 /sys/module/migt/parameters/glk_disable
+    restorecon /sys/module/migt/parameters/glk_disable
+    chmod 0666 /sys/module/migt/parameters/glk_fbreak_enable
+    restorecon /sys/module/migt/parameters/glk_fbreak_enable
+    chmod 0666 /sys/module/migt/parameters/glk_freq_limit_walt
+    restorecon /sys/module/migt/parameters/glk_freq_limit_walt
+    chmod 0666 /sys/module/migt/parameters/glk_minfreq
+    restorecon /sys/module/migt/parameters/glk_minfreq
+    chmod 0666 /sys/module/migt/parameters/glk_maxfreq
+    restorecon /sys/module/migt/parameters/glk_maxfreq
+    chmod 0666 /sys/module/migt/parameters/force_stask_to_big
+    restorecon /sys/module/migt/parameters/force_stask_to_big
+    chmod 0666 /sys/module/migt/parameters/force_reset_runtime
+    restorecon /sys/module/migt/parameters/force_reset_runtime
+    chmod 0777 /sys/module/metis/parameters/minor_window_app
+    restorecon /sys/module/metis/parameters/minor_window_app
+    chmod 0666 /sys/module/migt/parameters/mi_viptask
+    restorecon /sys/module/migt/parameters/mi_viptask
+    chmod 0666 /sys/module/migt/parameters/mi_freq_enable
+    restorecon /sys/module/migt/parameters/mi_freq_enable
+
+    chmod 0666 /dev/metis
+    restorecon /dev/metis
+    chown 0666 /sys/module/metis/parameters
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_lit
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_mid
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_big
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_lit
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_mid
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_big
+    chmod 0664 /sys/module/metis/parameters/add_lclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_lclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/add_mclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_mclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/add_bclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_bclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/reset_clus_affinity_uidlist
+    chown root system /sys/module/metis/parameters
+    chown root system /sys/module/metis/parameters/add_rebind_task_lit
+    chown root system /sys/module/metis/parameters/add_rebind_task_mid
+    chown root system /sys/module/metis/parameters/add_rebind_task_big
+    chown root system /sys/module/metis/parameters/del_rebind_task_lit
+    chown root system /sys/module/metis/parameters/del_rebind_task_mid
+    chown root system /sys/module/metis/parameters/del_rebind_task_big
+    chown root system /sys/module/metis/parameters/add_lclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_lclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/add_mclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_mclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/add_bclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_bclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/reset_clus_affinity_uidlist
+
+    chmod 0666 /dev/metis
+    restorecon /dev/metis
+    chmod 0666 /sys/module/metis/parameters/mi_viptask
+    restorecon /sys/module/metis/parameters/mi_viptask
+    chmod 0666 /sys/module/metis/parameters/mi_boost_duration
+    restorecon /sys/module/metis/parameters/mi_boost_duration
+    chmod 0666 /sys/class/thermal/thermal_message/boost
+    restorecon /sys/class/thermal/thermal_message/boost
+    chmod 0666 /sys/module/metis/parameters/vip_link_enable
+    restorecon /sys/module/metis/parameters/vip_link_enable
+    chmod 0666 /sys/module/metis/parameters/mi_fboost_enable
+    restorecon /sys/module/metis/parameters/mi_fboost_enable
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
+    restorecon /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
+    restorecon /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_priority
+    restorecon /sys/module/metis/parameters/add_mi_viptask_sched_priority
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_priority
+    restorecon /sys/module/metis/parameters/del_mi_viptask_sched_priority
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
+    restorecon /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
+    restorecon /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
+    chmod 0666 /sys/module/metis/parameters/is_break_enable
+    restorecon /sys/module/metis/parameters/is_break_enable
+
+    chmod 0666 /dev/metis_link
+    restorecon /dev/metis_link
+    chmod 0666 /sys/module/metis/parameters/mi_lock_blocked_pid
+    restorecon /sys/module/metis/parameters/mi_lock_blocked_pid
+
+    mkdir /vendor/data/tombstones 0771 system system
+    # add wlan log output path
+    mkdir /data/vendor/wlan_logs 0777 root shell
+    mkdir /data/vendor/mac_addr 0770 system wifi
+    mkdir /mnt/vendor/persist/kiwi_v2 0770 system wifi
+    # Enable WLAN cold boot calibration
+    write /sys/kernel/cnss/fs_ready 1
+    chmod 0660 /dev/ir_spi
+    chown system system /dev/ir_spi
+
+    mkdir /data/vendor/thermal 0771 root system
+    mkdir /data/vendor/thermal/config 0771 root system
+
+    # add torch node for cit && mmi
+    chown system system /sys/class/leds/led:torch_0/brightness
+    chown system system /sys/class/leds/led:torch_1/brightness
+    chown system system /sys/class/leds/led:torch_2/brightness
+    chown system system /sys/class/leds/led:torch_3/brightness
+    chown system system /sys/class/leds/led:flash_0/brightness
+    chown system system /sys/class/leds/led:flash_1/brightness
+    chown system system /sys/class/leds/led:flash_2/brightness
+    chown system system /sys/class/leds/led:flash_3/brightness
+    chown system system /sys/class/leds/led:switch_0/brightness
+    chown system system /sys/class/leds/led:switch_1/brightness
+    chown system system /sys/class/leds/led:switch_2/brightness
+    chown system system /sys/class/leds/led:switch_3/brightness
+    chown system system /sys/class/leds/led:switch_0/trigger
+    chown system system /sys/class/leds/led:switch_1/trigger
+    chown system system /sys/class/leds/led:switch_2/trigger
+    chown system system /sys/class/leds/led:switch_3/trigger
+    chown system system /sys/class/leds/flashlight/brightness
+
+    chmod 0664 /sys/class/leds/led:torch_0/brightness
+    chmod 0664 /sys/class/leds/led:torch_1/brightness
+    chmod 0664 /sys/class/leds/led:torch_2/brightness
+    chmod 0664 /sys/class/leds/led:torch_3/brightness
+    chmod 0664 /sys/class/leds/led:flash_0/brightness
+    chmod 0664 /sys/class/leds/led:flash_1/brightness
+    chmod 0664 /sys/class/leds/led:flash_2/brightness
+    chmod 0664 /sys/class/leds/led:flash_3/brightness
+    chmod 0664 /sys/class/leds/led:switch_0/brightness
+    chmod 0664 /sys/class/leds/led:switch_1/brightness
+    chmod 0664 /sys/class/leds/led:switch_2/brightness
+    chmod 0664 /sys/class/leds/led:switch_3/brightness
+    chmod 0664 /sys/class/leds/led:switch_0/trigger
+    chmod 0664 /sys/class/leds/led:switch_1/trigger
+    chmod 0664 /sys/class/leds/led:switch_2/trigger
+    chmod 0664 /sys/class/leds/led:switch_3/trigger
+    chmod 0664 /sys/class/leds/flashlight/brightness
+
+    chmod 0662 /dev/miev
+    restorecon /dev/miev
+# MIUI ADD: Performance_BoostFramework
+    chown system system /sys/module/perf_helper/mimd/mimdtrigger
+# END Performance_BoostFramework
+
+on early-boot
+    verity_update_state
+    #Enable WLAN SSR recovery
+    write /sys/kernel/cnss/recovery 3
+
+on boot
+    write /dev/cpuset/audio-app/cpus 0-7
+    # Add a cpuset for the camera daemon
+    # We want all cores for camera
+    mkdir /dev/cpuset/camera-daemon
+    write /dev/cpuset/camera-daemon/cpus 0-7
+    write /dev/cpuset/camera-daemon/mems 0
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon
+    chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+    chmod 0660 /dev/cpuset/camera-daemon/tasks
+    chown system /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
+    chmod 0660 /sys/devices/platform/soc/990000.i2c/i2c-0/0-0038/trusted_touch_enable
+    chown system /sys/devices/platform/soc/990000.spi/spi_master/spi0/spi0.0/trusted_touch_enable
+    chmod 0660 /sys/devices/platform/soc/990000.spi/spi_master/spi0/spi0.0/trusted_touch_enable
+    chown system /sys/devices/system/cpu/hyp_core_ctl/enable
+    chown system /sys/devices/system/cpu/hyp_core_ctl/hcc_min_freq
+
+    # Create persist for camera calibration data
+    mkdir /mnt/vendor/persist/camera 0755 system cameraserver
+
+    # Display feature sysfs node
+    chown system system /sys/class/mi_display/disp-DSI-0/disp_param
+    chmod 0664 /sys/class/mi_display/disp-DSI-0/disp_param
+    chown system system /sys/class/mi_display/disp-DSI-0/mipi_rw
+    chmod 0664 /sys/class/mi_display/disp-DSI-0/mipi_rw
+    chown system system /sys/class/mi_display/disp-DSI-0/panel_info
+    chmod 0444 /sys/class/mi_display/disp-DSI-0/panel_info
+    chown system system /sys/class/mi_display/disp-DSI-0/wp_info
+    chmod 0444 /sys/class/mi_display/disp-DSI-0/wp_info
+    chown system system /sys/class/mi_display/disp-DSI-0/dynamic_fps
+    chmod 0444 /sys/class/mi_display/disp-DSI-0/dynamic_fps
+    chown system system /sys/class/mi_display/disp-DSI-0/doze_brightness
+    chmod 0664 /sys/class/mi_display/disp-DSI-0/doze_brightness
+    chown system system /sys/class/mi_display/disp-DSI-0/brightness_clone
+    chmod 0664 /sys/class/mi_display/disp-DSI-0/brightness_clone
+    chown system system /sys/class/mi_display/disp-DSI-0/max_brightness_clone
+    chmod 0664 /sys/class/mi_display/disp-DSI-0/max_brightness_clone
+
+    # Display feature sysfs node for panel1
+    chown system system /sys/class/mi_display/disp-DSI-1/brightness_clone
+    chmod 0664 /sys/class/mi_display/disp-DSI-1/brightness_clone
+    chown system system /sys/class/mi_display/disp-DSI-1/max_brightness_clone
+    chmod 0664 /sys/class/mi_display/disp-DSI-1/max_brightness_clone
+
+    #MIUI ADD:Thermal_NodeReq
+    chown system system /sys/class/thermal/thermal_message/sconfig
+    chown system system /sys/class/thermal/thermal_message/balance_mode
+    chown cameraserver cameraserver /sys/class/thermal/thermal_message/torch_real_level
+    chown cameraserver cameraserver /sys/class/thermal/thermal_message/flash_state
+    chown system system /sys/class/thermal/thermal_message/charger_temp
+    chown system system /sys/class/thermal/thermal_message/board_sensor_temp_comp
+    chown system system /sys/class/thermal/thermal_message/cpu_nolimit_temp
+    #END Thermal_NodeReq
+
+    #MIUI ADD: Memory_CLD
+    #ufscld functions permission
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/auto_hibern8_enable
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/block_suspend
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/cld_operation_status
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/debug
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/frag_level
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger
+    chown root system /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger_interval
+    chmod 664 /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger
+    #END Memory_CLD
+
+on property:vendor.display.lcd_density=560
+   setprop dalvik.vm.heapgrowthlimit 256m
+
+on property:vendor.display.lcd_density=640
+   setprop dalvik.vm.heapgrowthlimit 512m
+
+on init && property:ro.boot.mode=charger
+    wait_for_prop vendor.all.modules.ready 1
+    mount_all /vendor/etc/charger_fw_fstab.qti --early
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+
+on charger
+    start vendor.power_off_alarm
+    write /sys/kernel/cnss/charger_mode 1
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    write /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled n
+    write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
+    write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
+    write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
+
+#service vendor.lowi /vendor/bin/sscrpcd
+#   class core
+#   user system
+#   group system wakelock
+#   capabilities BLOCK_SUSPEND
+
+#pd-mapper
+service vendor.pd_mapper /vendor/bin/pd-mapper
+    class core
+    user system
+    group system
+
+#Peripheral manager
+service vendor.per_mgr /vendor/bin/pm-service
+    class core
+    user system
+    group system
+    ioprio rt 4
+
+service vendor.per_proxy /vendor/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
+
+#service vendor.mdm_helper /vendor/bin/mdm_helper
+#    class core
+#    group system wakelock
+#    disabled
+
+service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
+    class core
+    oneshot
+
+on property:init.svc.vendor.per_mgr=running
+    start vendor.per_proxy
+
+on property:sys.shutdown.requested=*
+    write /sys/kernel/qcom_rproc/shutdown_in_progress 1
+    stop vendor.per_proxy
+
+# enable root version wlan log
+on property:ro.debuggable=1
+    start vendor.cnss_diag
+    start vendor.tcpdump
+
+# add persist prop for tcpdump and cnss_diag
+#on property:vold.decrypt=trigger_restart_framework
+#   start vendor.cnss_diag
+
+on property:persist.vendor.cnss_diag.enable=true
+    start vendor.cnss_diag
+
+on property:persist.vendor.cnss_diag.enable=false
+    stop vendor.cnss_diag
+
+service vendor.cnss_diag /system/vendor/bin/cnss_diag -q -f -t HELIUM
+   class main
+   user system
+   group system wifi inet sdcard_rw media_rw diag
+   disabled
+   oneshot
+
+service vendor.nv_mac /vendor/bin/nv_mac
+    class late_start
+    user system
+    group system inet net_admin wifi net_raw
+    oneshot
+
+on early-boot && property:persist.vendor.pcie.boot_option=*
+    write /sys/bus/platform/devices/1c00000.qcom,pcie/debug/boot_option ${persist.vendor.pcie.boot_option}
+    write /sys/bus/platform/devices/1c08000.qcom,pcie/debug/boot_option ${persist.vendor.pcie.boot_option}
+
+service fatal_err_check /vendor/bin/check_fatal_err.sh
+    class late_start
+    user root
+    group root
+    oneshot
+
+on property:vendor.bluetooth.startwdsdaemon=true
+    start vendor.bt_wdsdaemon
+on property:vendor.bluetooth.startwdsdaemon=false
+    stop vendor.bt_wdsdaemon
+service vendor.bt_wdsdaemon /system/vendor/bin/wdsdaemon -su
+    class late_start
+    user root
+    group bluetooth diag system wakelock
+    disabled
+    oneshot
+
+#Enable WLAN SSR recovery
+on property:persist.vendor.ssr.restart_level=ALL_ENABLE
+    write /sys/kernel/cnss/recovery 3
+
+#Disable WLAN SSR recovery
+on property:persist.vendor.ssr.restart_level=ALL_DISABLE
+    write /sys/kernel/cnss/recovery 0
+
+#on property:sys.user.0.ce_available=true
+#    start vendor.tcpdump
+
+on property:vendor.hardware.wlan.runtcpdump=stop
+     stop vendor.tcpdump
+
+on property:vendor.hardware.wlan.runtcpdump=start && property:persist.vendor.tcpdump.enable=true
+     start vendor.tcpdump
+
+on property:vendor.hardware.wlan.runsniffer=stop
+     stop vendor.sniffer
+
+on property:vendor.hardware.wlan.runsniffer=start
+     start vendor.sniffer
+
+on property:vendor.hardware.wlan.runsniffer.circular=stop
+    stop vendor.sniffer.circular
+
+on property:vendor.hardware.wlan.runsniffer.circular=start
+    start vendor.sniffer.circular
+
+service ufs_ffu_service /vendor/bin/sh /vendor/bin/ufs_ffu.sh
+    class core
+    user root
+    oneshot
+
+on property:sys.boot_completed=1
+    start ufs_ffu_service
+
+# add sniffer and tcpdump output
+service vendor.tcpdump /vendor/bin/tcpdump -i any -W 3 -C 5 -s 134 -w /data/vendor/wlan_logs/tcpdump.pcap -Z system
+    class main
+    user root
+    group root wifi
+    disabled
+    oneshot
+
+service vendor.sniffer /vendor/bin/tcpdump -i wlan0 -w /data/vendor/wlan_logs/sniffer.pcap -Z system
+    class main
+    user root
+    group root wifi
+    disabled
+    oneshot
+
+service vendor.sniffer.circular /vendor/bin/tcpdump -i wlan0 -W 3 -C 300 -w /data/vendor/wlan_logs/sniffer.pcap -Z system
+    class main
+    user root
+    group root wifi
+    disabled
+    oneshot
+
+# add persist prop for tcpdump and cnss_diag
+on property:persist.vendor.tcpdump.enable=true
+    start vendor.tcpdump
+
+on property:persist.vendor.tcpdump.enable=false
+    stop vendor.tcpdump
+service fan_control_turn_on /vendor/bin/fan_service 1
+    class late_start
+    user root
+    disabled
+    oneshot
+
+service fan_control_turn_off /vendor/bin/fan_service 0
+    class late_start
+    user root
+    disabled
+    oneshot
