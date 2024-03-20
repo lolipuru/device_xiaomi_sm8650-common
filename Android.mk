@@ -99,14 +99,14 @@ ALL_DEFAULT_INSTALLED_MODULES += \
 	$(RFS_MSM_SLPI_SYMLINKS) \
 	$(RFS_MSM_WPSS_SYMLINKS)
 
-FIRMWARE_WLAN_WIKI_V2_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/wiki_v2/
-$(FIRMWARE_WLAN_WIKI_V2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating wiki_v2 qca_cld wlan firmware symlinks: $@"
+FIRMWARE_WLAN_KIWI_V2_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/kiwi_v2/
+$(FIRMWARE_WLAN_KIWI_V2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating kiwi_v2 qca_cld wlan firmware symlinks: $@"
 	mkdir -p $@
-	$(hide) ln -sf /vendor/etc/wifi/wiki_v2/WCNSS_qcom_cfg.ini $@/WCNSS_qcom_cfg.ini
-	$(hide) ln -sf /mnt/vendor/persist/wiki_v2/wlan_mac.bin $@/wlan_mac.bin
+	$(hide) ln -sf /vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini $@/WCNSS_qcom_cfg.ini
+	$(hide) ln -sf /mnt/vendor/persist/kiwi_v2/wlan_mac.bin $@/wlan_mac.bin
 
 ALL_DEFAULT_INSTALLED_MODULES += \
-    $(FIRMWARE_WLAN_WIKI_V2_SYMLINKS)
+    $(FIRMWARE_WLAN_KIWI_V2_SYMLINKS)
 
 endif
