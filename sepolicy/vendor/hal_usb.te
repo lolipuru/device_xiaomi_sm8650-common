@@ -1,3 +1,6 @@
+allow vendor_hal_usb_qti vendor_sysfs_qcom_battery:dir r_dir_perms;
+allow vendor_hal_usb_qti vendor_sysfs_qcom_battery:file r_file_perms;
+
 allow vendor_hal_usb_qti block_device:dir search;
 allow vendor_hal_usb_qti vendor_ramdump_block_device:blk_file rw_file_perms;
 allow vendor_hal_usb_qti vendor_sysfs_iio:dir search;

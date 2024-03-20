@@ -1,0 +1,12 @@
+type vendor_hal_eid_rc, domain;
+type vendor_hal_eid_rc_exec, exec_type, file_type, vendor_file_type;
+
+allow vendor_hal_eid_rc tee_device:chr_file rw_file_perms;
+allow vendor_hal_eid_rc ion_device:chr_file r_file_perms;
+init_daemon_domain(vendor_hal_eid_rc)
+r_dir_file(vendor_hal_eid_rc, firmware_file)
+get_prop(vendor_hal_eid_rc, vendor_tee_listener_prop)
+hal_server_domain(vendor_hal_eid_rc, vendor_hal_eid)
+hal_client_domain(vendor_hal_eid_rc, hal_graphics_composer)
+hal_client_domain(vendor_hal_eid_rc, vendor_hal_trustedui)
+hal_client_domain(vendor_hal_eid_rc, vendor_hal_qteeconnector)

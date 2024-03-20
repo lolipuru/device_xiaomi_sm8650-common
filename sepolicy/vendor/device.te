@@ -9,6 +9,9 @@ type stmvl53l5_device, dev_type;
 # Displayfeature
 type vendor_displayfeature_device, dev_type;
 
+# Fingerprint
+type vendor_fingerprint_device, dev_type;
+
 # IR
 type ir_spi_device, dev_type;
 

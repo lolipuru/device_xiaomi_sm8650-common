@@ -1,8 +1,8 @@
 # Allow vendor init to set SSR property
 set_prop(vendor_init, vendor_ssr_prop)
 
-# Allow vendor init to set SSR property
-set_prop(vendor_init, vendor_nfc_prop)
+# Allow vendor init to set NFC property
+set_prop(vendor_init, vendor_nfc_mi_prop)
 
 # Allow vendor_init to set thermal prop
 set_prop(vendor_init, vendor_thermal_normal_prop)

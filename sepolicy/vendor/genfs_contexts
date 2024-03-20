@@ -1,8 +1,14 @@
+# Battery
+genfscon sysfs "/class/qcom-battery" u:object_r:vendor_sysfs_qcom_battery:s0
+
+# Fingerprint
+genfscon sysfs "/devices/virtual/touch/touch_dev/gesture_single_tap_state" u:object_r:sysfs_tp_fodstatus:s0
+genfscon sysfs "/devices/platform/soc/soc:xiaomi_fingerprint/fingerdown" u:object_r:vendor_sysfs_displayfeature:s0
+genfscon sysfs "/devices/platform/soc/soc:fingerprint_goodix/wakeup" u:object_r:sysfs_wakeup:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/fod_press_status" u:object_r:sysfs_tp_fodstatus:s0
+
 # last_kmsg
 genfscon proc /last_kmsg                                         u:object_r:proc_last_kmsg:s0
-
-# Leds
-genfscon sysfs /devices/platform/soc/[a-z0-9]+.qcom,spmi/spmi-[0-1]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
 
 # Memory
 genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ufshcd0 u:object_r:vendor_sysfs_memory:s0

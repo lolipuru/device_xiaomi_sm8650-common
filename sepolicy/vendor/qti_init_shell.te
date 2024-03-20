@@ -2,5 +2,7 @@ allow vendor_qti_init_shell sysfs_dm:file rw_file_perms;
 allow vendor_qti_init_shell sysfs_dm:dir r_dir_perms;
 allow vendor_qti_init_shell vendor_firmware_data_file:dir rw_dir_perms;
 allow vendor_qti_init_shell vendor_firmware_data_file:file rw_file_perms;
+allow vendor_qti_init_shell touchfeature_device:chr_file { setattr };
 allow vendor_qti_init_shell vendor_sysfs_displayfeature:dir r_dir_perms;
 allow vendor_qti_init_shell vendor_sysfs_displayfeature:file rw_file_perms;
+allow vendor_qti_init_shell vendor_sysfs_qcom_battery:file { setattr };

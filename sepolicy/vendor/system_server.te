@@ -18,6 +18,13 @@ hal_client_domain(system_server, vendor_hal_displayfeature_xiaomi)
 # Dolby
 hal_client_domain(system_server, hal_dms)
 
+# Fingerprint
+allow system_server vendor_hal_fingerprint_hwservice_xiaomi:hwservice_manager { add find };
+allow system_server vendor_dtool:binder { call transfer };
+allow system_server vendor_dtool:binder transfer;
+allow system_server vendor_dtool:fd *;
+get_prop(system_server, vendor_fp_prop)
+
 # last_kmsg
 allow system_server proc_last_kmsg:file r_file_perms;
 
@@ -46,7 +53,10 @@ allow system_server sysfs_wakeup:file r_file_perms;
 
 # Sensors
 allow system_server vendor_hal_citsensorservice_xiaomi_default:binder { call transfer };
-allow system_server vendor_hal_sensorcommunicate_default:binder { call transfer };
+
+# SLA
+allow system_server hal_slaservice_hwservice:hwservice_manager find;
+allow system_server hal_slaservice_qti:binder call;
 
 # Thermal
 allow system_server sysfs_thermal:dir search;
