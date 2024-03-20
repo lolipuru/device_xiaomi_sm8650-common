@@ -1,0 +1,61 @@
+# Audio
+allow system_server vendor_audio_prop:file { getattr open read };
+allow system_server vendor_audio_prop:file map;
+allow system_server audioserver:file write;
+allow system_server sound_device:chr_file rw_file_perms;
+
+# Camera
+allow system_server hal_camera:binder transfer;
+allow system_server hal_camera:binder { call transfer };
+allow system_server hal_camera:fd *;
+
+# Displayfeature
+allow system_server vendor_displayfeature:binder { call transfer };
+allow system_server vendor_displayfeature:fd *;
+get_prop(system_server, vendor_displayfeature_prop)
+hal_client_domain(system_server, vendor_hal_displayfeature_xiaomi)
+
+# Dolby
+hal_client_domain(system_server, hal_dms)
+
+# last_kmsg
+allow system_server proc_last_kmsg:file r_file_perms;
+
+# Memory
+r_dir_file(system_server, vendor_sysfs_memory)
+
+# MiCharge
+allow system_server vendor_hal_micharge_xiaomi_hwservice:hwservice_manager find;
+allow system_server vendor_hal_micharge_xiaomi_default:binder { call transfer };
+
+# Misys
+allow system_server hal_misys_default:binder call;
+allow system_server hal_misys_hwservice:hwservice_manager find;
+
+# Mlipay
+allow system_server hal_mtdservice_hwservice:hwservice_manager find;
+allow system_server hal_mtdservice_default:binder { call transfer };
+allow system_server hal_mtdservice_default:fd *;
+
+# IR
+allow system_server ir_spi_device:chr_file rw_file_perms;
+allow system_server ir_spi_device:chr_file { ioctl open read write };
+
+# Oem fastcharge
+allow system_server sysfs_wakeup:file r_file_perms;
+
+# Sensors
+allow system_server vendor_hal_citsensorservice_xiaomi_default:binder { call transfer };
+allow system_server vendor_hal_sensorcommunicate_default:binder { call transfer };
+
+# Thermal
+allow system_server sysfs_thermal:dir search;
+allow system_server sysfs_thermal:file r_file_perms;
+
+# Touchfeature
+allow system_server hal_touchfeature_xiaomi_default:process signal;
+allow system_server sysfs_touch_hostprocess:file rw_file_perms;
+allow system_server touchfeature_device:chr_file rw_file_perms;
+allow system_server touchfeature_device:file { getattr map read };
+get_prop(system_server, vendor_touchfeature_prop)
+hal_client_domain(system_server, hal_touchfeature_xiaomi)

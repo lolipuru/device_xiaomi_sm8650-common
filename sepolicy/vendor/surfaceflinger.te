@@ -1,0 +1,10 @@
+allow surfaceflinger sysfs_touch_hostprocess:dir r_dir_perms;
+allow surfaceflinger sysfs_touch_hostprocess:file rw_file_perms;
+allow surfaceflinger hal_touchfeature_xiaomi_hwservice:hwservice_manager find;
+allow surfaceflinger hal_touchfeature_xiaomi_default:binder { call transfer };
+allow surfaceflinger hal_touchfeature_xiaomi_default:fd *;
+allow surfaceflinger vendor_sysfs_displayfeature:dir r_dir_perms;
+allow surfaceflinger vendor_sysfs_displayfeature:file rw_file_perms;
+allow surfaceflinger vendor_displayfeature_device:chr_file { ioctl open read write };
+get_prop(surfaceflinger, vendor_displayfeature_prop)
+hal_client_domain(surfaceflinger, vendor_hal_displayfeature_xiaomi)

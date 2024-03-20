@@ -1,0 +1,1 @@
+allow charger_vendor vendor_sysfs_graphics:file rw_file_perms;

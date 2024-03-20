@@ -1,0 +1,3 @@
+get_prop(untrusted_app, vendor_payment_security_prop)
+hal_client_domain(untrusted_app, hal_mlipay)
+hal_client_domain(untrusted_app, hal_tidaservice)

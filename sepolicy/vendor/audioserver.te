@@ -1,0 +1,11 @@
+hal_client_domain(audioserver, hal_dms)
+allow audioserver system_server:dir search;
+allow audioserver mediaserver:dir search;
+allow audioserver mediaserver:file { open read };
+allow audioserver system_app:dir search;
+allow audioserver hal_audio_default:process signal;
+allow audioserver sound_device:chr_file rw_file_perms;
+set_prop(audioserver, audio_prop)
+
+# Allow audioserver to r/w to f0_value sysfs
+allow audioserver sysfs_f0_value:file rw_file_perms;

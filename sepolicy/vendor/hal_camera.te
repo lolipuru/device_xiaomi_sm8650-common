@@ -1,0 +1,56 @@
+allow hal_camera_client vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
+allow hal_camera fwk_sensor_hwservice:hwservice_manager find;
+allow hal_camera system_server:binder { call transfer };
+allow hal_camera system_server:binder transfer;
+allow hal_camera system_server:fd *;
+allow hal_camera_default vendor_qdsp_device:chr_file r_file_perms;
+allow hal_camera_default vendor_npu_device:chr_file r_file_perms;
+allow hal_camera_default mnt_vendor_file:dir search;
+allow hal_camera_default camera_persist_file:dir search;
+allow hal_camera_default vendor_persist_sensors_file:dir search;
+allow hal_camera_default proc_pressure_cpu:file { getattr open read write };
+allow hal_camera_default proc_pressure_io:file { getattr open read write };
+allow hal_camera_default proc_pressure_mem:file { getattr open read write };
+allow hal_camera_default proc_meminfo:file { getattr open read };
+allow hal_camera_default self:capability sys_resource;
+allow hal_camera_default stmvl53l5_device:chr_file { ioctl open read write };
+allow hal_camera_default sysfs:file { open read getattr };
+allow hal_camera_default vendor_sysfs_devfreq:dir search;
+allow hal_camera_default vendor_sysfs_kgsl:file { getattr open read };
+allow hal_camera_default vendor_sysfs_battery_supply:dir search;
+allow hal_camera_default vendor_sysfs_battery_supply:file { getattr open read };
+allow hal_camera_default vendor_sysfs_battery_supply:file open;
+allow hal_camera_default vendor_sysfs_battery_supply:file read;
+allow hal_camera_default camlog_device:chr_file { ioctl open read write };
+allow hal_camera_default platform_app:binder transfer;
+allow hal_camera_default platform_app:binder { call transfer };
+allow hal_camera_default platform_app:fd *;
+allow hal_camera_default priv_app:binder transfer;
+allow hal_camera_default priv_app:binder { call transfer };
+allow hal_camera_default priv_app:fd *;
+allow hal_camera_default system_app:binder transfer;
+allow hal_camera_default system_app:binder { call transfer };
+allow hal_camera_default system_app:fd *;
+allow hal_camera_default system_server:binder call;
+allow hal_camera_default cgroup:file { getattr map open read write };
+allow hal_camera_default migt_dev:chr_file rw_file_perms;
+allow hal_camera_default hal_quickcamera_hwservice:hwservice_manager { add find };
+
+r_dir_file(hal_camera_default, mnt_vendor_file)
+r_dir_file(hal_camera_default, camera_persist_file)
+r_dir_file(hal_camera_default, vendor_persist_sensors_file)
+r_dir_file(hal_camera_default, domain)
+
+get_prop(hal_camera_default, exported_system_prop)
+set_prop(hal_camera, vendor_camera_sensor_prop)
+set_prop(hal_camera_default, vendor_camera_p3enable_prop)
+set_prop(hal_camera_default, log_prop)
+
+hal_server_domain(hal_camera_default, vendor_hal_camerapostproc_xiaomi)
+add_hwservice(hal_camera_server, vendor_hal_camerapostproc_xiaomi_hwservice)
+
+# Allow /proc/stat accessing camera
+allow hal_camera_default proc_stat:file r_file_perms;
+
+# Allow QSPM hal service accessing camera
+hal_client_domain(hal_camera_default, vendor_hal_qspmhal)

@@ -1,0 +1,28 @@
+allow hal_audio bluetooth:binder transfer;
+allow hal_audio_default vendor_persist_audio_file:dir rw_dir_perms;
+allow hal_audio_default vendor_persist_audio_file:file { create rw_file_perms };
+allow hal_audio_default mnt_vendor_file:dir r_dir_perms;
+allow hal_audio_default vendor_audio_prop:property_service set;
+allow hal_audio_default audio_socket:sock_file rw_file_perms;
+allow hal_audio_default sound_device:chr_file rw_file_perms;
+allow hal_audio_default sysfs:file rw_file_perms;
+allow hal_audio_default sysfs_f0_value:file rw_file_perms;
+unix_socket_connect(hal_audio_default, property, init)
+unix_socket_connect(hal_audio_default, property, hal_sensors_default)
+hal_client_domain(hal_audio_default, hal_dms)
+
+# Allow hal_audio_default to access sensor service
+allow hal_audio_default fwk_sensor_hwservice:hwservice_manager find;
+
+# Allow Audio hal to find hal_dms_hwservice
+binder_call(hal_audio_default, hal_dms_default)
+allow hal_audio_default hal_dms_hwservice:hwservice_manager find;
+
+# Allow Audio hal to find system_suspend_hwservice
+allow hal_audio_default system_suspend_hwservice:hwservice_manager find;
+
+# Allow audio hal to set audio_prop
+set_prop(hal_audio_default, vendor_audio_prop)
+
+# Dontaudit Audio to read default_prop
+dontaudit hal_audio_default default_prop:file read;

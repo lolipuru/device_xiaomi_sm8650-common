@@ -1,0 +1,19 @@
+# Camera
+allow priv_app proc_filesystems:file r_file_perms;
+allow priv_app hal_camera_default:binder { call transfer };
+allow priv_app hal_camera_default:binder transfer;
+allow priv_app hal_camera_default:fd *;
+allow priv_app vendor_configs_file:file r_file_perms;
+allow priv_app vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
+allow priv_app vendor_hal_camerapostproc_xiaomi:binder { call transfer };
+allow priv_app vendor_hal_camerapostproc_xiaomi:binder transfer;
+allow priv_app vendor_hal_camerapostproc_xiaomi:fd *;
+allow priv_app hal_quickcamera_hwservice:hwservice_manager find;
+get_prop(priv_app, qemu_hw_prop)
+get_prop(priv_app, vendor_camera_p3enable_prop)
+get_prop(priv_app, vendor_audio_prop)
+get_prop(priv_app, vendor_display_prop)
+get_prop(priv_app, vendor_displayfeature_prop)
+hal_client_domain(priv_app, hal_misys)
+hal_client_domain(priv_app, vendor_hal_camerapostproc_xiaomi)
+hal_client_domain(priv_app, hal_quickcamera)

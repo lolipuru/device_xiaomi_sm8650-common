@@ -1,0 +1,2 @@
+# Batterysecret
+allow system_suspend_server batterysecret:binder { call transfer };

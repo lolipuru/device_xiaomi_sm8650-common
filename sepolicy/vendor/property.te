@@ -1,0 +1,21 @@
+# Camera
+vendor_public_prop(vendor_camera_sensor_prop)
+vendor_public_prop(vendor_camera_p3enable_prop)
+
+# Displayfeature
+vendor_public_prop(vendor_displayfeature_prop)
+
+# Mlipay
+vendor_public_prop(vendor_payment_security_prop)
+
+# Sensors
+vendor_public_prop(vendor_cct_prop)
+vendor_public_prop(vendor_parsedalgo_prop)
+
+# Thermal
+vendor_public_prop(vendor_thermal_normal_prop)
+
+# Touchfeature
+vendor_public_prop(vendor_panel_info_prop)
+vendor_restricted_prop(vendor_touchfeature_prop)
+vendor_restricted_prop(vendor_touch_hostprocess_prop)

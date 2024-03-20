@@ -1,0 +1,23 @@
+type vendor_displayfeature, domain;
+type vendor_displayfeature_exec, exec_type, file_type, vendor_file_type;
+
+allow vendor_displayfeature system_server:binder transfer;
+allow vendor_displayfeature system_server:binder { call transfer };
+allow vendor_displayfeature system_server:fd *;
+allow vendor_displayfeature appdomain:binder { call transfer };
+allow vendor_displayfeature appdomain:fd *;
+allow vendor_displayfeature sysfs:file { getattr open read write };
+allow vendor_displayfeature vendor_file:file r_file_perms;
+allow vendor_displayfeature graphics_device:dir r_dir_perms;
+allow vendor_displayfeature graphics_device:chr_file rw_file_perms;
+init_daemon_domain(vendor_displayfeature)
+get_prop(vendor_displayfeature, hwservicemanager_prop)
+get_prop(vendor_displayfeature, vendor_displayfeature_prop)
+hwbinder_use(vendor_displayfeature)
+vndbinder_use(vendor_displayfeature)
+hal_client_domain(vendor_displayfeature, hal_graphics_composer)
+hal_client_domain(vendor_displayfeature, hal_light)
+hal_client_domain(vendor_displayfeature, vendor_hal_display_color)
+hal_client_domain(vendor_displayfeature, vendor_hal_display_postproc)
+hal_client_domain(vendor_displayfeature, vendor_hal_displayfeature_xiaomi)
+add_service(vendor_displayfeature, vendor_DisplayFeatureControl_service)

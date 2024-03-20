@@ -1,0 +1,62 @@
+# Define mi_thermald domain
+type mi_thermald, domain, mlstrustedsubject;
+type mi_thermald_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(mi_thermald)
+
+allow mi_thermald init:unix_stream_socket connectto;
+allow mi_thermald property_socket:sock_file write;
+
+# Allow mi_thermald to create files in /data/vendor/thermal/
+allow mi_thermald vendor_thermal_data_file:dir { add_name read remove_name search watch write };
+allow mi_thermald vendor_thermal_data_file:file { create getattr open read rename setattr unlink write };
+allow mi_thermald vendor_data_file:dir { add_name read remove_name watch write };
+allow mi_thermald vendor_data_file:file { create getattr open read rename setattr unlink write };
+allow mi_thermald mi_thermald:capability { chown fowner sys_admin };
+allow mi_thermald mi_thermald:capability2 { block_suspend wake_alarm };
+allow mi_thermald self:capability { 
+    chown 
+    fowner 
+    fsetid 
+    sys_boot 
+};
+
+# Allow mi_thermald to read leds sysfs
+allow mi_thermald sysfs_leds:dir r_dir_perms;
+allow mi_thermald sysfs_leds:file rw_file_perms;
+allow mi_thermald sysfs_leds:lnk_file r_file_perms;
+
+# Allow mi_thermald to read sysfs (xiaomi sucks)
+allow mi_thermald sysfs:dir r_dir_perms;
+allow mi_thermald sysfs:file rw_file_perms;
+allow mi_thermald sysfs:lnk_file r_file_perms;
+
+# Allow mi_thermald to access thermal sysfs
+allow mi_thermald sysfs_thermal:dir r_dir_perms;
+allow mi_thermald sysfs_thermal:file rw_file_perms;
+allow mi_thermald sysfs_thermal:lnk_file r_file_perms;
+
+# Allow mi_thermald to access system cpu sysfs
+allow mi_thermald sysfs_devices_system_cpu:file rw_file_perms;
+
+# Allow mi_thermald to access battery supply sysfs
+allow mi_thermald vendor_sysfs_battery_supply:dir r_dir_perms;
+allow mi_thermald vendor_sysfs_battery_supply:file rw_file_perms;
+allow mi_thermald vendor_sysfs_battery_supply:lnk_file r_file_perms;
+allow mi_thermald vendor_sysfs_qcom_battery:file rw_file_perms;
+r_dir_file(mi_thermald, vendor_sysfs_qcom_battery)
+
+# Allow mi_thermald to access graphics sysfs
+allow mi_thermald {vendor_sysfs_graphics vendor_sysfs_displayfeature}:dir r_dir_perms;
+allow mi_thermald {vendor_sysfs_graphics vendor_sysfs_displayfeature}:file rw_file_perms;
+allow mi_thermald {vendor_sysfs_graphics vendor_sysfs_displayfeature}:lnk_file r_file_perms;
+
+# Allow mi_thermald to access kgsl sysfs
+allow mi_thermald vendor_sysfs_kgsl:dir r_dir_perms;
+allow mi_thermald vendor_sysfs_kgsl:file rw_file_perms;
+allow mi_thermald vendor_sysfs_kgsl:lnk_file r_file_perms;
+
+# Allow mi_thermald to set thermal prop
+set_prop(mi_thermald, vendor_thermal_normal_prop)
+
+# Allow mi_thermald to create wakelock
+wakelock_use(mi_thermald)

@@ -1,0 +1,33 @@
+allow charger kmsg_device:chr_file rw_file_perms;
+allow charger sysfs_type:dir r_dir_perms;
+allow charger self:capability sys_tty_config;
+allow charger self:capability sys_boot;
+allow charger self:cap_userns sys_tty_config;
+allow charger self:cap_userns sys_boot;
+allow charger self:capability2 block_suspend;
+allow charger self:cap2_userns block_suspend;
+allow charger self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow charger sysfs_wake_lock:file rw_file_perms;
+allow charger system_suspend_server:binder { call transfer };
+allow charger system_suspend_server:fd *;
+allow charger system_suspend_hwservice:hwservice_manager find;
+allow charger hidl_manager_hwservice:hwservice_manager find;
+allow charger sysfs_power:file rw_file_perms;
+allow charger pstorefs:dir r_dir_perms;
+allow charger pstorefs:file r_file_perms;
+allow charger graphics_device:dir r_dir_perms;
+allow charger graphics_device:chr_file rw_file_perms;
+allow charger input_device:dir r_dir_perms;
+allow charger input_device:chr_file r_file_perms;
+allow charger tty_device:chr_file rw_file_perms;
+allow charger proc_sysrq:file rw_file_perms;
+allow charger vendor_sysfs_graphics:file rw_file_perms;
+allow charger vendor_sysfs_graphics:lnk_file rw_file_perms;
+r_dir_file(charger, rootfs)
+r_dir_file(charger, cgroup)
+r_dir_file(charger, sysfs_batteryinfo)
+get_prop(charger, hwservicemanager_prop)
+get_prop(charger, charger_prop)
+set_prop(charger, system_prop)
+set_prop(charger, exported_system_prop)
+hwbinder_use(charger)

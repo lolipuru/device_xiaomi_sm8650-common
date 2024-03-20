@@ -1,0 +1,4 @@
+allow vendor_hal_usb_qti block_device:dir search;
+allow vendor_hal_usb_qti vendor_ramdump_block_device:blk_file rw_file_perms;
+allow vendor_hal_usb_qti vendor_sysfs_iio:dir search;
+allow vendor_hal_usb_qti vendor_sysfs_usb_device:file { getattr open read write };

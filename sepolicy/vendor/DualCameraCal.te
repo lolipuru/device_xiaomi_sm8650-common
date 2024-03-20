@@ -1,0 +1,8 @@
+allow DualCameraCal mnt_vendor_file:dir r_dir_perms;
+allow DualCameraCal camera_persist_file:dir create_dir_perms;
+allow DualCameraCal camera_persist_file:file create_file_perms;
+init_daemon_domain(DualCameraCal)
+get_prop(DualCameraCal, vendor_camera_prop)
+get_prop(DualCameraCal, vendor_camera_sensor_prop)
+type DualCameraCal, domain;
+type DualCameraCal_exec, exec_type, file_type, vendor_file_type;

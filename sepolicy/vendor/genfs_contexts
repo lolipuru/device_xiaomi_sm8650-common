@@ -1,0 +1,77 @@
+# last_kmsg
+genfscon proc /last_kmsg                                         u:object_r:proc_last_kmsg:s0
+
+# Leds
+genfscon sysfs /devices/platform/soc/[a-z0-9]+.qcom,spmi/spmi-[0-1]/spmi0-0[0-9]/[a-z0-9]+.qcom,spmi:qcom,[a-z0-9]+@[0-9]:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
+
+# Memory
+genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ufshcd0 u:object_r:vendor_sysfs_memory:s0
+genfscon sysfs /devices/platform/soc/1d84000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:vendor_sysfs_memory:s0
+genfscon sysfs /devices/platform/soc/4804000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:vendor_sysfs_memory:s0
+
+# Touchfeature
+genfscon proc "/tp_hal_version" u:object_r:proc_tp_file:s0
+genfscon proc "/tp_lockdown_info" u:object_r:proc_tp_lockdown:s0
+genfscon proc "/tp_lockdown_info_pri" u:object_r:proc_tp_lockdown:s0
+genfscon proc "/tp_lockdown_info_sec" u:object_r:proc_tp_lockdown:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/abnormal_event" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/clicktouch_raw" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/ear_sensor" u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/ear_sensor_data" u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/enable_touch_delta" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/enable_touch_raw" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/hold_sensor" u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/palm_sensor" u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/palm_sensor_data" u:object_r:sysfs_tp_virtual_prox:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/suspend_state" u:object_r:sysfs_touch_suspend:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_active_status" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_doze_analysis" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_finger_status" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_ic_buffer" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_irq_no" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_sensor_ctrl" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_breakline_mode" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_breakline_result" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_cmd" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_cmd_ready" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_downthd" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_dump" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_dump_data" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_islandthd" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_mem_notify" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_movethd" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_noisefilter" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_preset_point" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_rx_num" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_smooth" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_testmode" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_testresult" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_tx_num" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_upthd" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_x_resolution" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/touch_thp_y_resolution" u:object_r:sysfs_touch_hostprocess:s0
+genfscon sysfs "/devices/virtual/touch/touch_dev/update_rawdata" u:object_r:sysfs_touch_hostprocess:s0
+
+# Vibrator
+genfscon sysfs /devices/platform/soc/soc:pwm_vibrator/leds/vibrator/activate  u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:pwm_vibrator/leds/vibrator/duration  u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:pwm_vibrator/leds/vibrator/trigger   u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:pwm_vibrator/leds/vibrator/state     u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:vibrator_gpio/leds/vibrator/activate u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:vibrator_gpio/leds/vibrator/duration u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:vibrator_gpio/leds/vibrator/state    u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/soc/soc:vibrator_gpio/leds/vibrator/trigger  u:object_r:sysfs_leds:s0
+genfscon sysfs /class/leds/vibrator/activate                                  u:object_r:sysfs_leds:s0
+genfscon sysfs /class/leds/vibrator/state                                     u:object_r:sysfs_leds:s0
+genfscon sysfs /class/leds/vibrator/duration                                  u:object_r:sysfs_leds:s0
+genfscon sysfs /class/leds/vibrator/trigger                                   u:object_r:sysfs_leds:s0
+
+# UFS
+genfscon sysfs /class/mi_memory/mi_memory_device/ufshcd0/dump_string_desc_serial u:object_r:ufs_sysfs:s0
+genfscon sysfs /class/mi_memory/mi_memory_device/ufshcd0/dump_health_desc u:object_r:ufs_sysfs:s0
+genfscon sysfs /class/mi_memory/mi_memory_device/ufshcd0/dump_device_desc u:object_r:ufs_sysfs:s0
+genfscon sysfs /class/mi_memory/mi_memory_device/ddr/ddr_vendor u:object_r:ufs_sysfs:s0
+genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ufshcd0/dump_string_desc_serial u:object_r:ufs_sysfs:s0
+genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ufshcd0/dump_health_desc u:object_r:ufs_sysfs:s0
+genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ufshcd0/dump_device_desc u:object_r:ufs_sysfs:s0
+genfscon sysfs /devices/virtual/mi_memory/mi_memory_device/ddr/ddr_vendor u:object_r:ufs_sysfs:s0

@@ -1,0 +1,36 @@
+allow healthd kmsg_device:chr_file rw_file_perms;
+allow healthd sysfs_type:dir search;
+allow healthd sysfs:dir r_dir_perms;
+allow healthd self:capability sys_tty_config;
+allow healthd self:capability sys_boot;
+allow healthd self:cap_userns sys_tty_config;
+allow healthd self:cap_userns sys_boot;
+allow healthd self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+allow healthd self:capability2 block_suspend;
+allow healthd self:cap2_userns block_suspend;
+allow healthd sysfs_wake_lock:file rw_file_perms;
+allow healthd system_suspend_server:binder { call transfer };
+allow healthd system_suspend_server:fd *;
+allow healthd system_suspend_hwservice:hwservice_manager find;
+allow healthd hidl_manager_hwservice:hwservice_manager find;
+allow healthd sysfs_power:file rw_file_perms;
+allow healthd sysfs_usb:file write;
+allow healthd graphics_device:dir r_dir_perms;
+allow healthd graphics_device:chr_file rw_file_perms;
+allow healthd input_device:dir r_dir_perms;
+allow healthd input_device:chr_file r_file_perms;
+allow healthd tty_device:chr_file rw_file_perms;
+allow healthd ashmem_device:chr_file execute;
+allow healthd proc_sysrq:file rw_file_perms;
+allow healthd statsd:binder transfer;
+allow healthd vold:binder transfer;
+dontaudit healthd self:capability sys_resource;
+dontaudit healthd self:cap_userns sys_resource;
+r_dir_file(healthd, rootfs)
+r_dir_file(healthd, cgroup)
+get_prop(healthd, hwservicemanager_prop)
+set_prop(healthd, system_prop)
+set_prop(healthd, exported_system_prop)
+hwbinder_use(healthd)
+type healthd_exec, exec_type, file_type, system_file_type;
+hal_client_domain(healthd, hal_health)

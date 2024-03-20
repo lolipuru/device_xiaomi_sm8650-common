@@ -1,0 +1,36 @@
+# Battery
+allow init vendor_sysfs_usb_supply:file setattr;
+allow init vendor_sysfs_battery_supply:file setattr;
+allow init vendor_sysfs_qcom_battery:file setattr;
+
+# Displayfeature
+set_prop(init, vendor_displayfeature_prop)
+set_prop(vendor_init, vendor_displayfeature_prop)
+
+# last_kmsg
+allow init proc_last_kmsg:file r_file_perms;
+allow init proc_last_kmsg:file setattr;
+
+# Mount
+allow init vendor_configs_file:dir mounton;
+allow init vendor_configs_file:file mounton;
+
+# Partition
+allow init block_device:blk_file setattr;
+allow init vendor_file:file execute;
+allow vendor_init tmpfs:dir create_dir_perms;
+allow vendor_init tmpfs:dir { mounton relabelfrom relabelto };
+allow vendor_init tmpfs:file rw_file_perms;
+allow vendor_init block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init block_device:lnk_file setattr;
+allow vendor_init block_device:file { mounton relabelfrom relabelto };
+allow vendor_init block_device:file setattr;
+allow vendor_init vendor_ramdump_block_device:lnk_file { relabelfrom relabelto };
+allow vendor_init vendor_ramdump_block_device:file { relabelfrom relabelto };
+
+# Touchfeature
+allow init tpevent_exec:file { execute getattr open read };
+allow init tpevent:process { rlimitinh siginh transition };
+allow init touchreport_exec:file { execute getattr open read };
+allow init touchreport:process { rlimitinh siginh transition };
+set_prop(vendor_init, vendor_touchfeature_prop)

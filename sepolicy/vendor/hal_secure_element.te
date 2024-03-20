@@ -1,0 +1,7 @@
+# Allow Secure Element hal to access /data/vendor/nfc/
+r_dir_file(hal_secure_element_default, vendor_nfc_vendor_data_file)
+
+# Mlipay
+allow hal_secure_element_default hal_mtdservice_hwservice:hwservice_manager find;
+allow hal_secure_element_default hal_mtdservice_default:binder { call transfer };
+allow hal_secure_element_default hal_mtdservice_default:fd *;

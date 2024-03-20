@@ -1,0 +1,87 @@
+# Audio
+allow system_app sound_device:chr_file { open read write };
+get_prop(system_app, vendor_audio_prop)
+get_prop(system_app, audio_config_prop)
+
+# Battery
+allow system_app vendor_sysfs_battery_supply:file r_file_perms;
+allow system_app vendor_sysfs_battery_supply:dir r_dir_perms;
+allow system_app vendor_sysfs_qcom_battery:file rw_file_perms;
+allow system_app vendor_sysfs_qcom_battery:dir r_dir_perms;
+allow system_app vendor_sysfs_qcom_battery:dir search;
+allow system_app vendor_sysfs_usb_supply:file r_file_perms;
+allow system_app vendor_sysfs_usb_supply:dir r_dir_perms;
+
+# Camera
+allow system_app camlog_device:chr_file { getattr ioctl open read watch watch_reads write };
+allow system_app hal_camera_default:binder { call transfer };
+allow system_app hal_camera_default:binder transfer;
+allow system_app hal_camera_default:fd *;
+allow system_app hal_quickcamera_hwservice:hwservice_manager find;
+allow system_app hal_quickcamera:binder { call transfer };
+allow system_app hal_quickcamera:binder transfer;
+allow system_app hal_quickcamera:fd *;
+allow system_app hal_quickcamera_default:binder { call transfer };
+allow system_app hal_quickcamera_default:binder transfer;
+allow system_app hal_quickcamera_default:fd *;
+allow system_app vendor_camera_data_file:dir { append map r_dir_perms write };
+allow system_app vendor_camera_data_file:file { getattr open read };
+allow system_app vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
+allow system_app vendor_hal_camerapostproc_xiaomi:binder { call transfer };
+allow system_app vendor_hal_camerapostproc_xiaomi:binder transfer;
+allow system_app vendor_hal_camerapostproc_xiaomi:fd *;
+get_prop(system_app, vendor_camera_sensor_prop)
+hal_client_domain(system_app, vendor_hal_camerapostproc_xiaomi)
+hal_client_domain(system_app, hal_quickcamera)
+
+# Displayfeature
+allow system_app vendor_hal_displayfeature_xiaomi_default:binder transfer;
+allow system_app vendor_sysfs_displayfeature:dir r_dir_perms;
+allow system_app vendor_sysfs_displayfeature:file rw_file_perms;
+get_prop(system_app, vendor_displayfeature_prop)
+hal_client_domain(system_app, vendor_hal_displayfeature_xiaomi)
+
+# LED
+allow system_app sysfs_leds:dir search;
+allow system_app sysfs_leds:dir r_dir_perms;
+
+# Memory
+allow system_app vendor_sysfs_memory:dir r_dir_perms;
+allow system_app vendor_sysfs_memory:file r_file_perms;
+
+# Misys
+allow system_app hal_misys_hwservice:hwservice_manager find;
+allow system_app hal_misys_default:binder call;
+allow system_app hal_misys_default:binder transfer;
+
+# Mlipay
+hal_client_domain(system_app, hal_mlipay)
+allow system_app hal_mfidoca_hwservice:hwservice_manager find;
+allow system_app hal_mfidoca_default:binder call;
+allow system_app hal_mlipay_hwservice:hwservice_manager find;
+allow system_app hal_mlipay_default:binder call;
+allow system_app hal_mtdservice_hwservice:hwservice_manager find;
+allow system_app hal_mtdservice_default:binder { call transfer };
+allow system_app hal_mtdservice_default:fd *;
+allow system_app hal_tidaservice_hwservice:hwservice_manager find;
+allow system_app hal_tidaservice_default:binder { call transfer };
+allow system_app hal_tidaservice_default:fd *;
+
+# Thermal
+allow system_app vendor_thermal_data_file:dir create_dir_perms;
+allow system_app vendor_thermal_data_file:file create_file_perms;
+allow system_app sysfs_thermal:file { getattr open read write };
+allow system_app sysfs_thermal:dir search;
+get_prop(system_app, vendor_thermal_normal_prop)
+
+# Touchfeature
+allow system_app touchfeature_device:chr_file rw_file_perms;
+allow system_app touchfeature_device:file { getattr map read };
+get_prop(system_app, vendor_touchfeature_prop)
+hal_client_domain(system_app, hal_touchfeature_xiaomi)
+
+# UFS
+allow system_app ufs_sysfs:file { getattr open read };
+
+# Vibrator
+allow system_app hal_vibrator_default:binder call;

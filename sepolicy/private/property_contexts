@@ -1,0 +1,24 @@
+# Audio
+tas.smartpa.debug.                      u:object_r:exported_system_prop:s0
+
+# Camera
+persist.camera.                         u:object_r:vendor_camera_prop:s0
+ro.camera.                              u:object_r:vendor_camera_prop:s0
+
+# Fingerprint
+sys.fp.miui.token                       u:object_r:exported_system_prop:s0
+
+# Hardware
+ro.hardware.chipname                    u:object_r:exported_default_prop:s0
+
+# MIUI
+ro.boot.hwc                             u:object_r:exported_default_prop:s0
+ro.boot.hwname                          u:object_r:exported_default_prop:s0
+ro.boot.hwversion                       u:object_r:exported_default_prop:s0
+ro.miui.                                u:object_r:exported_system_prop:s0
+ro.product.marketname                   u:object_r:exported_default_prop:s0 exact string
+ro.product.mod_device                   u:object_r:exported_default_prop:s0 exact string
+
+# Ril
+ro.carrier.name                         u:object_r:exported_default_prop:s0
+ro.ril.oem.wifimac                      u:object_r:vendor_radio_prop:s0

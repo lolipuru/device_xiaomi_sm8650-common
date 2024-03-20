@@ -1,0 +1,48 @@
+attribute hal_misys;
+attribute hal_misys_client;
+attribute hal_misys_server;
+
+type hal_misys_default, domain;
+type hal_misys_default_exec, exec_type, file_type, vendor_file_type;
+type hal_misys_hwservice, hwservice_manager_type;
+
+add_hwservice(hal_misys_server, hal_misys_hwservice)
+binder_call(hal_misys_client, hal_misys_server)
+hal_server_domain(hal_misys_default, hal_misys)
+hal_client_domain(hal_misys_default, hal_allocator)
+hwbinder_use(hal_misys_default)
+init_daemon_domain(hal_misys_default)
+set_prop(hal_misys_default, vendor_system_prop)
+
+allow hal_misys_default camera_persist_file:dir create_dir_perms;
+allow hal_misys_default camera_persist_file:file create_file_perms;
+allow hal_misys_default vendor_camera_data_file:dir rw_dir_perms;
+allow hal_misys_default vendor_camera_data_file:file create_file_perms;
+allow hal_misys_default sysfs_thermal:file { getattr open read setattr write };
+allow hal_misys_default mnt_vendor_file:dir { getattr open read search };
+allow hal_misys_default mnt_vendor_file:dir write;
+allow hal_misys_default mnt_vendor_file:dir { add_name remove_name rmdir };
+allow hal_misys_default mnt_vendor_file:file { getattr open read };
+allow hal_misys_default mnt_vendor_file:file write;
+allow hal_misys_default mnt_vendor_file:file { create unlink };
+allow hal_misys_default proc:file { getattr open read setattr write };
+allow hal_misys_default vendor_data_file:file r_file_perms;
+allow hal_misys_default vendor_data_file:file { create getattr open read setattr write };
+allow hal_misys_default vendor_data_file:dir { add_name write };
+allow hal_misys_default vendor_audio_data_file:dir create_dir_perms;
+allow hal_misys_default vendor_audio_data_file:file create_file_perms;
+allow hal_misys_default platform_app:binder transfer;
+allow hal_misys_default hidl_memory_hwservice:hwservice_manager find;
+allow hal_misys_default system_app:binder transfer;
+allow hal_misys_default hal_allocator_server:binder call;
+allow hal_misys_default hal_allocator_server:fd *;
+allow hal_misys_default proc_meminfo:file read;
+allow hal_misys_default block_device:dir r_dir_perms;
+allow hal_misys_default super_block_device:blk_file r_file_perms;
+allow hal_misys_client hal_misys_server:binder { call transfer };
+allow hal_misys_client hal_misys_server:binder transfer;
+allow hal_misys_client hal_misys_server:fd *;
+allow hal_misys_client hal_misys_hwservice:hwservice_manager find;
+allow hal_misys_server hal_misys_client:binder transfer;
+allow hal_misys_server hal_misys_client:binder { call transfer };
+allow hal_misys_server hal_misys_client:fd *;

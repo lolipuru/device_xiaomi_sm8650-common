@@ -1,0 +1,4 @@
+type hal_touchfeature_xiaomi_default, domain;
+type hal_touchfeature_xiaomi_default_exec, exec_type, file_type, vendor_file_type;
+
+type hal_touchfeature_xiaomi_hwservice, hwservice_manager_type;

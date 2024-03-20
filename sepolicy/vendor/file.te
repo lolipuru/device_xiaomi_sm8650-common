@@ -1,0 +1,37 @@
+# Audio
+type audio_socket, file_type;
+type sysfs_f0_value, sysfs_type, fs_type;
+
+# Battery
+type persist_subsys_file, vendor_persist_type, file_type;
+type vendor_sysfs_qcom_battery, fs_type, sysfs_type;
+
+# Camera
+type camera_persist_file, file_type, mlstrustedobject, vendor_persist_type;
+
+# Displayfeature
+type vendor_sysfs_displayfeature, fs_type, sysfs_type;
+
+# last_kmsg
+type proc_last_kmsg, fs_type, proc_type;
+
+# Ril
+type vendor_modem_data_file, data_file_type, file_type;
+
+# Sensors
+type vendor_sysfs_iio, fs_type, sysfs_type;
+
+# Thermal data
+type vendor_thermal_data_file, file_type, data_file_type;
+
+# Touchfeature
+type proc_tp_file, fs_type, proc_type;
+type proc_tp_lockdown, fs_type, proc_type;
+type sysfs_touch_hostprocess, fs_type, sysfs_type;
+type sysfs_touch_suspend, fs_type, sysfs_type;
+type sysfs_tp_virtual_prox, fs_type, sysfs_type;
+type vendor_data_touchreport_file, data_file_type, file_type;
+type touchreport_data_file, data_file_type, file_type;
+
+# UFS
+type ufs_sysfs, fs_type, sysfs_type;
