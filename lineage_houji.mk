@@ -18,8 +18,13 @@ $(call inherit-product, device/xiaomi/houji/device.mk)
 PRODUCT_DEVICE := houji
 PRODUCT_NAME := lineage_houji
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := 23127PN0CC
+PRODUCT_MODEL := 23127PN0CG
 PRODUCT_MANUFACTURER := xiaomi
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="houji_global-user 14 UKQ1.230804.001 V816.0.2.0.UNCMIXM release-keys"
+
+BUILD_FINGERPRINT := Xiaomi/houji_global/houji:14/UKQ1.230804.001/V816.0.2.0.UNCMIXM:user/release-keys
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
