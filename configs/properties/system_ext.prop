@@ -1,0 +1,13 @@
+# Camera
+persist.vendor.camera.privapp.list=org.lineageos.aperture.org.codeaurora.snapcam,com.android.camera,com.google.camera
+vendor.camera.aux.packagelist=org.lineageos.aperture,org.codeaurora.snapcam,com.android.camera,com.google.camera
+
+# DPM
+persist.vendor.dpm.feature=11
+
+# Radio
+ro.telephony.sim_slots.count=2
+telephony.active_modems.max_count=2
+
+# Media
+vendor.media.target_variant=_pineapple
