@@ -1,0 +1,17 @@
+<manifest version="7.0" type="device" target-level="8">
+    <hal format="hidl">
+        <name>vendor.xiaomi.hardware.bgservice</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IBGService/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.xiaomi.hidl.minet</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IMiNetService/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.xiaomi.hidl.miwill</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::IMiwillService/default</fqname>
+    </hal>
+</manifest>
