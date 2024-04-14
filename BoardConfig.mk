@@ -49,6 +49,9 @@ SOONG_CONFIG_ufsbsg_ufsframework := bsg
 TARGET_BOOTLOADER_BOARD_NAME := pineapple
 TARGET_NO_BOOTLOADER := true
 
+# Filesystem
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
+
 # Display
 TARGET_SCREEN_DENSITY := 480
 
