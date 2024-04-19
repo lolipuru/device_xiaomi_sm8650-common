@@ -224,7 +224,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- SPU service-->
+    <!-- SPU service
     <hal format="hidl">
         <name>vendor.qti.spu</name>
         <transport>hwbinder</transport>
@@ -243,6 +243,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear
             <instance>default</instance>
         </interface>
     </hal>
+    -->
     <hal format="aidl" optional="true">
         <name>vendor.qti.hardware.spu</name>
         <version>2</version>
