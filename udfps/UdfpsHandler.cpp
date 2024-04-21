@@ -178,7 +178,7 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
             while (true) {
                 int rc = poll(&dispEventPoll, 1, -1);
                 if (rc < 0) {
-                    LOG(ERROR) << "failed to poll " << FOD_PRESS_STATUS_PATH << ", err: " << rc;
+                    LOG(ERROR) << "failed to poll " << DISP_FEATURE_PATH << ", err: " << rc;
                     continue;
                 }
 
