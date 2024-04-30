@@ -41,6 +41,5 @@ int main(int, char* argv[]) {
 
         ABinderProcess_joinThreadPool();
     }
-    ABinderProcess_joinThreadPool();
     return EXIT_FAILURE;  // should not reach
 }
