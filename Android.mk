@@ -53,14 +53,6 @@ $(CNE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@rm -rf $@
 	$(hide) ln -sf /vendor/lib64/$(notdir $@) $@
 
-EGL_LIB_SYMLINKS := $(TARGET_OUT_VENDOR)/lib
-$(EGL_LIB_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "EGL lib symlinks: $@"
-	@mkdir -p $@
-	$(hide) ln -sf egl/libEGL_adreno.so $@/libEGL_adreno.so
-	$(hide) ln -sf egl/libGLESv2_adreno.so $@/libGLESv2_adreno.so
-	$(hide) ln -sf egl/libq3dtools_adreno.so $@/libq3dtools_adreno.so
-
 EGL_LIB64_SYMLINKS := $(TARGET_OUT_VENDOR)/lib64
 $(EGL_LIB64_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	@echo "EGL lib64 symlinks: $@"
@@ -72,7 +64,6 @@ $(EGL_LIB64_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += \
 	$(CNE_SYMLINKS) \
 	$(IMS_SYMLINKS) \
-	$(EGL_LIB_SYMLINKS) \
 	$(EGL_LIB64_SYMLINKS)
 
 # Symlinks
@@ -145,12 +136,19 @@ ALL_DEFAULT_INSTALLED_MODULES += \
 
 FIRMWARE_WLAN_KIWI_V2_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/kiwi_v2/
 $(FIRMWARE_WLAN_KIWI_V2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating kiwi_v2 qca_cld wlan firmware symlinks: $@"
+	@echo "Creating firmware wlan qca_cld kiwi_v2 symlinks: $@"
 	mkdir -p $@
 	$(hide) ln -sf /vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini $@/WCNSS_qcom_cfg.ini
 	$(hide) ln -sf /mnt/vendor/persist/kiwi_v2/wlan_mac.bin $@/wlan_mac.bin
 
+FIRMWARE_WLANMDSP_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/
+$(FIRMWARE_WLANMDSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating firmware wlanmdsp.otaupdate symlinks: $@"
+	mkdir -p $@
+	$(hide) ln -sf /data/vendor/firmware/wlanmdsp.mbn $@/wlanmdsp.otaupdate
+
 ALL_DEFAULT_INSTALLED_MODULES += \
-    $(FIRMWARE_WLAN_KIWI_V2_SYMLINKS)
+	$(FIRMWARE_WLAN_KIWI_V2_SYMLINKS) \
+	$(FIRMWARE_WLANMDSP_SYMLINKS)
 
 endif
