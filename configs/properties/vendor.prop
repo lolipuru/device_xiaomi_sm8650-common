@@ -4,9 +4,10 @@ ro.camera.enableCamera1MaxZsl=1
 ro.hardware.camera=xiaomi
 
 # Display
+ro.vendor.displayfeature.dump=true
 vendor.display.comp_mask=0
-vendor.display.disable_excl_rect=0
 vendor.display.disable_excl_rect_partial_fb=1
+vendor.display.disable_excl_rect=0
 vendor.display.disable_hw_recovery_dump=1
 vendor.display.disable_offline_rotator=1
 vendor.display.disable_scaler=0
@@ -21,41 +22,16 @@ vendor.display.enable_early_wakeup=1
 vendor.display.enable_hdr10_gpu_target=1
 vendor.display.enable_optimize_refresh=0
 vendor.display.enable_rc_support=1
+vendor.display.scaling_dest_opt_mode=4
+vendor.display.scaling_source_opt_mode=4
 vendor.display.use_smooth_motion=0
 vendor.display.vds_allow_hwc=1
 
-# displayfeature
-persist.vendor.dc_backlight.enable=false
-persist.vendor.dc_backlight.threshold=0
-ro.vendor.bcbc.enable=true
+# displayfeature (vendor)
 ro.vendor.beluga.c=0x4800
 ro.vendor.beluga.p=0x3
 ro.vendor.beluga.s=0x900
 ro.vendor.beluga.t=0x240
-ro.vendor.cabc.enable=fasle
-ro.vendor.colorpick_adjust=true
-ro.vendor.dfps.enable=false
-ro.vendor.display.ai_disp.enable=true
-ro.vendor.display.default_fps=60
-ro.vendor.display.mi_calib.enable=true
-ro.vendor.display.nature_mode.enable=true
-ro.vendor.display.touch.idle.enable=true
-ro.vendor.display.type=oled
-ro.vendor.fps.switch.default=true
-ro.vendor.fps.switch.thermal=true
-ro.vendor.gcp.enable=1
-ro.vendor.hbm_backlight.enable=true
-ro.vendor.histogram.enable=true
-ro.vendor.localhbm.enable=true
-ro.vendor.soft_backlight.enable=true
-ro.vendor.standard.video.enable=true
-ro.vendor.thermal.dimming.enable=true
-ro.vendor.video_box.version=2
-ro.vendor.whitepoint_calibration_enable=false
-ro.vendor.xiaomi.bl.poll=true
-sys.displayfeature.entry.enable=true
-sys.displayfeature_hidl=false
-ro.vendor.displayfeature.dump=true
 
 # Dolby
 ro.vendor.audio.dolby.dax.version=DAX3_3.8.5.20_r1
@@ -68,16 +44,9 @@ persist.vendor.dpm.vndr.feature=11
 # DRM
 drm.service.enabled=true
 
-# Fingerprint
-persist.vendor.sys.fp.expolevel=0x88
-persist.vendor.sys.fp.fod.location.X_Y=491,2282
-persist.vendor.sys.fp.fod.size.width_height=218,218
-ro.hardware.fp.fod.location=low
-ro.hardware.fp.fod.touch.ctl.version=2.0
-ro.hardware.fp.fod.lowlight.lux.threshold=3
-ro.hardware.fp.fod.lowlight.brightness.threshold=411
-ro.hardware.fp.fod=true
-ro.hardware.fp.mievent=true
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
+vendor.gatekeeper.is_security_level_spu=0
 
 # Graphics
 debug.egl.hw=0
@@ -115,34 +84,6 @@ ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
 ro.vendor.all_modes.colorpick_adjust=true
 vendor.gralloc.disable_ubwc=0
-
-# Haptics
-sys.haptic.motor=linear
-sys.haptic.infinitelevel=true
-sys.haptic.dynamiceffect=true
-sys.haptic.dynamiceffect.richtap=true
-sys.haptic.down.weak=0
-sys.haptic.down.normal=2
-sys.haptic.down.strong=5
-sys.haptic.down=5,2
-sys.haptic.tap.normal=3,2
-sys.haptic.tap.light=5,2
-sys.haptic.flick=5,2
-sys.haptic.flick.light=7,2
-sys.haptic.switch=9,2
-sys.haptic.mesh.heavy=8,2
-sys.haptic.mesh.normal=5,2
-sys.haptic.mesh.light=5,1
-sys.haptic.long.press=0,1
-sys.haptic.popup.normal=6,2
-sys.haptic.popup.light=6,1
-sys.haptic.pickup=2,2
-sys.haptic.scroll.edge=7,0
-sys.haptic.trigger.drawer=2,0
-sys.haptic.hold=4,0
-sys.haptic.runin=13
-sys.haptic.intensityforkeyboard=true
-sys.haptic.device_type=agm
 
 # Incremental
 ro.incremental.enable=yes
@@ -202,7 +143,7 @@ persist.vendor.rcs.singlereg.feature=1
 
 # USB
 sys.usb.mtp.batchcancel=1
-vendor.usb.product_string=Xiaomi 13
+vendor.usb.product_string=Xiaomi 14
 vendor.usb.rndis.func.name=gsi
 vendor.usb.rmnet.func.name=gsi
 vendor.usb.rmnet.inst.name=rmnet
