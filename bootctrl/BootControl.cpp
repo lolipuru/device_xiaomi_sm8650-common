@@ -19,12 +19,15 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+#include "BootControl.h"
 #include <cstdint>
+
 #include <android-base/logging.h>
+
 #include <memory>
+
 #include <log/log.h>
 
-#include <libboot_control_qti.h>
 #include "BootControl.h"
 
 using HIDLMergeStatus = ::android::hardware::boot::V1_1::MergeStatus;
@@ -161,10 +164,10 @@ ScopedAStatus BootControl::setActiveBootSlot(int32_t in_slot) {
 }
 
 ScopedAStatus BootControl::setSlotAsUnbootable(int32_t in_slot) {
-    int ret = set_slot_as_unbootable(in_slot);
-    if (ret == 0) {
-         return ScopedAStatus::ok();
-    }
+   int ret = set_slot_as_unbootable(in_slot);
+   if (ret == 0) {
+        return ScopedAStatus::ok();
+   }
     else {
         return ScopedAStatus::fromServiceSpecificErrorWithMessage(COMMAND_FAILED, "Operation failed");
     }

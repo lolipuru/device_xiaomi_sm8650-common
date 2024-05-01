@@ -21,6 +21,7 @@
 #pragma once
 
 #include <aidl/android/hardware/boot/BnBootControl.h>
+#include <libboot_control_qti.h>
 
 namespace aidl::android::hardware::boot {
 

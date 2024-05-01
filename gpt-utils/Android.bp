@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-
 cc_library {
     name: "libgptutils.pineapple",
     vendor: true,
