@@ -272,7 +272,6 @@ PRODUCT_PACKAGES += \
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    fstab.qcom.vendor_ramdisk \
     init.class_main.sh \
     init.qcom.class_core.sh \
     init.qcom.early_boot.sh \
@@ -283,6 +282,9 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.xiaomi.rc \
     ueventd.qcom.rc
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.qcom
 
 # Secure element
 PRODUCT_PACKAGES += \
