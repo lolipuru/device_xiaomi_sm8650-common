@@ -321,7 +321,6 @@ vendor/lib64/soundfx/libswgamedap.so
 vendor/lib64/soundfx/libswspatializer.so
 vendor/lib64/soundfx/libswvqe.so
 vendor/lib64/soundfx/libvisualizer.so
-# vendor/lib64/soundfx/libvolumelistener.so
 
 # Batterysecret
 vendor/bin/batterysecret
