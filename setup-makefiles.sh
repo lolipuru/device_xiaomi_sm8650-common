@@ -8,7 +8,7 @@
 
 set -e
 
-DEVICE=shennong
+DEVICE=houji
 VENDOR=xiaomi
 
 # Load extract_utils and do some sanity checks

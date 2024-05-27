@@ -102,14 +102,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.xiaomi.hardware.bgservice</name>
-        <version>1.0</version>
-        <interface>
-            <name>IBGService</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="aidl" optional="true">
         <name>vendor.xiaomi.hardware.blackbox</name>
         <interface>
@@ -572,6 +564,48 @@
         <version>1.0</version>
         <interface>
             <name>ISensorCommunicate</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hardware.aidl.mtdservice</name>
+        <interface>
+            <name>IMTService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.rongcard.eid</name>
+        <interface>
+            <name>IEidDeviceAidl</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hardware.aidl.tidaservice</name>
+        <interface>
+            <name>ITidaService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hardware.mfidoca</name>
+        <interface>
+            <name>IFidoService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hardware.mlipay</name>
+        <interface>
+            <name>IMlipayService</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="aidl" optional="true">
+        <name>vendor.xiaomi.hw.touchfeature</name>
+        <interface>
+            <name>ITouchFeature</name>
             <instance>default</instance>
         </interface>
     </hal>

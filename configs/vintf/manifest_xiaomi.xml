@@ -1,5 +1,10 @@
 <manifest version="7.0" type="device" target-level="8">
     <hal format="hidl">
+        <name>vendor.qti.sla.service</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::ISlaService/default</fqname>
+    </hal>
+    <hal format="hidl">
         <name>vendor.xiaomi.hardware.bgservice</name>
         <transport>hwbinder</transport>
         <fqname>@1.0::IBGService/default</fqname>
@@ -14,4 +19,9 @@
         <transport>hwbinder</transport>
         <fqname>@1.0::IMiwillService/default</fqname>
     </hal>
+    <!-- <hal format="aidl">
+        <name>android.hardware.contexthub</name>
+        <version>2</version>
+        <fqname>IContextHub/default</fqname>
+    </hal> -->
 </manifest>

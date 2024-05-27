@@ -26,7 +26,8 @@ $(call inherit-product, packages/modules/Virtualization/apex/product_packages.mk
 
 # SHIPPING API
 BOARD_API_LEVEL := 34
-BOARD_SHIPPING_API_LEVEL := 34
+BOARD_SHIPPING_API_LEVEL := $(BOARD_API_LEVEL)
+PRODUCT_SHIPPING_API_LEVEL := $(BOARD_API_LEVEL)
 
 # AAPT
 PRODUCT_AAPT_CONFIG := normal
@@ -83,6 +84,14 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     libvolumelistener
 
+AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/common/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
+    $(AUDIO_HAL_DIR)/configs/pineapple/audio_effects.conf:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.conf \
+    $(AUDIO_HAL_DIR)/configs/pineapple/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio/sku_pineapple/audio_effects.xml \
+    $(AUDIO_HAL_DIR)/configs/pineapple/microphone_characteristics.xml:$(TARGET_COPY_OUT_VENDOR)/etc/microphone_characteristics.xml
+
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
@@ -128,6 +137,10 @@ TARGET_SCREEN_WIDTH := 1200
 PRODUCT_PACKAGES += \
     android.hardware.boot-service.qti \
     android.hardware.boot-service.qti.recovery
+
+# ContextHub
+PRODUCT_PACKAGES += \
+    com.android.hardware.contexthub
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -193,7 +206,8 @@ PRODUCT_PACKAGES += \
     android.hidl.allocator@1.0.vendor \
     android.hidl.memory.block@1.0.vendor \
     libhidltransport.vendor \
-    libhwbinder.vendor
+    libhwbinder.vendor \
+    vendor.qti.hardware.systemhelper@1.0.vendor
 
 # IPACM
 PRODUCT_PACKAGES += \
@@ -226,12 +240,19 @@ PRODUCT_PACKAGES += \
     android.hardware.media.c2@1.2.vendor \
     libavservices_minijail \
     libavservices_minijail.vendor \
-    libcodec2_soft_common.vendor \
     libcodec2_hidl@1.2.vendor \
+    libcodec2_soft_common.vendor \
     libcodec2_vndk.vendor \
-    libgui_vendor \
     libsfplugin_ccodec_utils.vendor \
     libstagefrighthw
+
+PRODUCT_COPY_FILES += \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/media_codecs_c2_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_c2_audio.xml \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.base-arm.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.base-arm.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.base-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.base-arm64.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.ext-arm.policy \
+    $(AUDIO_HAL_DIR)/configs/common/codec2/service/1.0/c2audio.vendor.ext-arm64.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/c2audio.vendor.ext-arm64.policy \
+    $(AUDIO_HAL_DIR)/configs/common/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
@@ -242,18 +263,26 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
-# NXP
+# NXP Keymint
 PRODUCT_PACKAGES += \
-	android.hardware_keystore.jc-strongbox-keymint.nxp.xml \
-	android.hardware.weaver-service.nxp \
+	android.hardware.security.keymint-service.strongbox.nxp \
 	android.hardware.authsecret-service.nxp \
-	libcppbor_external.vendor \
-	libjc_keymint.nxp.vendor \
 	libjc_keymint_transport.nxp.vendor \
-	libkeymaster_portable.vendor \
+	libjc_keymint.nxp.vendor \
+	libjc_keymint3.nxp.vendor \
 	libkeymaster_messages.vendor \
-	libsoft_attestation_cert.vendor \
+	libkeymaster_portable.vendor \
 	libmemunreachable.vendor \
+	libsoft_attestation_cert.vendor \
+    lib_android_keymaster_keymint_utils.vendor \
+    libcppbor_external.vendor
+
+# NxpNFC
+PRODUCT_PACKAGES += \
+    android.hardware.weaver-service.nxp \
+	ese_spi_nxp_snxxx \
+	nfc_nci_nxp_snxxx \
+	se_extn_client
 
 # NDK
 $(foreach target, $(shell cat $(LOCAL_PATH)/configs/ndk/ndk.txt), $(eval PRODUCT_PACKAGES += $(target).vendor))
@@ -300,10 +329,6 @@ PRODUCT_PACKAGES += \
     libvndfwk_detect_jni.qti_vendor \
     vendor.qti.hardware.systemhelper@1.0.vendor
 
-# RenderScript
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.6.vendor \
@@ -340,11 +365,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.hifi_sensors.xml:$(TARGET_COPY_OUT_ODM)/etc/permissions/android.hardware.sensor.hifi_sensors.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_kalama/android.hardware.sensor.stepdetector.xml
+
+# Vndservice manager
+PRODUCT_PACKAGES += \
+    vndservicemanager
 
 # Servicetracker
 PRODUCT_PACKAGES += \
@@ -355,6 +386,26 @@ PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
 # Telephony
+PRODUCT_PACKAGES += \
+    extphonelib \
+    extphonelib-product \
+    extphonelib.xml \
+    extphonelib_product.xml \
+    ims-ext-common \
+    ims_ext_common.xml \
+    qti-telephony-hidl-wrapper \
+    qti-telephony-hidl-wrapper-prd \
+    qti_telephony_hidl_wrapper.xml \
+    qti_telephony_hidl_wrapper_prd.xml \
+    qti-telephony-utils \
+    qti-telephony-utils-prd \
+    qti_telephony_utils.xml \
+    qti_telephony_utils_prd.xml \
+    telephony-ext
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
@@ -380,10 +431,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml
 
-# Vendor service manager
-PRODUCT_PACKAGES += \
-    vndservicemanager
-
 # Verified boot
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml
@@ -391,14 +438,15 @@ PRODUCT_COPY_FILES += \
 # WiFi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
-    android.hardware.wifi.hostapd@1.0.vendor \
     hostapd \
     hostapd_cli \
     libwifi-hal-qcom \
     libwpa_client \
     wpa_cli \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    libpasn \
+    libwifi-hal
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \

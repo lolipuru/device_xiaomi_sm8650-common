@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from Xiaomi 14 (OS1.0.11.0.UNCMIXM). 
+## are from Xiaomi 14 (OS1.0.6.0.UNCMIXM). 
 
 # ACDB
 odm/etc/acdbdata/Tutu_orange/Tutu_orange_acdb_cal.acdb
@@ -73,7 +73,6 @@ vendor/lib64/libloadalgo_stub.so
 vendor/lib64/libvmmem.so
 
 # ADSP modules
-odm/etc/audio/hrtf5c.bin
 odm/etc/audio/misound_karaoke_res.bin
 odm/etc/audio/misound_karaokemix_res.bin
 odm/etc/audio/misound_res_headphone.bin
@@ -96,6 +95,7 @@ odm/lib/rfsa/adsp/libmialgo_night_align_cdsp_skel.so
 odm/lib/rfsa/adsp/libmialgo_rawhdr_cdsp_skel.so
 odm/lib/rfsa/adsp/libmialgo_tsspot_cdsp_skel.so
 odm/lib/rfsa/adsp/libmiphone_capture_mdbokeh_cdsp_skel.so
+vendor/etc/hrtf5c.bin
 vendor/lib/rfsa/adsp/chre_qsh_shim.so
 vendor/lib/rfsa/adsp/libadsp_jpege_skel.so
 vendor/lib/rfsa/adsp/libarc_htp_driver_skel.so
@@ -219,6 +219,7 @@ vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
 vendor/lib64/hw/audio.primary.pineapple.so
+vendor/lib64/libVoiceSdk.so
 vendor/lib64/lib_misound_asc.so
 vendor/lib64/libadm.so
 vendor/lib64/libar-acdb.so
@@ -240,6 +241,7 @@ vendor/lib64/liblx-ar_util.so
 -vendor/lib64/liblx-osal.so
 vendor/lib64/libmcs.so
 vendor/lib64/libmisight.so
+vendor/lib64/libmisfpsop.so
 vendor/lib64/libmisoundsa.so
 vendor/lib64/libmispowerop.so
 vendor/lib64/libpal_net_if.so
@@ -252,12 +254,14 @@ vendor/lib64/libvibratorutils.so
 vendor/lib64/libxlog.so
 -vendor/lib64/vendor.qti.hardware.pal@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.pal@1.0.so
+vendor/lib64/vendor.qti.voiceprint@1.0.so
 
 # Audio (Config)
 odm/etc/audio/sku_pineapple/mixer_paths_overlay_dynamic.xml
 odm/etc/audio/sku_pineapple/mixer_paths_overlay_static.xml
 odm/etc/audio/sku_pineapple/mixer_paths_pineapple_mtp.xml
 odm/etc/audio/sku_pineapple/resourcemanager_pineapple_mtp.xml
+odm/etc/usecaseKvManager.xml
 vendor/etc/audio/sku_pineapple/adsp_sleep_monitor.conf
 vendor/etc/audio/sku_pineapple/audio_effects.conf
 vendor/etc/audio/sku_pineapple/audio_effects.xml
@@ -1547,8 +1551,11 @@ vendor/lib64/libSnpeHtpV69Stub.so
 vendor/lib64/libSnpeHtpV73Stub.so
 vendor/lib64/libSnpeHtpV75Stub.so
 vendor/lib64/libsynx.so
+vendor/lib64/libtfestriping.so
 vendor/lib64/libthreadutils.so
 vendor/lib64/libtracker_6dof_impl.so
+vendor/lib64/libtunningmemhook.so
+vendor/lib64/libubifocus.so
 vendor/lib64/libvideoBokeh.so
 vendor/lib64/libvideoml.so
 vendor/lib64/libXMFaceFocus.so
@@ -1768,9 +1775,9 @@ vendor/etc/init/ssgtzd.rc
 vendor/etc/ssg/tz_whitelist.json
 
 # Context Hub
-# odm/etc/init/android.hardware.contexthub-service.qmi.rc
+odm/etc/init/android.hardware.contexthub-service.qmi.rc
 odm/etc/permissions/android.hardware.context_hub.xml
-# vendor/bin/hw/android.hardware.contexthub-service.qmi
+vendor/bin/hw/android.hardware.contexthub-service.qmi
 vendor/etc/chre/preloaded_nanoapps.json
 
 # Data
@@ -2036,6 +2043,8 @@ odm/lib64/hw/fingerprint.goodix_fod.so
 odm/lib64/libgf_hal.so
 odm/bin/hw/vendor.xiaomi.hardware.dtool1-service
 odm/etc/init/vendor.xiaomi.hardware.dtool1.rc
+vendor/bin/hw/mfp-daemon
+vendor/etc/init/init.mfp-daemon.aidl.rc
 vendor/etc/vintf/manifest/AHBF-V3-service.xml
 vendor/etc/vintf/manifest/fod-aidl.xml
 vendor/lib64/com.fingerprints.extension3-V1-ndk.so
@@ -2081,6 +2090,7 @@ vendor/etc/vintf/manifest/android.hardware.gnss-aidl-service-qti.xml
 vendor/etc/vintf/manifest/vendor.qti.gnss-service.xml
 vendor/etc/xtwifi.conf
 vendor/lib64/hw/android.hardware.gnss-aidl-impl-qti.so
+vendor/lib64/libMiVDR.so
 vendor/lib64/libbatching.so
 vendor/lib64/libcacertclient.so
 vendor/lib64/libcdfw.so
@@ -2797,11 +2807,13 @@ vendor/etc/qvr/qvr_hid_device_list.txt
 vendor/etc/qvr/qvr_usb_device_list.txt
 vendor/etc/qvr/qvrservice_config.txt
 vendor/etc/seccomp_policy/qvr@2.0.policy
+vendor/lib64/libQEGA.qti.so
 vendor/lib64/libDspIOProxy_stub.so
 vendor/lib64/libMapService.so
 vendor/lib64/libScenescape.so
 vendor/lib64/libStereoRectifyWrapper.so
 vendor/lib64/libeye_tracking_dsp_sample_stub.so
+vendor/lib64/vendor.qti.qegahal-V1-ndk_platform.so
 
 # QXR
 vendor/etc/vintf/manifest/vendor.qti.hardware.qxr-service.xml
@@ -2920,9 +2932,14 @@ vendor/etc/vintf/manifest/dataconnection-saidl.xml
 vendor/etc/vintf/manifest/datafactoryservice-saidl.xml
 vendor/etc/vintf/manifest/mwqem-saidl.xml
 vendor/etc/vintf/manifest/qtiradio-saidl.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.radio.ims.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.data.connectionaidl.xml
 vendor/etc/vintf/manifest/vendor.qti.hardware.radio.am.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.radio.ims.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.radio.lpa.xml
 vendor/etc/vintf/manifest/vendor.qti.hardware.radio.qtiradioconfig.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_client.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_server.xml
+vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim.xml
 vendor/lib64/deviceInfoServiceModuleNr.so
 vendor/lib64/libQtiRilLoadable.so
 vendor/lib64/liblqe.so
@@ -3036,7 +3053,7 @@ vendor/lib64/vendor.qti.hardware.radio.uim-V1-ndk.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.0.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.1.so
 vendor/lib64/vendor.qti.hardware.radio.uim@1.2.so
-#vendor/lib64/vendor.qti.hardware.radio.internal.deviceinfo@1.0.so
+vendor/lib64/vendor.qti.hardware.radio.internal.deviceinfo@1.0.so
 
 # SMC Invoke
 vendor/etc/ssg/ta_config.json
@@ -3315,11 +3332,10 @@ vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so
 
 # Trusted User Interface
 vendor/bin/hw/vendor.qti.hardware.trustedui-aidl-service-qti
-vendor/bin/hw/vendor.qti.hardware.trustedui@1.0-service-qti
 vendor/bin/trusteduilistener
 vendor/etc/init/trusteduilistener.rc
 vendor/etc/init/vendor.qti.hardware.trustedui-aidl-service-qti.rc
-vendor/etc/init/vendor.qti.hardware.trustedui@1.0-service-qti.rc
+vendor/etc/vintf/manifest/vendor.qti.hardware.trustedui-aidl-service.xml
 vendor/lib64/libTouchInputVM.so
 vendor/lib64/libTrustedInput.so
 vendor/lib64/libTrustedInputAIDL.so
@@ -3567,6 +3583,7 @@ vendor/etc/vmmgr.conf
 # VPP
 vendor/bin/hw/qconfigservice
 vendor/bin/vppservice
+vendor/etc/configstore/vpp.configstore.xml
 vendor/etc/init/qconfig.rc
 vendor/etc/init/vppservice.rc
 vendor/etc/vintf/manifest/vendor.qti.hardware.qconfig-service.xml
@@ -3602,6 +3619,8 @@ vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini
 vendor/etc/wifi/p2p_supplicant_overlay.conf
 vendor/etc/wifi/vendor_cmd.xml
 vendor/etc/wifi/wpa_supplicant_overlay.conf
+vendor/lib64/libWlanServiceJni.so
+vendor/lib64/libwifi-hal-ctrl.so
 
 # Wifi Display
 -system/framework/WfdCommon.jar
@@ -3673,41 +3692,22 @@ vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
 vendor/bin/nv_mac
 
 # A
-odm/etc/me_config.xml
 odm/etc/MESubway_prebuilt.db
-odm/etc/usecaseKvManager.xml
-odm/firmware/film_model.tflite
-odm/firmware/glove_model.tflite
-odm/firmware/water_check.tflite
 vendor/bin/hwinfo
-vendor/bin/hw/mfp-daemon
-vendor/bin/poweroffm64
-vendor/bin/qcc-vendor
 vendor/bin/qlm-service
 vendor/bin/qsap_dcfd
 vendor/bin/qsap_location
 vendor/bin/qsap_qapeservice
 vendor/bin/qsap_sensors
 vendor/bin/slad
-vendor/bin/SoterProvisioningTool
-vendor/bin/ufs_ffu.sh
-vendor/bin/vendor_cmd_tool
-vendor/bin/vendor.qti.diag.sh
 vendor/etc/1-SN1X0_SPC.txt
-vendor/etc/audio_diag.cfg
-vendor/etc/configstore/vpp.configstore.xml
-vendor/etc/hrtf5c.bin
-vendor/etc/init/cas-default.rc
 vendor/etc/init/dcfd.rc
-vendor/etc/init/general_service.rc
 vendor/etc/init/init.charge_logger.rc
 vendor/etc/init/init.hwinfo.rc
-vendor/etc/init/init.mfp-daemon.aidl.rc
 vendor/etc/init/init.qccvendor.rc
 vendor/etc/init/init.qlm-service.rc
 vendor/etc/init/init.qti.media.rc
 vendor/etc/init/init.vendor.wlan.rc
-vendor/etc/init/minidump.rc
 vendor/etc/init/nicmd.rc
 vendor/etc/init/slad.rc
 vendor/etc/init/tlpd.rc
@@ -3715,7 +3715,6 @@ vendor/etc/init/vendor.mbnota.rc
 vendor/etc/init/vendor.qsap.location.rc
 vendor/etc/init/vendor.qsap.qapeservice.rc
 vendor/etc/init/vendor.qsap.sensors.rc
-vendor/etc/init/vendor.qti.smp2p.rc
 vendor/etc/mem_logger_config.xml
 vendor/etc/misound_asc_model.tflite
 vendor/etc/nfcon.pnscr
@@ -3731,31 +3730,10 @@ vendor/etc/seccomp_policy/qsap_sensors.policy
 vendor/etc/seccomp_policy/qsap_voiceui.policy
 vendor/etc/sensor_diag.cfg
 vendor/etc/sla/slad.conf
-vendor/etc/smomo_setting.xml
 vendor/etc/spr_cfg_xiaomi_n11u_42_02_0a_cmd_mode_dsc_dsi_panel.xml
 vendor/etc/spr_cfg_xiaomi_n3_42_0d_0a_cmd_mode_dsc_dsi_panel.xml
-vendor/etc/tzlog.dict
 vendor/etc/vintf/manifest/dpm-saidl.xml
-vendor/etc/vintf/manifest/power.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.data.connectionaidl.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.radio.lpa.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_client.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim_remote_server.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.radio.uim.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.tetheroffload.service.xml
-vendor/etc/vintf/manifest/vendor.qti.hardware.trustedui-aidl-service.xml
-vendor/lib64/android.automotive.watchdog-V2-ndk.so
-vendor/lib64/android.hardware.automotive.vehicle@2.0-manager-lib.so
-vendor/lib64/android.hardware.automotive.vehicle@2.0.so
 vendor/lib64/android.hardware.radio.sap-V1-ndk.so
-vendor/lib64/android.hardware.tetheroffload-V1-ndk.so
-vendor/lib64/ese_weaver.so
-vendor/lib64/ftm_fm_lib.so
-vendor/lib64/libalsautils.so
-vendor/lib64/libandroid_runtime_lazy.so
-vendor/lib64/libbase64.so
-vendor/lib64/libbinderdebug.so
-vendor/lib64/libcert_parse.wpa_s.so
 vendor/lib64/libcld80211.so
 vendor/lib64/libcpion.so
 vendor/lib64/libcppcose_rkp.so
@@ -3777,16 +3755,12 @@ vendor/lib64/libfilefinder.so
 vendor/lib64/libflatbuffers-cpp.so
 vendor/lib64/libhidparser.so
 vendor/lib64/libiccprofile.so
-vendor/lib64/libipanat.so
 vendor/lib64/libjnihelper.so
 vendor/lib64/libkeystore-engine-wifi-hidl.so
 vendor/lib64/libkeystore-wifi-hidl.so
 vendor/lib64/libloadtrusteduiapp.so
 vendor/lib64/libmapdata_api.so
 vendor/lib64/libmediautils_vendor.so
-vendor/lib64/libmiracast.so
-vendor/lib64/libmispowerop.so
-vendor/lib64/libMiVDR.so
 vendor/lib64/libMiVideoFilter.so
 vendor/lib64/libmmosal_vendor.so
 vendor/lib64/libnbaio_mono.so
@@ -3795,11 +3769,9 @@ vendor/lib64/libnfnetlink.so
 vendor/lib64/liboemaids_vendor.so
 vendor/lib64/liboem_specific.so
 vendor/lib64/libofflinedebugdata.so
-vendor/lib64/liboffloadhal.so
 vendor/lib64/libpcap.so
 vendor/lib64/libpolygon.so
 vendor/lib64/libqape_oem_ext.so
-vendor/lib64/libQEGA.qti.so
 vendor/lib64/libqesdoem_query_sys.so
 vendor/lib64/libQnnDspNetRunExtensions.so
 vendor/lib64/libQnnDsp.so
@@ -3829,19 +3801,3 @@ vendor/lib64/libswregistrationalgo.so
 vendor/lib64/libsxrservice_client.qti.so
 vendor/lib64/libsys_info_cache.so
 vendor/lib64/libtaautoload.so
-vendor/lib64/libtensorflowlite_vendor.so
-vendor/lib64/libtextclassifier_hash.so
-vendor/lib64/libtfestriping.so
-vendor/lib64/libtunningmemhook.so
-vendor/lib64/libTxPwrJni.so
-vendor/lib64/libubifocus.so
-vendor/lib64/libVoiceSdk.so
-vendor/lib64/libwifi-hal-ctrl.so
-vendor/lib64/libWlanServiceJni.so
-vendor/lib64/mediacas/libclearkeycasplugin.so
-vendor/lib64/mediadrm/libdrmclearkeyplugin.so
-vendor/lib64/vendor.qti.hardware.automotive.vehicle@1.0.so
-vendor/lib64/vendor.qti.hardware.sigma_miracast@1.0.so
-vendor/lib64/vendor.qti.qegahal-V1-ndk_platform.so
-vendor/lib64/vendor.qti.qvirt-V1-ndk.so
-vendor/lib64/vendor.qti.voiceprint@1.0.so
