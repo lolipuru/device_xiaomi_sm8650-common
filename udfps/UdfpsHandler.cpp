@@ -212,29 +212,24 @@ class XiaomiSm8650UdfpsHander : public UdfpsHandler {
 
     void cancel() {
         LOG(DEBUG) << __func__;
-        enrolling = false;
     }
 
     void preEnroll() {
         LOG(DEBUG) << __func__;
-        enrolling = true;
     }
 
     void enroll() {
         LOG(DEBUG) << __func__;
-        enrolling = true;
     }
 
     void postEnroll() {
         LOG(DEBUG) << __func__;
-        enrolling = false;
     }
 
   private:
     fingerprint_device_t* mDevice;
     android::base::unique_fd touch_fd_;
     android::base::unique_fd disp_fd_;
-    bool enrolling = false;
     uint32_t lastPressX, lastPressY;
 
     void setFingerDown(bool pressed) {
