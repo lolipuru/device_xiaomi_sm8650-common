@@ -81,21 +81,4 @@ $(CAMERA_LIB_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += \
 	$(CAMERA_LIB_SYMLINKS)
 
-FIRMWARE_WLAN_KIWI_V2_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/wlan/qca_cld/kiwi_v2/
-$(FIRMWARE_WLAN_KIWI_V2_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating firmware wlan qca_cld kiwi_v2 symlinks: $@"
-	mkdir -p $@
-	$(hide) ln -sf /vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini $@/WCNSS_qcom_cfg.ini
-	$(hide) ln -sf /mnt/vendor/persist/kiwi_v2/wlan_mac.bin $@/wlan_mac.bin
-
-FIRMWARE_WLANMDSP_SYMLINKS := $(TARGET_OUT_VENDOR)/firmware/
-$(FIRMWARE_WLANMDSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "Creating firmware wlanmdsp.otaupdate symlinks: $@"
-	mkdir -p $@
-	$(hide) ln -sf /data/vendor/firmware/wlanmdsp.mbn $@/wlanmdsp.otaupdate
-
-ALL_DEFAULT_INSTALLED_MODULES += \
-	$(FIRMWARE_WLAN_KIWI_V2_SYMLINKS) \
-	$(FIRMWARE_WLANMDSP_SYMLINKS)
-
 endif
