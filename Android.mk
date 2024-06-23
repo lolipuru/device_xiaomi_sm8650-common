@@ -43,14 +43,6 @@ ALL_DEFAULT_INSTALLED_MODULES += \
 	$(MODEM_FIRMWARE_MOUNT_POINT) \
 	$(VM_SYSTEM_MOUNT_POINT)
 
-IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
-IMS_SYMLINKS := $(addprefix $(TARGET_OUT_SYSTEM_EXT_APPS_PRIVILEGED)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
-$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "IMS lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /system_ext/lib64/$(notdir $@) $@
-
 CNE_LIBS := libvndfwk_detect_jni.qti_vendor.so
 CNE_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR_APPS)/CneApp/lib/arm64/,$(notdir $(CNE_LIBS)))
 $(CNE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -60,8 +52,7 @@ $(CNE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /vendor/lib64/$(notdir $@) $@
 
 ALL_DEFAULT_INSTALLED_MODULES += \
-	$(CNE_SYMLINKS) \
-	$(IMS_SYMLINKS)
+	$(CNE_SYMLINKS)
 
 CAMERA_LIB_SYMLINKS := $(TARGET_OUT_VENDOR)/lib64/camera
 $(CAMERA_LIB_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
