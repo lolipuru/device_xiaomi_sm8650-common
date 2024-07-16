@@ -37,4 +37,5 @@ interface ITouchFeature {
   int registerCallback(int type, vendor.xiaomi.hw.touchfeature.ITouchFeatureCallback callback, String name);
   int unregisterCallback(int type, vendor.xiaomi.hw.touchfeature.ITouchFeatureCallback callback, String name);
   String setModePackageName(int type, int mode, String packageName);
+  void setTouchMode(int touchId, int mode, int value);
 }
