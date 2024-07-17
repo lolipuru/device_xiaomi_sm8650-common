@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_wifiBridgedSoftApSupported">false</bool>
+    <bool name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">false</bool>
+    <bool name="config_wifiMultiStaRestrictedConcurrencyEnabled">false</bool>
+    <bool name="config_wifiSoftapIeee80211beSupported">false</bool>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="config_vendor_softap_beacon_protection_supported">true</bool>
+    <bool name="config_vendor_softap_ocv_supported">true</bool>
+    <bool name="config_wifi5ghzSupport">true</bool>
+    <bool name="config_wifi6ghzSupport">true</bool>
+    <bool name="config_wifiApplicationCentricQosPolicyFeatureEnabled">true</bool>
+    <bool name="config_wifiBridgedSoftApSupported">false</bool>
+    <bool name="config_wifiConnectedFrequencyEnhancementEnabled">true</bool>
+    <bool name="config_wifiDriverSupportedNl80211RegChangedEvent">true</bool>
+    <bool name="config_wifiEnablePartialInitialScan">true</bool>
+    <bool name="config_wifiForcedSoftApRestartWhenCountryCodeChanged">false</bool>
+    <bool name="config_wifiMultiStaLocalOnlyConcurrencyEnabled">false</bool>
+    <bool name="config_wifiMultiStaMultiInternetConcurrencyEnabled">true</bool>
+    <bool name="config_wifiMultiStaNetworkSwitchingMakeBeforeBreakEnabled">false</bool>
+    <bool name="config_wifiMultiStaRestrictedConcurrencyEnabled">false</bool>
+    <bool name="config_wifiNetworkCentricQosPolicyFeatureEnabled">true</bool>
+    <bool name="config_wifiSaeH2eSupported">true</bool>
+    <bool name="config_wifiSaeUpgradeOffloadEnabled">true</bool>
+    <bool name="config_wifiSoftap6ghzSupported">true</bool>
+    <bool name="config_wifiSoftapHeSuBeamformeeSupported">true</bool>
+    <bool name="config_wifiSoftapHeSuBeamformerSupported">true</bool>
+    <bool name="config_wifiSoftapIeee80211axSupported">true</bool>
+    <bool name="config_wifi_background_scan_support">true</bool>
+    <bool name="config_wifi_framework_enable_quick_connect">true</bool>
+    <bool name="config_wifi_softap_acs_supported">true</bool>
+</resources>
