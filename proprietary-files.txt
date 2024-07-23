@@ -2,10 +2,10 @@
 ## are from Xiaomi 14 (OS1.0.6.0.UNCMIXM). 
 
 # ACDB
-odm/etc/acdbdata/Tutu_orange/Tutu_orange_acdb_cal.acdb
-odm/etc/acdbdata/Tutu_orange/Tutu_orange_workspaceFileXml.qwsp
-odm/etc/acdbdata/Tutu/Tutu_acdb_cal.acdb
-odm/etc/acdbdata/Tutu/Tutu_workspaceFileXml.qwsp
+odm/etc/acdbdata/Tutu_orange/Tutu_orange_acdb_cal.acdb:odm/etc/acdbdata/pineapple_mtp/Tutu_orange_acdb_cal.acdb
+odm/etc/acdbdata/Tutu_orange/Tutu_orange_workspaceFileXml.qwsp:odm/etc/acdbdata/pineapple_mtp/Tutu_orange_workspaceFileXml.qwsp
+odm/etc/acdbdata/Tutu/Tutu_acdb_cal.acdb:odm/etc/acdbdata/pineapple_mtp/Tutu_acdb_cal.acdb
+odm/etc/acdbdata/Tutu/Tutu_workspaceFileXml.qwsp:odm/etc/acdbdata/pineapple_mtp/Tutu_workspaceFileXml.qwsp
 vendor/etc/acdbdata/IDP_UPD/IDP_UPD_acdb_cal.acdb
 vendor/etc/acdbdata/IDP_UPD/IDP_UPD_workspaceFileXml.qwsp
 vendor/etc/acdbdata/ffv_models/ffv__5.0.1_0.1__3.0.0_0.0__eai_2.10_enpu3.pmd
