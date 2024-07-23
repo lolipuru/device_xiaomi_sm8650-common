@@ -316,8 +316,12 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
     CarrierConfig \
     FrameworksResHouji \
+    FrameworksResXiaomi \
     SecureElementResTarget \
     SystemUIResHouji \
+    SettingsResXiaomi \
+    TelephonyResCommon \
+    WifiResCommon \
     WifiResTarget \
     WifiResTarget_spf
 
