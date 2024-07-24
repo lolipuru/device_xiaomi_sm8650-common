@@ -362,6 +362,7 @@ PRODUCT_PACKAGES += \
 # RIL
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.6.vendor \
+    libandroid_runtime_lazy.vendor \
     libprotobuf-cpp-full \
     librmnetctl
 
