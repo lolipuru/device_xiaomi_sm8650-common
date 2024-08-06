@@ -1,3 +1,81 @@
+# Audio
+aaudio.hw_burst_min_usec=2000
+aaudio.mmap_exclusive_policy=2
+aaudio.mmap_policy=2
+af.fast_track_multiplier=1
+audio.deep_buffer.media=true
+audio.offload.video=true
+audio.sys.noisy.broadcast.delay=600
+audio.sys.offload.pstimeout.secs=3
+persist.audio.button_jack.profile=volume
+persist.audio.button_jack.switch=0
+persist.vendor.audio.dolby.disable=false
+persist.vendor.audio.ha_proxy.enabled=true
+persist.vendor.audio.induce_crash=false
+persist.vendor.audio.misound.disable=true
+persist.vendor.audio.misoundasc=true
+persist.vendor.audio.ras.enabled=false
+persist.vendor.audio.spv3.enable=true
+persist.vendor.audio.voicecall.speaker.stereo=true
+ro.vendor.audio.dolby.dax.support=true
+ro.vendor.audio.dolby.dax.version=DAX3_3.8.5.20_r1
+ro.vendor.audio.dolby.surround.enable=true
+ro.vendor.audio.dolby.vision.support=true
+ro.vendor.audio.dualadc.support=true
+ro.vendor.audio.feature.spatial=7
+ro.vendor.audio.support.sound.id=true
+ro.vendor.audio.gain.support=true
+vendor.audio.adm.buffering.ms=2
+vendor.audio.feature.a2dp_offload.enable=true
+vendor.audio.feature.afe_proxy.enable=true
+vendor.audio.feature.battery_listener.enable=true
+vendor.audio.feature.hfp.enable=true
+vendor.audio.feature.kpi_optimize.enable=true
+vendor.audio.flac.sw.decoder.24bit=true
+vendor.audio.hal.boot.timeout.ms=20000
+vendor.audio.hdr.record.enable=false
+vendor.audio.hw.aac.encoder=false
+vendor.audio.offload.buffer.size.kb=32
+vendor.audio.safx.pbe.enabled=false
+vendor.audio.ull_record_period_multiplier=2
+vendor.audio.volume.headset.gain.depcal=true
+vendor.audio_hal.period_size=192
+vendor.qc2audio.per_frame.flac.dec.enabled=true
+vendor.qc2audio.suspend.enabled=true
+
+# Battery
+persist.vendor.battery.health=true
+
+# Bluetooth
+bluetooth.device.class_of_device=90,2,12
+bluetooth.hardware.power.idle_cur_ma=6
+bluetooth.hardware.power.operating_voltage_mv=3700
+bluetooth.hardware.power.rx_cur_ma=28
+bluetooth.hardware.power.tx_cur_ma=36
+bluetooth.profile.a2dp.source.enabled?=true
+bluetooth.profile.avrcp.target.enabled?=true
+bluetooth.profile.avrcp.controller.enabled?=false
+bluetooth.profile.hfp.ag.enabled?=true
+bluetooth.profile.asha.central.enabled?=true
+bluetooth.profile.gatt.enabled?=true
+bluetooth.profile.hid.host.enabled?=true
+bluetooth.profile.hid.device.enabled?=true
+bluetooth.profile.map.server.enabled?=true
+bluetooth.profile.opp.enabled?=true
+bluetooth.profile.pan.nap.enabled?=true
+bluetooth.profile.pan.panu.enabled?=true
+bluetooth.profile.pbap.server.enabled?=true
+bluetooth.profile.sap.server.enabled?=false
+persist.bluetooth.a2dp_offload.disabled=false
+persist.vendor.qcom.bluetooth.a2dp_mcast_test.enabled=false
+persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aac-aptx-aptxhd-ldac
+persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
+persist.vendor.qcom.bluetooth.aptxadaptiver2_1_support=false
+persist.vendor.qcom.bluetooth.aptxadaptiver2_2_support=false
+persist.vendor.qcom.bluetooth.scram.enabled=false
+persist.vendor.qcom.bluetooth.twsp_state.enabled=false
+ro.bluetooth.a2dp_offload.supported=true
+
 # Camera
 camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=1
@@ -210,16 +288,18 @@ persist.vendor.qfp=true
 ro.vendor.qspm.enable=true
 
 # Radio
+persist.dbg.volte_avail_ovr=1
+persist.dbg.vt_avail_ovr=1
+persist.dbg.wfc_avail_ovr=1
 persist.radio.multisim.config=dsds
 persist.vendor.radio.apm_sim_not_pwdn=1
 persist.vendor.radio.custom_ecc=1
 persist.vendor.radio.dynamic_sar=1
-persist.vendor.radio.enable_temp_dds=true
+persist.vendor.radio.ecc_cloud=true
 persist.vendor.radio.enableadvancedscan=true
 persist.vendor.radio.procedure_bytes=SKIP
 persist.vendor.radio.sib16_support=1
-ro.vendor.radio.5g=3
-ro.vendor.radio.features_common=3
+ro.telephony.default_network=33,33
 
 # RCS
 persist.vendor.rcs.singlereg.feature=1
