@@ -2862,6 +2862,8 @@ vendor/etc/vintf/manifest/vendor.qti.hardware.qxr-service.xml
 vendor/lib64/vendor.qti.hardware.qxr-V1-ndk.so
 
 # RIL
+odm/etc/MESubway_prebuilt.db
+odm/etc/me_config.xml
 product/app/uimgbaservice/uimgbaservice.apk
 product/etc/permissions/UimGba.xml
 product/etc/permissions/UimGbaManager.xml
@@ -2869,6 +2871,7 @@ product/etc/permissions/UimService.xml
 product/framework/uimgbalibrary.jar
 product/framework/uimgbamanagerlibrary.jar
 product/framework/uimservicelibrary.jar
+system/etc/sysconfig/qti_whitelist.xml
 system_ext/app/QtiTelephonyService/QtiTelephonyService.apk
 system_ext/etc/permissions/qcrilhook.xml
 system_ext/etc/permissions/qti_libpermissions.xml
