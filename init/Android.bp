@@ -5,8 +5,8 @@
 //
 
 cc_library_static {
-    name: "libinit_houji",
-    srcs: ["init_houji.cpp"],
+    name: "libinit_xiaomi_8650",
+    srcs: ["libinit_xiaomi_8650.cpp"],
     recovery_available: true,
     whole_static_libs: ["libbase"],
     include_dirs: [

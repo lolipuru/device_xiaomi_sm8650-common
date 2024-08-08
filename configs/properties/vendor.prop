@@ -309,7 +309,6 @@ ro.virtual_ab.compression.threads=true
 
 # USB
 sys.usb.mtp.batchcancel=1
-vendor.usb.product_string=Xiaomi 14
 vendor.usb.rndis.func.name=gsi
 vendor.usb.rmnet.func.name=gsi
 vendor.usb.rmnet.inst.name=rmnet
