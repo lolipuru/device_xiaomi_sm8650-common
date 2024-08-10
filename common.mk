@@ -366,7 +366,6 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.recovery.qcom.rc \
     init.target.rc \
-    init.logcat.rc \
     ueventd.xiaomi.rc \
     ueventd.qcom.rc
 
