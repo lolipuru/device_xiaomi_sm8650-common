@@ -104,7 +104,6 @@ vendor.display.scaling_dest_opt_mode=4
 vendor.display.scaling_source_opt_mode=4
 vendor.display.use_smooth_motion=0
 vendor.display.vds_allow_hwc=1
-vendor.display.enable_spr=1
 
 # displayfeature (vendor)
 persist.sys.sf.native_mode=258
