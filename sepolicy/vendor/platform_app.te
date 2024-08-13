@@ -14,7 +14,7 @@ allow platform_app app_data_file:file execute;
 allow platform_app hal_camera_default:binder { call transfer };
 allow platform_app hal_camera_default:binder transfer;
 allow platform_app hal_camera_default:fd *;
-allow platform_app hal_quickcamera_hwservice:hwservice_manager find;
+allow platform_app hal_quickcamera_service:service_manager find;
 allow platform_app hal_quickcamera:binder { call transfer };
 allow platform_app hal_quickcamera:binder transfer;
 allow platform_app hal_quickcamera:fd *;
@@ -39,7 +39,7 @@ hal_client_domain(platform_app, vendor_hal_camerapostproc_xiaomi)
 hal_client_domain(platform_app, hal_quickcamera)
 
 # Displayfeature
-allow platform_app vendor_hal_displayfeature_xiaomi_hwservice:hwservice_manager find;
+allow platform_app vendor_hal_displayfeature_xiaomi_service:service_manager find;
 allow platform_app vendor_hal_displayfeature_xiaomi_default:binder call;
 get_prop(platform_app, vendor_displayfeature_prop)
 
@@ -52,14 +52,12 @@ allow platform_app hal_misys_default:binder call;
 
 # Mlipay
 hal_client_domain(platform_app, hal_mlipay)
-allow platform_app hal_mfidoca_hwservice:hwservice_manager find;
+allow platform_app hal_mfidoca_service:service_manager find;
 allow platform_app hal_mfidoca_default:binder call;
-allow platform_app hal_mlipay_hwservice:hwservice_manager find;
+allow platform_app hal_mlipay_service:service_manager find;
 allow platform_app hal_mlipay_default:binder call;
-allow platform_app hal_mtdservice_hwservice:hwservice_manager find;
 allow platform_app hal_mtdservice_default:binder { call transfer };
 allow platform_app hal_mtdservice_default:fd *;
-allow platform_app hal_tidaservice_hwservice:hwservice_manager find;
 allow platform_app hal_tidaservice_default:binder { call transfer };
 allow platform_app hal_tidaservice_default:fd *;
 
@@ -67,4 +65,4 @@ allow platform_app hal_tidaservice_default:fd *;
 hal_client_domain(platform_app, vendor_hal_soter);
 
 # Touchfeature
-allow platform_app hal_touchfeature_xiaomi_hwservice:hwservice_manager find;
+allow platform_app hal_touchfeature_xiaomi_service:service_manager find;

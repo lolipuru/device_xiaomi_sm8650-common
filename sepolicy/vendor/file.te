@@ -14,6 +14,7 @@ type vendor_sysfs_displayfeature, fs_type, sysfs_type;
 
 # Fingerprint
 type sysfs_tp_fodstatus, fs_type, sysfs_type;
+type vendor_mfp-daemon_data_file, data_file_type, file_type;
 type vendor_fingerprint_data_file, data_file_type, file_type;
 type vendor_fingerprint_data_file_fpdump, data_file_type, file_type;
 

@@ -1,11 +1,11 @@
 type hal_tidaservice_default, domain;
 type hal_tidaservice_default_exec, exec_type, file_type, vendor_file_type;
-type hal_tidaservice_hwservice, hwservice_manager_type;
+type hal_tidaservice_service, hal_service_type, protected_service, service_manager_type;
+
 hal_server_domain(hal_tidaservice_default, hal_tidaservice)
 allow hal_tidaservice_client hal_tidaservice_server:binder { call transfer };
 allow hal_tidaservice_client hal_tidaservice_server:binder transfer;
 allow hal_tidaservice_client hal_tidaservice_server:fd *;
-allow hal_tidaservice_client hal_tidaservice_hwservice:hwservice_manager find;
 allow hal_tidaservice_server hal_tidaservice_client:binder transfer;
 allow hal_tidaservice_server hal_tidaservice_client:binder { call transfer };
 allow hal_tidaservice_server hal_tidaservice_client:fd *;
@@ -16,7 +16,6 @@ allow hal_tidaservice_default firmware_file:dir r_dir_perms;
 allow hal_tidaservice_default firmware_file:file r_file_perms;
 allow hal_tidaservice_default ion_device:chr_file rw_file_perms;
 allow hal_tidaservice_default rootfs:lnk_file r_file_perms;
-allow hal_tidaservice_default hal_mtdservice_hwservice:hwservice_manager find;
 allow hal_tidaservice_default platform_app:binder transfer;
 #allow hal_tidaservice_default vendor_hal_tui_comm_hwservice:hwservice_manager find;
 #allow hal_tidaservice_default vendor_hal_tui_comm_hwservice:binder { call transfer };
@@ -29,5 +28,7 @@ init_daemon_domain(hal_tidaservice_default)
 #get_prop(hal_tidaservice_default, vendor_fp_prop)
 get_prop(hal_tidaservice_default, vendor_system_prop)
 get_prop(hal_tidaservice_default, vendor_payment_security_prop)
-hwbinder_use(hal_tidaservice_default)
-add_hwservice(hal_tidaservice_server, hal_tidaservice_hwservice)
+binder_use(hal_tidaservice_default)
+hal_server_domain(hal_tidaservice_default, hal_tidaservice)
+hal_client_domain(hal_tidaservice_default, hal_mtdservice)
+add_service(hal_tidaservice_server, hal_tidaservice_service)

@@ -20,7 +20,6 @@
 
 # Displayfeature
 /dev/mi_display/disp_feature u:object_r:vendor_displayfeature_device:s0
-/sys/devices/platform/soc/[a-f0-9]+.qcom,mdss_mdp/drm/card([0-3])+/card([0-3])+-DSI-+[0-1](/.*)? u:object_r:vendor_sysfs_displayfeature:s0
 /sys/devices/virtual/mi_display/disp_feature/disp-DSI-+[0-1](/.*)? u:object_r:vendor_sysfs_displayfeature:s0
 /(vendor|system/vendor)/bin/displayfeature u:object_r:vendor_displayfeature_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.xiaomi\.hardware\.displayfeature_aidl-service u:object_r:vendor_hal_displayfeature_xiaomi_default_exec:s0
@@ -34,8 +33,9 @@
 /(vendor|system/vendor)/bin/hw/vendor\.rongcard\.eid@1\.0-service                      u:object_r:vendor_hal_eid_rc_exec:s0
 
 # Fingerprint
+/(vendor|system/vendor|odm)/bin/hw/mfp-daemon u:object_r:vendor_mfp-daemon_exec:s0
+/data/vendor/misc/mi_fp(/.*)? u:object_r:vendor_mfp-daemon_data_file:s0
 /data/vendor/fpc(/.*)? u:object_r:vendor_fingerprint_data_file:s0
-/data/vendor/fpdump(/.*)? u:object_r:vendor_fingerprint_data_file_fpdump:s0
 /data/vendor/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0
 /dev/goodix_fp u:object_r:vendor_fingerprint_device:s0
 /mnt/vendor/persist/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0

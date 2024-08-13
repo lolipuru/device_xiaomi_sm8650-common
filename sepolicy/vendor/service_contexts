@@ -1,0 +1,33 @@
+# Camera
+vendor.xiaomi.hardware.quickcamera.IQuickCameraService/default u:object_r:hal_quickcamera_service:s0
+vendor.xiaomi.hardware.aidlbgservice.IBGService/default           u:object_r:hal_aidlbgservice_service:s0
+vendor.xiaomi.hardware.aon.IAlwaysOn/miaonservicehal           u:object_r:vendor_hal_camera_aon_service:s0
+
+# CIT
+vendor.xiaomi.sensor.citsensorservice.ICitSensorService/default   u:object_r:vendor_hal_citsensorservice_xiaomi_service:s0
+vendor.xiaomi.sensor.tofsensorservice.ITofSensorService/default   u:object_r:vendor_hal_tofsensorservice_xiaomi_service:s0
+
+# Display
+vendor.xiaomi.hardware.displayfeature_aidl.IDisplayFeature/default       u:object_r:vendor_hal_displayfeature_xiaomi_service:s0
+
+# EID
+vendor.rongcard.eid.IEidDeviceAidl/default                                u:object_r:vendor_hal_eid_service:s0
+
+# Fingerprint
+com.fingerprints.extension3.IFingerprintNavigation/default              u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
+com.fingerprints.extension3.IFingerprintSensorTest/default              u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
+vendor.xiaomi.hardware.fingerprintextension.IXiaomiFingerprint/default  u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
+vendor.xiaomi.hardware.fx.tunnel.IMiFxTunnel/default                    u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
+vendor.xiaomi.hardware.dtool1.IDtool/default                            u:object_r:vendor_hal_fingerprint_dtool1_service:s0
+
+# Micharge
+vendor.xiaomi.hardware.micharge.IMiCharge/default   u:object_r:vendor_hal_micharge_xiaomi_service:s0
+
+# Mlipay
+vendor.xiaomi.hardware.mfidoca.IFidoService/default       u:object_r:hal_mfidoca_service:s0
+vendor.xiaomi.hardware.mlipay.IMlipayService/default        u:object_r:hal_mlipay_service:s0
+vendor.xiaomi.hardware.aidl.mtdservice.IMTService/default        u:object_r:hal_mtdservice_service:s0
+vendor.xiaomi.hardware.aidl.tidaservice.ITidaService/default       u:object_r:hal_tidaservice_service:s0
+
+# Touch
+vendor.xiaomi.hw.touchfeature.ITouchFeature/default          u:object_r:hal_touchfeature_xiaomi_service:s0

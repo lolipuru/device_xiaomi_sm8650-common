@@ -8,7 +8,7 @@ allow priv_app vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find
 allow priv_app vendor_hal_camerapostproc_xiaomi:binder { call transfer };
 allow priv_app vendor_hal_camerapostproc_xiaomi:binder transfer;
 allow priv_app vendor_hal_camerapostproc_xiaomi:fd *;
-allow priv_app hal_quickcamera_hwservice:hwservice_manager find;
+allow priv_app hal_quickcamera_service:service_manager find;
 get_prop(priv_app, qemu_hw_prop)
 get_prop(priv_app, vendor_camera_p3enable_prop)
 get_prop(priv_app, vendor_audio_prop)

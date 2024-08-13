@@ -1,8 +1,11 @@
+allow hal_camera_client hal_quickcamera_service:service_manager find;
+allow hal_camera_client hal_aidlbgservice_service:service_manager find;
 allow hal_camera_client vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
 allow hal_camera fwk_sensor_hwservice:hwservice_manager find;
 allow hal_camera system_server:binder { call transfer };
 allow hal_camera system_server:binder transfer;
 allow hal_camera system_server:fd *;
+allow hal_camera_default hal_aidlbgservice_service:service_manager find;
 allow hal_camera_default vendor_qdsp_device:chr_file r_file_perms;
 allow hal_camera_default vendor_npu_device:chr_file r_file_perms;
 allow hal_camera_default mnt_vendor_file:dir search;
@@ -34,7 +37,7 @@ allow hal_camera_default system_app:fd *;
 allow hal_camera_default system_server:binder call;
 allow hal_camera_default cgroup:file { getattr map open read write };
 allow hal_camera_default migt_dev:chr_file rw_file_perms;
-allow hal_camera_default hal_quickcamera_hwservice:hwservice_manager { add find };
+allow hal_camera_default vendor_displayfeature_device:chr_file { read };
 
 r_dir_file(hal_camera_default, mnt_vendor_file)
 r_dir_file(hal_camera_default, camera_persist_file)

@@ -14,6 +14,7 @@ vendor_public_prop(vendor_nfc_mi_prop)
 
 # Mlipay
 vendor_public_prop(vendor_payment_security_prop)
+vendor_public_prop(vendor_cpuid_prop)
 
 # Sensors
 vendor_public_prop(vendor_cct_prop)

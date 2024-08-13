@@ -1,0 +1,2 @@
+allow vendor_hal_gnss_qti sysfs_wake_lock:file { read write open };
+get_prop(vendor_hal_gnss_qti, vendor_sensors_prop)

@@ -17,7 +17,7 @@ allow system_app camlog_device:chr_file { getattr ioctl open read watch watch_re
 allow system_app hal_camera_default:binder { call transfer };
 allow system_app hal_camera_default:binder transfer;
 allow system_app hal_camera_default:fd *;
-allow system_app hal_quickcamera_hwservice:hwservice_manager find;
+allow system_app hal_quickcamera_service:service_manager find;
 allow system_app hal_quickcamera:binder { call transfer };
 allow system_app hal_quickcamera:binder transfer;
 allow system_app hal_quickcamera:fd *;
@@ -33,6 +33,9 @@ allow system_app vendor_hal_camerapostproc_xiaomi:fd *;
 get_prop(system_app, vendor_camera_sensor_prop)
 hal_client_domain(system_app, vendor_hal_camerapostproc_xiaomi)
 hal_client_domain(system_app, hal_quickcamera)
+
+# Cit
+allow system_app vendor_hal_citsensorservice_xiaomi_service:service_manager find;
 
 # Displayfeature
 allow system_app vendor_hal_displayfeature_xiaomi_default:binder transfer;
@@ -56,14 +59,13 @@ allow system_app hal_misys_default:binder transfer;
 
 # Mlipay
 hal_client_domain(system_app, hal_mlipay)
-allow system_app hal_mfidoca_hwservice:hwservice_manager find;
+allow system_app hal_mfidoca_service:service_manager find;
 allow system_app hal_mfidoca_default:binder call;
-allow system_app hal_mlipay_hwservice:hwservice_manager find;
+allow system_app hal_mlipay_service:service_manager find;
 allow system_app hal_mlipay_default:binder call;
-allow system_app hal_mtdservice_hwservice:hwservice_manager find;
+allow system_app hal_mtdservice_service:service_manager find;
 allow system_app hal_mtdservice_default:binder { call transfer };
 allow system_app hal_mtdservice_default:fd *;
-allow system_app hal_tidaservice_hwservice:hwservice_manager find;
 allow system_app hal_tidaservice_default:binder { call transfer };
 allow system_app hal_tidaservice_default:fd *;
 

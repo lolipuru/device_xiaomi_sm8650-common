@@ -1,4 +1,5 @@
 type vendor_hal_eid_hwservice, hwservice_manager_type, protected_hwservice;
+type vendor_hal_eid_service, hal_service_type, protected_service, service_manager_type;
 
 allow vendor_hal_eid_client vendor_hal_eid_server:binder { call transfer };
 allow vendor_hal_eid_client vendor_hal_eid_server:binder transfer;
@@ -7,3 +8,4 @@ allow vendor_hal_eid_server vendor_hal_eid_client:binder transfer;
 allow vendor_hal_eid_server vendor_hal_eid_client:binder { call transfer };
 allow vendor_hal_eid_server vendor_hal_eid_client:fd *;
 hal_attribute_hwservice(vendor_hal_eid, vendor_hal_eid_hwservice)
+hal_attribute_service(vendor_hal_eid, vendor_hal_eid_service)

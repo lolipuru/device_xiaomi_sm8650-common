@@ -7,6 +7,14 @@ attribute vendor_hal_camerapostproc_xiaomi;
 attribute vendor_hal_camerapostproc_xiaomi_client;
 attribute vendor_hal_camerapostproc_xiaomi_server;
 
+attribute hal_camera_aon;
+attribute hal_camera_aon_client;
+attribute hal_camera_aon_server;
+
+attribute hal_aidlbgservice;
+attribute hal_aidlbgservice_client;
+attribute hal_aidlbgservice_server;
+
 # Dolby
 attribute hal_dms;
 attribute hal_dms_client;
@@ -28,6 +36,10 @@ attribute hal_mtdservice_server;
 attribute hal_tidaservice;
 attribute hal_tidaservice_client;
 attribute hal_tidaservice_server;
+
+attribute vendor_hal_tofsensorservice_xiaomi;
+attribute vendor_hal_tofsensorservice_xiaomi_client;
+attribute vendor_hal_tofsensorservice_xiaomi_server;
 
 # Sensors
 attribute vendor_hal_citsensorservice_xiaomi;

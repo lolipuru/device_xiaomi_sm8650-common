@@ -10,6 +10,7 @@ allow rild vendor_modem_data_file:dir create_dir_perms;
 allow rild vendor_modem_data_file:file create_file_perms;
 allow rild vendor_sysfs_ssr_toggle:file rw_file_perms;
 
+get_prop(rild, vendor_cpuid_prop)
 set_prop(rild, vendor_system_prop)
 set_prop(rild, vendor_radio_prop)
 set_prop(rild, vendor_ssr_prop)

@@ -1,0 +1,65 @@
+type vendor_mfp-daemon, domain;
+type vendor_mfp-daemon_exec, exec_type, file_type, vendor_file_type;
+
+allow vendor_mfp-daemon surfaceflinger:binder transfer;
+allow vendor_mfp-daemon system_server:binder transfer;
+allow vendor_mfp-daemon tee_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_hal_perf_hwservice:hwservice_manager find;
+allow vendor_mfp-daemon vendor_hal_perf_default:binder call;
+allow vendor_mfp-daemon mnt_vendor_file:dir write;
+allow vendor_mfp-daemon mnt_vendor_file:dir add_name;
+allow vendor_mfp-daemon mnt_vendor_file:dir search;
+allow vendor_mfp-daemon mnt_vendor_file:file { open write };
+allow vendor_mfp-daemon mnt_vendor_file:file create;
+allow vendor_mfp-daemon self:capability sys_nice;
+allow vendor_mfp-daemon self:cap_userns sys_nice;
+allow vendor_mfp-daemon self:netlink_socket create_socket_perms_no_ioctl;
+allow vendor_mfp-daemon vendor_fingerprint_data_file:dir create_dir_perms;
+allow vendor_mfp-daemon vendor_fingerprint_data_file:dir getattr;
+allow vendor_mfp-daemon vendor_fingerprint_data_file:file create_file_perms;
+allow vendor_mfp-daemon vendor_fingerprint_data_file_fpdump:dir create_dir_perms;
+allow vendor_mfp-daemon vendor_fingerprint_data_file_fpdump:file create_file_perms;
+allow vendor_mfp-daemon vendor_hal_fingerprint_hwservice_xiaomi:hwservice_manager { add find };
+allow vendor_mfp-daemon sysfs:file write;
+allow vendor_mfp-daemon vendor_sysfs_spss:dir search;
+allow vendor_mfp-daemon vendor_sysfs_spss:file { open read };
+allow vendor_mfp-daemon uhid_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_sysfs_graphics:dir r_dir_perms;
+allow vendor_mfp-daemon vendor_sysfs_graphics:file rw_file_perms;
+allow vendor_mfp-daemon vendor_sysfs_displayfeature:dir r_dir_perms;
+allow vendor_mfp-daemon vendor_sysfs_displayfeature:file rw_file_perms;
+allow vendor_mfp-daemon vendor_displayfeature_device:chr_file { ioctl open read write };
+allow vendor_mfp-daemon input_device:dir r_dir_perms;
+allow vendor_mfp-daemon input_device:chr_file rwx_file_perms;
+allow vendor_mfp-daemon vendor_fingerprint_device:chr_file rwx_file_perms;
+allow vendor_mfp-daemon vendor_spss_utils_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_skp_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_spcom_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_sp_keymaster_device:chr_file rw_file_perms;
+allow vendor_mfp-daemon vendor_dmabuf_qseecom_ta_heap_device:chr_file r_file_perms;
+allow vendor_mfp-daemon vendor_dmabuf_qseecom_heap_device:chr_file r_file_perms;
+allow vendor_mfp-daemon sysfs_tp_fodstatus:chr_file r_file_perms;
+allow vendor_mfp-daemon sysfs_tp_fodstatus:file r_file_perms;
+allow vendor_mfp-daemon dmabuf_system_heap_device:chr_file r_file_perms;
+allow vendor_mfp-daemon hal_touchfeature_xiaomi_default:binder { call transfer };
+allow vendor_mfp-daemon hal_touchfeature_xiaomi_default:fd *;
+allow vendor_mfp-daemon servicemanager:binder { call transfer };
+allow vendor_mfp-daemon fwk_sensor_hwservice:hwservice_manager find;
+allow vendor_mfp-daemon unlabeled:filesystem getattr;
+allow vendor_mfp-daemon unlabeled:lnk_file read;
+allow vendor_mfp-daemon vendor_data_file:dir rw_dir_perms;
+allow vendor_mfp-daemon vendor_data_file:file { open read write create };
+init_daemon_domain(vendor_mfp-daemon)
+r_dir_file(vendor_mfp-daemon, firmware_file)
+r_dir_file(vendor_mfp-daemon, mnt_vendor_file)
+r_dir_file(vendor_mfp-daemon, vendor_persist_qti_fp_file)
+get_prop(vendor_mfp-daemon, vendor_panel_info_prop)
+get_prop(vendor_mfp-daemon, vendor_spcomlib_prop)
+get_prop(vendor_mfp-daemon, vendor_tee_listener_prop)
+get_prop(vendor_mfp-daemon, vendor_camera_prop)
+set_prop(vendor_mfp-daemon, vendor_fp_prop)
+set_prop(vendor_mfp-daemon, vendor_fp_info_prop)
+hal_server_domain(vendor_mfp-daemon, hal_fingerprint)
+hal_client_domain(vendor_mfp-daemon, vendor_hal_perf)
+hal_client_domain(vendor_mfp-daemon, hal_touchfeature_xiaomi)
+add_service(vendor_mfp-daemon, vendor_hal_fingerprint_service_xiaomi)

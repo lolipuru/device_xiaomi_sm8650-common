@@ -3,6 +3,9 @@ allow radio hal_misys_hwservice:hwservice_manager find;
 allow radio hal_misys_hwservice:binder call;
 allow radio hal_misys_default:binder call;
 
+# Cit
+allow radio vendor_hal_citsensorservice_xiaomi_service:service_manager find;
+
 # Radio
 allow radio vendor_hal_latency_hwservice:hwservice_manager find;
 allow radio vendor_cnd:binder { call transfer };
