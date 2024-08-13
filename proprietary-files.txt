@@ -658,8 +658,6 @@ vendor/lib64/libesesbprovision.so
 vendor/lib64/vendor.qti.esepowermanager@1.0.so
 
 # Fingerprint
-odm/lib64/hw/fingerprint.goodix_fod.so
-odm/lib64/libgf_hal.so
 odm/bin/hw/vendor.xiaomi.hardware.dtool1-service
 odm/etc/init/vendor.xiaomi.hardware.dtool1.rc
 vendor/bin/hw/mfp-daemon

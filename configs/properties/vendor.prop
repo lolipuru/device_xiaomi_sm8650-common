@@ -157,8 +157,6 @@ ro.crypto.metadata_init_delete_all_keys.enabled=true
 
 # Fingerprint
 persist.vendor.sys.fp.expolevel=0x88
-persist.vendor.sys.fp.fod.location.X_Y=491,2282
-persist.vendor.sys.fp.fod.size.width_height=218,218
 ro.hardware.fp.fod.location=low
 ro.hardware.fp.fod.touch.ctl.version=2.0
 ro.hardware.fp.fod.lowlight.lux.threshold=3
