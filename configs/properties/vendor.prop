@@ -315,7 +315,7 @@ vendor.usb.controller=a600000.dwc3
 vendor.usb.qdss.inst.name=qdss_sw
 vendor.usb.diag.func.name=ffs
 vendor.usb.use_ffs_mtp=1
-vendor.usb.use_gadget_hal=0
+vendor.usb.use_gadget_hal=1
 
 # VCB
 persist.vendor.vcb.ability=true

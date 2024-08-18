@@ -154,7 +154,6 @@ vendor/etc/batching.conf
 vendor/etc/card-defs.xml
 vendor/etc/kvh2xml.xml
 vendor/etc/microphone_characteristics.xml
-vendor/etc/usb_compositions.conf
 vendor/etc/usecaseKvManager.xml
 
 # Audio (Dolby)
