@@ -1,5 +1,5 @@
 # Battery
-genfscon sysfs "/class/qcom-battery" u:object_r:vendor_sysfs_qcom_battery:s0
+genfscon sysfs /class/qcom-battery u:object_r:vendor_sysfs_battery_supply:s0
 
 # Fingerprint
 genfscon sysfs "/devices/virtual/touch/touch_dev/gesture_single_tap_state" u:object_r:sysfs_tp_fodstatus:s0
