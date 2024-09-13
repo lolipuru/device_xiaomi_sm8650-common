@@ -10,7 +10,6 @@
 #include <android-base/unique_fd.h>
 
 #include <fstream>
-#include <mutex>
 
 #include "UdfpsHandler.h"
 
@@ -68,7 +67,6 @@ class XiaomiSM8650UdfpsHander : public UdfpsHandler {
   public:
     void init(fingerprint_device_t* device) {
         mDevice = device;
-        mFodStatus = FOD_STATUS_OFF;
     }
 
     void onFingerDown(uint32_t /*x*/, uint32_t /*y*/, float /*minor*/, float /*major*/) {
@@ -84,11 +82,8 @@ class XiaomiSM8650UdfpsHander : public UdfpsHandler {
     void onAcquired(int32_t result, int32_t vendorCode) {
         LOG(INFO) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
         if (result != FINGERPRINT_ACQUIRED_VENDOR) {
-            if (result == FINGERPRINT_ACQUIRED_GOOD) {
-                setFodStatus(FOD_STATUS_OFF);
-            } else {
-                setFingerDown(false);
-            }
+            setFingerDown(false);
+            if (result == FINGERPRINT_ACQUIRED_GOOD) setFodStatus(FOD_STATUS_OFF);
         } else if (vendorCode == 21 || vendorCode == 23) {
             /*
              * vendorCode = 21 waiting for fingerprint authentication
@@ -105,38 +100,18 @@ class XiaomiSM8650UdfpsHander : public UdfpsHandler {
 
     void cancel() {
         LOG(INFO) << __func__;
+        setFingerDown(false);
         setFodStatus(FOD_STATUS_OFF);
     }
 
   private:
     fingerprint_device_t* mDevice;
-    std::recursive_mutex mFodStatusMutex;
-    int mFodStatus;
 
     void setFodStatus(int value) {
-        const std::lock_guard<std::recursive_mutex> lock(mFodStatusMutex);
-        setFodStatusLocked(value);
-    }
-
-    void setFodStatusLocked(int value) {
         set(FOD_STATUS_PATH, value);
-        mFodStatus = value;
-
-        if (value == FOD_STATUS_OFF) {
-            setFingerDownLocked(false);
-        }
     }
 
     void setFingerDown(bool pressed) {
-        const std::lock_guard<std::recursive_mutex> lock(mFodStatusMutex);
-        setFingerDownLocked(pressed);
-    }
-
-    void setFingerDownLocked(bool pressed) {
-        if (mFodStatus == FOD_STATUS_OFF && pressed) {
-            return;
-        }
-
         mDevice->extCmd(mDevice, COMMAND_NIT, pressed ? PARAM_NIT_FOD : PARAM_NIT_NONE);
 
         set(DISP_PARAM_PATH,
