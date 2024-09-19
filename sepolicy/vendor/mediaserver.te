@@ -1,1 +1,7 @@
+allow mediaserver vendor_hal_ozonotify_service:service_manager find;
+allow mediaserver vendor_hal_ozonotify_hwservice:hwservice_manager find;
+allow mediaserver vendor_hal_ozonotify:binder { call transfer };
+allow mediaserver vendor_hal_ozonotify:fd *;
+allow mediaserver vendor_hal_ozonotify_default:binder call;
+
 allow mediaserver sound_device:chr_file rw_file_perms;

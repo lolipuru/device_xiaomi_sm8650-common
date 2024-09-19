@@ -8,7 +8,7 @@ allow platform_app sound_device:chr_file { open read write };
 get_prop(platform_app, vendor_audio_prop)
 
 # Camera
-allow platform_app adsprpcd_file:dir { getattr search };
+allow platform_app adsprpcd_file:dir { getattr search read };
 allow platform_app adsprpcd_file:file { getattr open read };
 allow platform_app app_data_file:file execute;
 allow platform_app hal_camera_default:binder { call transfer };
@@ -21,12 +21,12 @@ allow platform_app hal_quickcamera:fd *;
 allow platform_app hal_quickcamera_default:binder { call transfer };
 allow platform_app hal_quickcamera_default:binder transfer;
 allow platform_app hal_quickcamera_default:fd *;
-allow platform_app vendor_file:file { read open getattr map execute};
+allow platform_app vendor_file:file { read open getattr map execute watch };
 allow platform_app vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
 allow platform_app vendor_hal_camerapostproc_xiaomi:binder { call transfer };
 allow platform_app vendor_hal_camerapostproc_xiaomi:binder transfer;
 allow platform_app vendor_hal_camerapostproc_xiaomi:fd *;
-allow platform_app vendor_xdsp_device:chr_file { ioctl open read };
+allow platform_app vendor_hal_fingerprint_service_xiaomi:service_manager { find };
 binder_call(platform_app, hal_camera_default)
 get_prop(platform_app, qemu_hw_prop)
 get_prop(platform_app, vendor_camera_sensor_prop)

@@ -41,6 +41,11 @@ attribute vendor_hal_tofsensorservice_xiaomi;
 attribute vendor_hal_tofsensorservice_xiaomi_client;
 attribute vendor_hal_tofsensorservice_xiaomi_server;
 
+# ozoaudio
+attribute vendor_hal_ozonotify;
+attribute vendor_hal_ozonotify_client;
+attribute vendor_hal_ozonotify_server;
+
 # Sensors
 attribute vendor_hal_citsensorservice_xiaomi;
 attribute vendor_hal_citsensorservice_xiaomi_client;

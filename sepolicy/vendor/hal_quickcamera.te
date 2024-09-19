@@ -22,6 +22,7 @@ allow hal_quickcamera platform_app:fd *;
 allow hal_quickcamera system_app:binder transfer;
 allow hal_quickcamera system_app:binder { call transfer };
 allow hal_quickcamera system_app:fd *;
-init_daemon_domain(hal_quickcamera_default)
-hal_server_domain(hal_quickcamera_default, hal_quickcamera)
+allow hal_quickcamera system_server:binder transfer;
+allow hal_quickcamera system_server:binder { call transfer };
+allow hal_quickcamera system_server:fd *;
 add_service(hal_quickcamera_server, hal_quickcamera_service)

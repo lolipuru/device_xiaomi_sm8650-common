@@ -5,7 +5,6 @@ allow hal_camera fwk_sensor_hwservice:hwservice_manager find;
 allow hal_camera system_server:binder { call transfer };
 allow hal_camera system_server:binder transfer;
 allow hal_camera system_server:fd *;
-allow hal_camera_default hal_aidlbgservice_service:service_manager find;
 allow hal_camera_default vendor_qdsp_device:chr_file r_file_perms;
 allow hal_camera_default vendor_npu_device:chr_file r_file_perms;
 allow hal_camera_default mnt_vendor_file:dir search;
@@ -38,6 +37,9 @@ allow hal_camera_default system_server:binder call;
 allow hal_camera_default cgroup:file { getattr map open read write };
 allow hal_camera_default migt_dev:chr_file rw_file_perms;
 allow hal_camera_default vendor_displayfeature_device:chr_file { read };
+allow hal_camera_default vendor_sysfs_displayfeature:dir search;
+allow hal_camera_default vendor_sysfs_displayfeature:file { read open };
+allow hal_camera_default vendor_sysfs_kgsl:lnk_file read;
 
 r_dir_file(hal_camera_default, mnt_vendor_file)
 r_dir_file(hal_camera_default, camera_persist_file)
@@ -49,6 +51,10 @@ set_prop(hal_camera, vendor_camera_sensor_prop)
 set_prop(hal_camera_default, vendor_camera_p3enable_prop)
 set_prop(hal_camera_default, log_prop)
 
+hal_server_domain(hal_camera_default, hal_aidlbgservice)
+hal_server_domain(hal_camera_default, hal_quickcamera)
+add_service(hal_camera_server, hal_aidlbgservice_service)
+add_service(hal_camera_server, hal_quickcamera_service)
 hal_server_domain(hal_camera_default, vendor_hal_camerapostproc_xiaomi)
 add_hwservice(hal_camera_server, vendor_hal_camerapostproc_xiaomi_hwservice)
 

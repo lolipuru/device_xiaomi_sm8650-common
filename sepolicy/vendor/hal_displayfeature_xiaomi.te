@@ -23,6 +23,8 @@ allow vendor_hal_displayfeature_xiaomi_default vendor_miclstc_service:service_ma
 allow vendor_hal_displayfeature_xiaomi_default system_app:binder { call transfer };
 allow vendor_hal_displayfeature_xiaomi_default system_app:fd *;
 allow vendor_hal_displayfeature_xiaomi_default surfaceflinger:binder call;
+allow vendor_hal_displayfeature_xiaomi_default mnt_vendor_file:dir { getattr open read search };
+allow vendor_hal_displayfeature_xiaomi_default vendor_persist_display_file:dir { getattr open read search };
 allow vendor_hal_displayfeature_xiaomi_client vendor_hal_displayfeature_xiaomi_server:binder { call transfer };
 allow vendor_hal_displayfeature_xiaomi_client vendor_hal_displayfeature_xiaomi_server:fd *;
 allow vendor_hal_displayfeature_xiaomi_client vendor_hal_displayfeature_xiaomi_service:service_manager find;

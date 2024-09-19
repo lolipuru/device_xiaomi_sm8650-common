@@ -1,4 +1,6 @@
 # Camera
+persist.vendor.aiie_capture_log.debug           u:object_r:vendor_camera_prop:s0
+persist.vendor.algo.aivs.debug                  u:object_r:vendor_camera_prop:s0
 vendor.camera.sensor.                           u:object_r:vendor_camera_sensor_prop:s0
 vendor.video.scene.recognition                  u:object_r:vendor_camera_prop:s0
 persist.vendor.EnableP3ColorSpace               u:object_r:vendor_camera_p3enable_prop:s0
@@ -125,28 +127,31 @@ vendor.video.mode.status                        u:object_r:vendor_displayfeature
 persist.vendor.fpc.                             u:object_r:vendor_fp_prop:s0
 persist.vendor.goodix.                          u:object_r:vendor_fp_prop:s0
 persist.vendor.sys.fp.                          u:object_r:vendor_fp_prop:s0
-persist.vendor.sys.fp.info                      u:object_r:vendor_fp_info_prop:s0
-persist.vendor.sys.fp.uid                       u:object_r:vendor_fp_info_prop:s0
+persist.vendor.sys.fp.info                      u:object_r:vendor_fp_prop:s0
+persist.vendor.sys.fp.uid                       u:object_r:vendor_fp_prop:s0
 ro.hardware.fp.                                 u:object_r:vendor_fp_prop:s0
 vendor.dtool.                                   u:object_r:vendor_fp_prop:s0
 vendor.fps_hal.                                 u:object_r:vendor_fp_prop:s0
 vendor.panel.display.                           u:object_r:vendor_fp_prop:s0
-vendor.panel.touch_vendor                       u:object_r:vendor_fp_info_prop:s0
+vendor.panel.touch_vendor                       u:object_r:vendor_fp_prop:s0
 
 # HVDCP
 ctl.vendor.hvdcp_opti                           u:object_r:vendor_hvdcp_opti_prop:s0
 
 # Mlipay
 ro.boot.cpuid                                   u:object_r:vendor_cpuid_prop:s0
+persist.vendor.sys.attestation.status           u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.ese_attestation.status       u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.pay.fido                     u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.pay.fido2                    u:object_r:vendor_payment_security_prop:s0
-persist.vendor.sys.pay.fido2pass                u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.pay.ifaa                     u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.pay.soter                    u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.pay.widevine                 u:object_r:vendor_payment_security_prop:s0
 persist.vendor.sys.provision.status             u:object_r:vendor_payment_security_prop:s0
+persist.vendor.sys.rkp.status                   u:object_r:vendor_payment_security_prop:s0
+persist.vendor.sys.wv_rkp.status                u:object_r:vendor_payment_security_prop:s0
 vendor.sys.feature_state                        u:object_r:vendor_payment_security_prop:s0
+vendor.sys.rpmb_state                           u:object_r:vendor_payment_security_prop:s0
 
 # NFC
 ro.vendor.se.                                   u:object_r:vendor_nfc_mi_prop:s0

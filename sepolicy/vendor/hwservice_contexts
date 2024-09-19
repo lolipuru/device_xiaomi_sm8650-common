@@ -4,5 +4,8 @@ vendor.dolby.hardware.dms::IDms          u:object_r:hal_dms_hwservice:s0
 # Misys
 vendor.xiaomi.hardware.misys::IMiSys       u:object_r:hal_misys_hwservice:s0
 
+# ozoaudio
+com.android.ozoaudio.notify::IOzoNotify                         u:object_r:vendor_hal_ozonotify_hwservice:s0
+
 # SLA
 vendor.qti.sla.service::ISlaService             u:object_r:hal_slaservice_hwservice:s0

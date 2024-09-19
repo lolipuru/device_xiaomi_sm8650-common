@@ -29,5 +29,11 @@ vendor.xiaomi.hardware.mlipay.IMlipayService/default        u:object_r:hal_mlipa
 vendor.xiaomi.hardware.aidl.mtdservice.IMTService/default        u:object_r:hal_mtdservice_service:s0
 vendor.xiaomi.hardware.aidl.tidaservice.ITidaService/default       u:object_r:hal_tidaservice_service:s0
 
+# Ozoaudio
+com.android.ozoaudio.notify.IOzoNotify/default                       u:object_r:vendor_hal_ozonotify_service:s0
+
+# Qspmhal
+vendor.qti.qspmhal.IQspmhal/default                           u:object_r:vendor_hal_qspmhal_service:s0
+
 # Touch
 vendor.xiaomi.hw.touchfeature.ITouchFeature/default          u:object_r:hal_touchfeature_xiaomi_service:s0

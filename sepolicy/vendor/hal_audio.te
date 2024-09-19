@@ -7,6 +7,11 @@ allow hal_audio_default audio_socket:sock_file rw_file_perms;
 allow hal_audio_default sound_device:chr_file rw_file_perms;
 allow hal_audio_default sysfs:file rw_file_perms;
 allow hal_audio_default sysfs_f0_value:file rw_file_perms;
+allow hal_audio_default vendor_hal_ozonotify_hwservice:hwservice_manager find;
+allow hal_audio_default vendor_hal_ozonotify_service:service_manager find;
+allow hal_audio_default vendor_hal_ozonotify:binder { call transfer };
+allow hal_audio_default vendor_hal_ozonotify:binder transfer;
+allow hal_audio_default vendor_hal_ozonotify:fd *;
 unix_socket_connect(hal_audio_default, property, init)
 unix_socket_connect(hal_audio_default, property, hal_sensors_default)
 hal_client_domain(hal_audio_default, hal_dms)

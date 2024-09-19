@@ -8,6 +8,7 @@ allow hal_aidlbgservice_server hal_aidlbgservice_service:service_manager { add f
 allow hal_aidlbgservice_server hal_aidlbgservice_client:binder transfer;
 allow hal_aidlbgservice_server hal_aidlbgservice_client:binder { call transfer };
 allow hal_aidlbgservice_server hal_aidlbgservice_client:fd *;
+allow platform_app hal_aidlbgservice_service:service_manager find;
 allow hal_aidlbgservice system_server:binder transfer;
 allow hal_aidlbgservice system_server:binder { call transfer };
 allow hal_aidlbgservice system_server:fd *;

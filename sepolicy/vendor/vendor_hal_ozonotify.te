@@ -1,0 +1,26 @@
+type vendor_hal_ozonotify_default, domain;
+type vendor_hal_ozonotify_default_exec, exec_type, file_type, vendor_file_type;
+type vendor_hal_ozonotify_hwservice, hwservice_manager_type;
+type vendor_hal_ozonotify_service, service_manager_type;
+
+allow vendor_hal_ozonotify_server dumpstate:fifo_file write;
+allow vendor_hal_ozonotify_server dumpstate:fd *;
+allow vendor_hal_ozonotify_server vendor_hal_ozonotify_client:binder transfer;
+allow vendor_hal_ozonotify_server vendor_hal_ozonotify_client:binder { call transfer };
+allow vendor_hal_ozonotify_server vendor_hal_ozonotify_client:fd *;
+allow vendor_hal_ozonotify_server vendor_hal_ozonotify_hwservice:hwservice_manager { add find };
+allow vendor_hal_ozonotify_server hidl_base_hwservice:hwservice_manager add;
+allow vendor_hal_ozonotify_client vendor_hal_ozonotify_server:binder { call transfer };
+allow vendor_hal_ozonotify_client vendor_hal_ozonotify_server:binder transfer;
+allow vendor_hal_ozonotify_client vendor_hal_ozonotify_server:fd *;
+allow vendor_hal_ozonotify_client vendor_hal_ozonotify_hwservice:hwservice_manager find;
+allow vendor_hal_ozonotify_client vendor_hal_ozonotify_service:service_manager find;
+allow vendor_hal_ozonotify servicemanager:binder { call transfer };
+allow vendor_hal_ozonotify servicemanager:fd *;
+allow vendor_hal_ozonotify mediaserver:binder transfer;
+allow vendor_hal_ozonotify hal_audio_default:binder transfer;
+allow vendor_hal_ozonotify hal_audio_default:binder { call transfer };
+allow vendor_hal_ozonotify hal_audio_default:fd *;
+init_daemon_domain(vendor_hal_ozonotify_default)
+hal_server_domain(vendor_hal_ozonotify_default, vendor_hal_ozonotify)
+add_service(vendor_hal_ozonotify_server, vendor_hal_ozonotify_service)

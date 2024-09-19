@@ -1,1 +1,2 @@
 allow servicemanager vendor_hal_citsensorservice_xiaomi_server:binder transfer;
+allow servicemanager vendor_hal_ozonotify:binder transfer;

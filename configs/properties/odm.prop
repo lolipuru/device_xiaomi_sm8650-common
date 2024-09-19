@@ -1,2 +1,11 @@
+# Fingerprint
+persist.vendor.sys.fp.expolevel=0x88
+ro.hardware.fp.fod.location=low
+ro.hardware.fp.fod.touch.ctl.version=2.0
+ro.hardware.fp.fod.lowlight.lux.threshold=3
+ro.hardware.fp.fod.lowlight.brightness.threshold=411
+ro.hardware.fp.fod=true
+ro.hardware.fp.mievent=true
+
 # Qti
 ro.vendor.qti.va_odm.support=1

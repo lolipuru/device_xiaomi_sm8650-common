@@ -3,6 +3,17 @@ allow hal_touchfeature_xiaomi_default system_server:binder call;
 allow hal_touchfeature_xiaomi_default vendor_touchfeature_prop:file { getattr open read };
 allow hal_touchfeature_xiaomi_default surfaceflinger:binder transfer;
 allow hal_touchfeature_xiaomi_default sysfs_touch_hostprocess:file { getattr open read write };
+allow hal_touchfeature_xiaomi_default fwk_sensor_hwservice:hwservice_manager find;
+allow hal_touchfeature_xiaomi_default touchfeature_device:chr_file rw_file_perms;
+allow hal_touchfeature_xiaomi_default touchfeature_device:file { getattr map read };
+allow hal_touchfeature_xiaomi_default uhid_device:chr_file rw_file_perms;
+allow hal_touchfeature_xiaomi_default sysfs_tp_virtual_prox:file { open read write };
+allow hal_touchfeature_xiaomi_default sysfs_tp_virtual_prox:file rw_file_perms;
+allow hal_touchfeature_xiaomi_default input_device:chr_file rw_file_perms;
+allow hal_touchfeature_xiaomi_default input_device:dir r_dir_perms;
+allow hal_touchfeature_xiaomi_default self:capability sys_nice;
+allow hal_touchfeature_xiaomi_default self:cap_userns sys_nice;
+allow hal_touchfeature_xiaomi_default hal_touchfeature_xiaomi_service:service_manager find;
 #allow hal_touchfeature_xiaomi_default vendor_mfp-daemon:binder transfer;
 allow hal_touchfeature_xiaomi touchfeature_device:chr_file rw_file_perms;
 allow hal_touchfeature_xiaomi_client hal_touchfeature_xiaomi_server:binder { call transfer };
@@ -10,6 +21,7 @@ allow hal_touchfeature_xiaomi_client hal_touchfeature_xiaomi_server:fd *;
 allow hal_touchfeature_xiaomi_client hal_touchfeature_xiaomi_service:service_manager find;
 allow hal_touchfeature_xiaomi_server hal_touchfeature_xiaomi_client:binder transfer;
 init_daemon_domain(hal_touchfeature_xiaomi_default)
+unix_socket_connect(hal_touchfeature_xiaomi_default, property, init)
 unix_socket_connect(hal_touchfeature_xiaomi_default, property, touchreport)
 unix_socket_connect(hal_touchfeature_xiaomi_default, property, tpevent)
 set_prop(hal_touchfeature_xiaomi_default, vendor_touchfeature_prop)
