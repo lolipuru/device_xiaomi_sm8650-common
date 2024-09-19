@@ -33,13 +33,13 @@
 /(vendor|system/vendor)/bin/hw/vendor\.rongcard\.eid@1\.0-service                      u:object_r:vendor_hal_eid_rc_exec:s0
 
 # Fingerprint
-/(vendor|system/vendor|odm)/bin/hw/mfp-daemon u:object_r:vendor_mfp-daemon_exec:s0
 /data/vendor/misc/mi_fp(/.*)? u:object_r:vendor_mfp-daemon_data_file:s0
 /data/vendor/fpc(/.*)? u:object_r:vendor_fingerprint_data_file:s0
 /data/vendor/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0
 /dev/goodix_fp u:object_r:vendor_fingerprint_device:s0
 /mnt/vendor/persist/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0
 /sys/devices/virtual/touch/tp_dev/fod_status u:object_r:sysfs_tp_fodstatus:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.xiaomi u:object_r:hal_fingerprint_default_exec:s0
 /(odm|system/odm|vendor|system/vendor)/bin/hw/vendor\.xiaomi\.hardware\.dtool1-service u:object_r:vendor_dtool_exec:s0
 
 # HAL

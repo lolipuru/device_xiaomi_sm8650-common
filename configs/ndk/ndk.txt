@@ -1,9 +1,6 @@
 android.frameworks.sensorservice-V1-ndk
 android.hardware.audio.common-V1-ndk
 android.hardware.authsecret-V1-ndk
-android.hardware.biometrics.common-V2-ndk
-android.hardware.biometrics.common-V3-ndk
-android.hardware.biometrics.fingerprint-V3-ndk
 android.hardware.bluetooth.audio-V3-ndk
 android.hardware.bluetooth.audio-V4-ndk
 android.hardware.boot-V1-ndk

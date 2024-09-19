@@ -660,8 +660,6 @@ vendor/lib64/vendor.qti.esepowermanager@1.0.so
 # Fingerprint
 odm/bin/hw/vendor.xiaomi.hardware.dtool1-service
 odm/etc/init/vendor.xiaomi.hardware.dtool1.rc
-vendor/bin/hw/mfp-daemon
-vendor/etc/init/init.mfp-daemon.aidl.rc
 vendor/etc/vintf/manifest/AHBF-V3-service.xml
 vendor/etc/vintf/manifest/fod-aidl.xml
 vendor/lib64/com.fingerprints.extension3-V1-ndk.so
