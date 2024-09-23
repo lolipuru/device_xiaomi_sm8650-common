@@ -1077,6 +1077,9 @@ vendor/etc/public.libraries.txt
 # Neural networks
 vendor/lib64/libQnnChrometraceProfilingReader.so
 vendor/lib64/libQnnCpu.so
+vendor/lib64/libQnnDsp.so
+vendor/lib64/libQnnDspV66CalculatorStub.so
+vendor/lib64/libQnnDspV66Stub.so
 vendor/lib64/libQnnGpu.so
 vendor/lib64/libQnnGpuNetRunExtensions.so
 vendor/lib64/libQnnGpuProfilingReader.so

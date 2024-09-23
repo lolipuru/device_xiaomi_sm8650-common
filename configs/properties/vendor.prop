@@ -14,21 +14,18 @@ persist.vendor.audio.ha_proxy.enabled=true
 persist.vendor.audio.induce_crash=false
 persist.vendor.audio.misound.disable=true
 persist.vendor.audio.misoundasc=true
-persist.vendor.audio.ras.enabled=false
-persist.vendor.audio.spv3.enable=true
-persist.vendor.audio.voicecall.speaker.stereo=true
-ro.vendor.audio.dolby.dax.support=true
-ro.vendor.audio.dolby.dax.version=DAX3_3.8.5.20_r1
-ro.vendor.audio.dolby.surround.enable=true
-ro.vendor.audio.dolby.vision.support=true
+ro.audio.flinger_standbytime_ms=2000
+ro.vendor.audio.btsamplerate.adaptive=true
 ro.vendor.audio.dualadc.support=true
-ro.vendor.audio.feature.spatial=7
 ro.vendor.audio.support.sound.id=true
 ro.vendor.audio.gain.support=true
 vendor.audio.adm.buffering.ms=2
+vendor.audio.compress_capture.aac.cut_off_freq=-1
+vendor.audio.compress_capture.aac=true
 vendor.audio.feature.a2dp_offload.enable=true
 vendor.audio.feature.afe_proxy.enable=true
 vendor.audio.feature.battery_listener.enable=true
+vendor.audio.feature.dmabuf.cma.memory.enable=false
 vendor.audio.feature.hfp.enable=true
 vendor.audio.feature.kpi_optimize.enable=true
 vendor.audio.flac.sw.decoder.24bit=true
@@ -79,10 +76,13 @@ ro.bluetooth.a2dp_offload.supported=true
 # Camera
 camera.disable_zsl_mode=true
 ro.camera.enableCamera1MaxZsl=1
-ro.hardware.camera=xiaomi
+
+# Chipset
+ro.soc.manufacturer=QTI
 
 # Display
 ro.vendor.displayfeature.dump=true
+ro.vendor.display.standard_d75_enable=true
 vendor.display.comp_mask=0
 vendor.display.disable_excl_rect_partial_fb=1
 vendor.display.disable_excl_rect=0
@@ -143,7 +143,10 @@ sys.displayfeature.entry.enable=true
 vendor.display.use_layer_ext=0
 
 # Dolby
+ro.vendor.audio.dolby.dax.support=true
 ro.vendor.audio.dolby.dax.version=DAX3_3.8.5.20_r1
+ro.vendor.audio.dolby.surround.enable=true
+ro.vendor.audio.dolby.vision.support=true
 
 # DPM
 persist.vendor.dpm.vndr.idletimer.mode=default
@@ -153,6 +156,7 @@ persist.vendor.dpm.vndr.feature=11
 # DRM
 drm.service.enabled=true
 ro.crypto.metadata_init_delete_all_keys.enabled=true
+vendor.wv.oemcrypto.debug.enable_prov40=true
 
 # Gatekeeper
 vendor.gatekeeper.disable_spu=true
@@ -175,6 +179,7 @@ debug.sf.hw=0
 debug.sf.predict_hwc_composition_strategy=0
 debug.sf.set_idle_timer_ms=1100
 debug.sf.treat_170m_as_sRGB=1
+graphics.gpu.profiler.support=true
 persist.sys.sf.color_mode=0
 persist.sys.sf.color_saturation=1.0
 ro.gfx.driver.1=com.qualcomm.qti.gpudrivers.pineapple.api34
@@ -194,6 +199,10 @@ ro.surface_flinger.use_content_detection_for_refresh_rate=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
 ro.vendor.all_modes.colorpick_adjust=true
 vendor.gralloc.disable_ubwc=0
+vendor.gralloc.enable_logs=0
+
+# FUSE
+persist.sys.fuse.passthrough.enable=true
 
 # Haptics
 sys.haptic.alert=8,2
@@ -243,29 +252,13 @@ ro.hardware.keystore_desede=true
 
 # Media
 debug.c2.use_dmabufheaps=1
-debug.config.media.video.aie.support=true
-debug.config.media.video.ais.support=true
-debug.config.media.video.frc.support=true
-debug.mdpcomp.logs=0
-debug.media.video.chipset=6
-debug.media.video.frc=false
-debug.media.video.vpp=false
 debug.stagefright.c2inputsurface=-1
-debug.stagefright.ccodec=4
-debug.stagefright.omx_default_rank=0
-media.stagefright.thumbnail.prefer_hw_codecs=true
-ro.vendor.media.video.frc.support=true
-ro.vendor.media.video.vpp.support=true
-vendor.media.vpp.aie.cade=100
-vendor.media.vpp.aie.ltm=1
-vendor.media.vpp.aie.ltmacebrih=0
-vendor.media.vpp.aie.ltmacebril=20
-vendor.media.vpp.aie.ltmacestr=37
-vendor.media.vpp.aie.ltmsatgain=55
-vendor.media.vpp.aie.ltmsatoff=55
-vendor.media.vpp.debug.value.use=false
-vendor.mm.enable.qcom_parser=16777215
 vendor.media.omx=0
+
+# Perf
+ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.perf-hal.ver=3.0
+ro.vendor.perf.scroll_opt=1
 
 # QCOM
 persist.vendor.qcomsysd.enabled=1
