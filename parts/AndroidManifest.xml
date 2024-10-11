@@ -37,10 +37,5 @@
             android:permission="ColorModeService">
         </service>
 
-        <service
-            android:name=".doze.AodBrightnessService"
-            android:exported="true">
-        </service>
-
     </application>
 </manifest>
