@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#define LOG_TAG "UdfpsHandler.xiaomi_sm8550"
+#define LOG_TAG "udfpsHandler.xiaomi_sm8650"
 
 #include <android-base/logging.h>
 #include <android-base/unique_fd.h>
@@ -39,7 +39,7 @@
 #define DISP_PARAM_LOCAL_HBM_OFF "0"
 #define DISP_PARAM_LOCAL_HBM_ON "1"
 
-#define FOD_PRESS_STATUS_PATH "/sys/class/touch/touch_dev/fod_press_status"
+#define FOD_PRESS_STATUS_PATH "/sys/devices/virtual/touch/touch_dev/fod_press_status"
 
 namespace {
 
@@ -70,7 +70,7 @@ static bool readBool(int fd) {
 
 }  // anonymous namespace
 
-class XiaomiSm8550UdfpsHander : public UdfpsHandler {
+class XiaomiSm8650UdfpsHander : public UdfpsHandler {
   public:
     void init(fingerprint_device_t* device) {
         mDevice = device;
@@ -154,7 +154,7 @@ class XiaomiSm8550UdfpsHander : public UdfpsHandler {
 };
 
 static UdfpsHandler* create() {
-    return new XiaomiSm8550UdfpsHander();
+    return new XiaomiSm8650UdfpsHander();
 }
 
 static void destroy(UdfpsHandler* handler) {
