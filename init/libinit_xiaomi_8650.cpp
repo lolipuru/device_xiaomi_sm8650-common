@@ -73,7 +73,7 @@ void vendor_load_properties() {
     } else if (sku == "shennong") { // Xiaomi 14 Pro
         if (region == "CN") { // China
             set_ro_build_prop("model", "23116PN5BC");
-            set_ro_build_prop("name", "shennong_glocal");
+            set_ro_build_prop("name", "shennong_global");
         } else {              // China (Satellite Edition)
             set_ro_build_prop("model", "2311BPN23C");
             set_ro_build_prop("name", "shennong");

@@ -6,7 +6,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter houji shennong aurora ryui goku manet,$(TARGET_DEVICE)),)
+ifneq ($(filter houji shennong aurora ruyi goku manet,$(TARGET_DEVICE)),)
 	include $(call all-makefiles-under,$(LOCAL_PATH))
 	include $(CLEAR_VARS)
 
