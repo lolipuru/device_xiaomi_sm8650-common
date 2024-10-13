@@ -9,10 +9,6 @@
 #include <linux/types.h>
 #include <asm/ioctl.h>
 
-#ifndef BIT
-#define BIT(x) (1UL << (x))
-#endif
-
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -63,9 +59,6 @@ enum disp_feature_id {
 	DISP_FEATURE_BIST_MODE_COLOR = 30,
 	DISP_FEATURE_ROUND_MODE = 31,
 	DISP_FEATURE_GAMUT = 32,
-	DISP_FEATURE_POWERSTATUS = 33,
-	DISP_FEATURE_SYSTEM_BUILD_VERSION = 34,
-	DISP_FEATURE_FRAME_DROP_COUNT = 35,
 	DISP_FEATURE_MAX,
 };
 
@@ -86,12 +79,32 @@ enum local_hbm_state {
 	LOCAL_HBM_MAX,
 };
 
-enum fod_ui_ready_state {
-	LOCAL_HBM_UI_NONE = 0,
-	GLOBAL_FOD_HBM_OVERLAY = BIT(0),
-	GLOBAL_FOD_ICON = BIT(1),
-	FOD_LOW_BRIGHTNESS_CAPTURE = BIT(2),
-	LOCAL_HBM_UI_READY  = BIT(3)
+/* feature_id: DISP_FEATURE_DBI corresponding feature_val */
+enum dbi_by_temp_state {
+	TEMP_INDEX_20 = 20,
+	TEMP_INDEX_25 = 25,
+	TEMP_INDEX_28 = 28,
+	TEMP_INDEX_30 = 30,
+	TEMP_INDEX_32 = 32,
+	TEMP_INDEX_35 = 35,
+	TEMP_INDEX_36 = 36,
+	TEMP_INDEX_37 = 37,
+	TEMP_INDEX_38 = 38,
+	TEMP_INDEX_39 = 39,
+	TEMP_INDEX_40 = 40,
+	TEMP_INDEX_41 = 41,
+	TEMP_INDEX_42 = 42,
+	TEMP_INDEX_43 = 43,
+	TEMP_INDEX_44 = 44,
+	TEMP_INDEX_45 = 45,
+	TEMP_INDEX_46 = 46,
+	TEMP_INDEX_47 = 47,
+	TEMP_INDEX_48 = 48,
+	TEMP_INDEX_49 = 49,
+	TEMP_INDEX_50 = 50,
+	TEMP_INDEX_51 = 51,
+	TEMP_INDEX_52 = 52,
+	TEMP_INDEX_MAX,
 };
 
 /* feature_id: DISP_FEATURE_FP_STATUS corresponding feature_val */
@@ -231,21 +244,47 @@ struct disp_wp_info {
 	char *info;
 };
 
-/* IOCTL: MI_DISP_IOCTL_GET_MANUFACTURER_INFO parameter */
-struct disp_manufacturer_info_req {
-	struct disp_base base;
-	char *wp_info;
-	char *maxbrightness;
-	char *manufacturer_time;
-	__u32 wp_info_len;
-	__u32 max_brightness_len;
-	__u32 manufacturer_time_len;
+
+/**
+ * enum ddic_mode_type - ddic mode
+ * @DDIC_MODE_NORMAL: TE frequency is equal to screen refresh rate
+ * @DDIC_MODE_IDLE:   TE frequency is fixed(120/60Hz), idle mode
+ *                         the screen refresh rate dimming to ddic minimum
+ * @DDIC_MODE_AUTO:   TE frequency is fixed(120/60Hz), adaptive mode
+ *                         the screen refresh rate adaptive app refresh frequency
+ * @DDIC_MODE_QSYNC:  TE frequency and screen refresh rate adaptive app refresh frequency
+ * @DDIC_MODE_DIFF:   The surfaceflinger refresh rate is different with kernel timing refresh rate
+ * @DDIC_MODE_TEST:   Used for testing, or factory version with special refresh rate
+ */
+enum ddic_mode_type {
+	DDIC_MODE_NORMAL = 0,
+	DDIC_MODE_IDLE   = 1,
+	DDIC_MODE_AUTO   = 2,
+	DDIC_MODE_QSYNC  = 3,
+	DDIC_MODE_DIFF   = 4,
+	DDIC_MODE_TEST   = 5,
+	DDIC_MODE_MAX,
+};
+
+/**
+ * struct mi_dsi_display_sub_mode - specifies xiaomi timing parameters for dsi display
+ * @ddic_mode:             ddic mode.
+ * @timing_refresh_rate:   kernel timing refresh rate.
+ * @sf_refresh_rate:       surfaceflinger refresh rate.
+ * @ddic_min_refresh_rate: ddic mininum refresh rate.
+ */
+struct mi_mode_info {
+	__u32 ddic_mode;
+	__u32 timing_refresh_rate;
+	__u32 sf_refresh_rate;
+	__u32 ddic_min_refresh_rate;
 };
 
 /* IOCTL: MI_DISP_IOCTL_GET_FPS parameter */
 struct disp_fps_info {
 	struct disp_base base;
 	__u32 fps;
+	struct mi_mode_info mode;
 };
 
 enum disp_event_type {
@@ -262,6 +301,8 @@ enum disp_event_type {
 	MI_DISP_EVENT_PANEL_EVENT = 10,
 	MI_DISP_EVENT_DDIC_RESOLUTION = 11,
 	MI_DISP_EVENT_FLAT_MODE = 12,
+	MI_DISP_EVENT_FP = 13,
+	MI_DISP_EVENT_LOCAL_HBM_VALUE = 14,
 	MI_DISP_EVENT_MAX,
 };
 
@@ -317,6 +358,26 @@ struct disp_dsi_cmd_req {
 	__u32 tx_len;
 	__u64 tx_ptr;
 	__u8  rx_state;
+	__u32 rx_len;
+	__u64 rx_ptr;
+};
+
+/* supported count info ids */
+enum disp_count_info_type {
+	DISP_COUNT_INFO_POWERSTATUS = 0,
+	DISP_COUNT_INFO_SYSTEM_BUILD_VERSION = 1,
+	DISP_COUNT_INFO_FRAME_DROP_COUNT = 2,
+	DISP_COUNT_INFO_SWITCH_KERNEL_FUNCTION_TIMER = 3,
+	DISP_COUNT_INFO_MAX,
+};
+
+/* IOCTL: MI_DISP_IOCTL_SET_COUNT_INFO parameter */
+struct disp_count_info_req {
+	struct disp_base base;
+	__u32 count_info_type;
+	__s32 count_info_val;
+	__u32 tx_len;
+	__u64 tx_ptr;
 	__u32 rx_len;
 	__u64 rx_ptr;
 };
@@ -418,6 +479,10 @@ static inline const char *get_disp_event_type_name(__u32 event_type)
 		return "ddic_resolution";
 	case MI_DISP_EVENT_FLAT_MODE:
 		return "flat_mode";
+	case MI_DISP_EVENT_FP:
+		return "fp_status";
+	case MI_DISP_EVENT_LOCAL_HBM_VALUE:
+		return "local_hbm_value";
 	default:
 		return "Unknown";
 	}
@@ -554,12 +619,6 @@ static inline const char *get_disp_feature_id_name(__u32 feature_id)
 		return "round_mode";
 	case DISP_FEATURE_GAMUT:
 		return "gamut";
-	case DISP_FEATURE_POWERSTATUS:
-		return "power_status";
-	case DISP_FEATURE_SYSTEM_BUILD_VERSION:
-		return "system_build_version";
-	case DISP_FEATURE_FRAME_DROP_COUNT:
-		return "frame_drop_count";
 	default:
 		return "Unknown";
 	}
@@ -583,6 +642,49 @@ static inline const char *get_lhbm_value_name(__u32 lhbm_value)
 	}
 }
 
+static inline const char *get_ddic_mode_name(__u32 ddic_mode)
+{
+	switch (ddic_mode) {
+	case DDIC_MODE_NORMAL:
+		return "normal";
+	case DDIC_MODE_IDLE:
+		return "idle";
+	case DDIC_MODE_AUTO:
+		return "auto";
+	case DDIC_MODE_QSYNC:
+		return "qsync";
+	case DDIC_MODE_DIFF:
+		return "diff";
+	case DDIC_MODE_TEST:
+		return "test";
+	default:
+		return "Unknown";
+	}
+}
+
+static inline int is_support_disp_count_info_type(__u32 count_info_type)
+{
+	if (count_info_type < DISP_COUNT_INFO_MAX)
+		return 1;
+	else
+		return 0;
+}
+
+static inline const char *get_disp_count_info_type_name(__u32 count_info_type)
+{
+	switch (count_info_type) {
+	case DISP_COUNT_INFO_POWERSTATUS:
+		return "power_status";
+	case DISP_COUNT_INFO_SYSTEM_BUILD_VERSION:
+		return "system_build_version";
+	case DISP_COUNT_INFO_FRAME_DROP_COUNT:
+		return "frame_drop_count";
+	case DISP_COUNT_INFO_SWITCH_KERNEL_FUNCTION_TIMER:
+		return "swith_function_timer";
+	default:
+		return "Unknown count info type";
+	}
+}
 #else
 static inline int isSupportDispId(__u32 disp_id)
 {
@@ -680,6 +782,10 @@ static inline const char *getDispEventTypeName(__u32 event_type)
 		return "ddic_resolution";
 	case MI_DISP_EVENT_FLAT_MODE:
 		return "flat_mode";
+	case MI_DISP_EVENT_FP:
+		return "fp_status";
+	case MI_DISP_EVENT_LOCAL_HBM_VALUE:
+		return "local_hbm_value";
 	default:
 		return "Unknown";
 	}
@@ -816,12 +922,6 @@ static inline const char *getDispFeatureIdName(__u32 feature_id)
 		return "round_mode";
 	case DISP_FEATURE_GAMUT:
 		return "gamut";
-	case DISP_FEATURE_POWERSTATUS:
-		return "power_status";
-	case DISP_FEATURE_SYSTEM_BUILD_VERSION:
-		return "system_build_version";
-	case DISP_FEATURE_FRAME_DROP_COUNT:
-		return "frame_drop_count";
 	default:
 		return "Unknown";
 	}
@@ -845,6 +945,49 @@ static inline const char *getLhbmValueName(__u32 lhbm_value)
 	}
 }
 
+static inline const char *getDdicModeName(__u32 ddic_mode)
+{
+	switch (ddic_mode) {
+	case DDIC_MODE_NORMAL:
+		return "normal";
+	case DDIC_MODE_IDLE:
+		return "idle";
+	case DDIC_MODE_AUTO:
+		return "auto";
+	case DDIC_MODE_QSYNC:
+		return "qsync";
+	case DDIC_MODE_DIFF:
+		return "diff";
+	case DDIC_MODE_TEST:
+		return "test";
+	default:
+		return "Unknown";
+	}
+}
+
+static inline int isSupportDispCountInfoType(__u32 count_info_type)
+{
+	if (count_info_type < DISP_COUNT_INFO_MAX)
+		return 1;
+	else
+		return 0;
+}
+
+static inline const char *getDispCountInfoTypeName(__u32 count_info_type)
+{
+	switch (count_info_type) {
+	case DISP_COUNT_INFO_POWERSTATUS:
+		return "power_status";
+	case DISP_COUNT_INFO_SYSTEM_BUILD_VERSION:
+		return "system_build_version";
+	case DISP_COUNT_INFO_FRAME_DROP_COUNT:
+		return "frame_drop_count";
+	case DISP_COUNT_INFO_SWITCH_KERNEL_FUNCTION_TIMER:
+		return "swith_function_timer";
+	default:
+		return "Unknown count info type";
+	}
+}
 #endif
 
 
@@ -869,7 +1012,7 @@ static inline const char *getLhbmValueName(__u32 lhbm_value)
 #define MI_DISP_IOCTL_READ_DSI_CMD            _IOWR('D', 0x0A, struct disp_dsi_cmd_req)
 #define MI_DISP_IOCTL_GET_BRIGHTNESS           _IOR('D', 0x0B, struct disp_brightness_req)
 #define MI_DISP_IOCTL_SET_BRIGHTNESS           _IOW('D', 0x0C, struct disp_brightness_req)
-#define MI_DISP_IOCTL_GET_MANUFACTURER_INFO   _IOWR('D', 0x0D, struct disp_manufacturer_info_req)
+#define MI_DISP_IOCTL_SET_COUNT_INFO          _IOWR('D', 0x0D, struct disp_count_info_req)
 #define MI_DISP_IOCTL_SET_LOCAL_HBM            _IOW('D', 0x0E, struct disp_local_hbm_req)
 #define MI_DISP_IOCTL_GET_FEATURE             _IOWR('D', 0x0F, struct disp_feature_req)
 
