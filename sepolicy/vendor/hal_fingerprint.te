@@ -34,3 +34,7 @@ allow hal_fingerprint_default surfaceflinger:binder transfer;
 get_prop(hal_fingerprint_default, vendor_panel_info_prop)
 set_prop(hal_fingerprint_default, vendor_fp_prop)
 set_prop(hal_fingerprint_default, vendor_fp_info_prop)
+
+
+# i don't have any good workaround for vendor_hal_fingerprint_service_xiaomi yet.... 
+dontaudit hal_fingerprint_default vendor_hal_fingerprint_service_xiaomi:service_manager { add find };
