@@ -30,8 +30,6 @@
 #define DISP_PARAM_LOCAL_HBM_OFF "0"
 #define DISP_PARAM_LOCAL_HBM_ON "1"
 
-#define FOD_PRESS_STATUS_PATH "/sys/class/touch/touch_dev/fod_press_status"
-
 #define FINGERPRINT_ACQUIRED_VENDOR 6
 
 namespace {
@@ -40,25 +38,6 @@ template <typename T>
 static void set(const std::string& path, const T& value) {
     std::ofstream file(path);
     file << value;
-}
-
-static bool readBool(int fd) {
-    char c;
-    int rc;
-
-    rc = lseek(fd, 0, SEEK_SET);
-    if (rc) {
-        LOG(ERROR) << "failed to seek fd, err: " << rc;
-        return false;
-    }
-
-    rc = read(fd, &c, sizeof(char));
-    if (rc != 1) {
-        LOG(ERROR) << "failed to read bool from fd, err: " << rc;
-        return false;
-    }
-
-    return c != '0';
 }
 
 }  // anonymous namespace
