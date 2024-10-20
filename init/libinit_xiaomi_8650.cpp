@@ -66,6 +66,9 @@ void vendor_load_properties() {
         if (region == "CN") { // China
             set_ro_build_prop("model", "23127PN0CC");
             set_ro_build_prop("name", "houji");
+        } else if (region == "IN") {
+            set_ro_build_prop("model", "23127PN0CG");
+            set_ro_build_prop("name", "houji_in");
         } else {              // Global
             set_ro_build_prop("model", "23127PN0CG");
             set_ro_build_prop("name", "houji_global");
