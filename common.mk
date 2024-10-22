@@ -107,7 +107,6 @@ PRODUCT_COPY_FILES += \
 
 # Authsecret
 PRODUCT_PACKAGES += \
-    android.hardware.authsecret-service.nxp \
     android.hardware.authsecret@1.0.vendor
 
 # Bluetooth
