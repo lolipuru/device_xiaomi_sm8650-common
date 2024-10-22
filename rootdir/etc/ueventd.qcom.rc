@@ -66,8 +66,9 @@ import /vendor/etc/ueventd.qcom.userdebug.rc
 # Firmware directory Path
 # Below macro will be read by uevent and path will
 # be added to search path for firmware loading
-firmware_directories /vendor/firmware_mnt/image/ /vendor/modem_firmware/image/
-
+# MIUI MOD: WIFI_VendorApex
+firmware_directories /apex/com.xiaomi.wifi/etc/firmware/  /vendor/firmware_mnt/image/ /vendor/modem_firmware/image/ /apex/com.xiaomi.wifi/etc/
+# END WIFI_VendorApex
 subsystem dma_heap
     devname uevent_devpath
     dirname /dev/dma_heap
@@ -216,7 +217,13 @@ subsystem mem_buf_vm
 /dev/jpeg2                0660   system     camera
 /dev/jpeg3                0660   system     camera
 /dev/adsprpc-smd          0664   system     system
+/dev/fastrpc-adsp         0664   system     system
+/dev/fastrpc-cdsp         0664   system     system
+/dev/fastrpc-sdsp         0664   system     system
 /dev/adsprpc-smd-secure   0644   system     system
+/dev/fastrpc-adsp-secure  0644   system     system
+/dev/fastrpc-cdsp-secure  0644   system     system
+/dev/fastrpc-sdsp-secure  0644   system     system
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
 /dev/spec_sync            0660   system     system
@@ -487,7 +494,9 @@ subsystem mem_buf_vm
 /sys/bus/usb/devices/usb*   authorized                 0660  system  usb
 
 #USB mode setting
+/sys/bus/platform/devices/a400000.ssusb    mode        0660  system  usb
 /sys/bus/platform/devices/a600000.ssusb    mode        0660  system  usb
+/sys/bus/platform/devices/4e00000.ssusb    mode        0660  system  usb
 
 #Memory Offline
 /sys/devices/system/memory/memory* state    0660 system system
@@ -596,3 +605,6 @@ subsystem mem_buf_vm
 
 #Virtualization Attributes
 /dev/gunyah                 0666   root     root
+
+# Q2SPI UWB device
+/dev/q2spiuwb    0660    uwb    uwb

@@ -479,17 +479,34 @@ else
         prev_version_info=""
     fi
 
-    cur_version_info=`cat /vendor/modem_firmware/verinfo/ver_info.txt`
-    if [ ! -f /vendor/modem_firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
-        # add W for group recursively before delete
-        chmod g+w -R /data/vendor/modem_config/*
-        rm -rf /data/vendor/modem_config/*
-        # preserve the read only mode for all subdir and files
-        cp --preserve=m -dr /vendor/modem_firmware/image/modem_pr/mcfg/configs/* /data/vendor/modem_config
-        cp --preserve=m -d /vendor/modem_firmware/verinfo/ver_info.txt /data/vendor/modem_config/
-        cp --preserve=m -d /vendor/modem_firmware/image/modem_pr/mbn_ota.txt /data/vendor/modem_config/
-        # the group must be root, otherwise this script could not add "W" for group recursively
-        chown -hR radio.root /data/vendor/modem_config/*
+    #add judge for modem decoupling or not
+    modem_decouple="/vendor/modem_firmware"
+    if [ -d "$modem_decouple" ] && [-n "$(ls -A "$modem_decouple")"]; then
+        cur_version_info=`cat /vendor/modem_firmware/verinfo/ver_info.txt`
+        if [ ! -f /vendor/modem_firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+           # add W for group recursively before delete
+           chmod g+w -R /data/vendor/modem_config/*
+           rm -rf /data/vendor/modem_config/*
+           # preserve the read only mode for all subdir and files
+           cp --preserve=m -dr /vendor/modem_firmware/image/modem_pr/mcfg/configs/* /data/vendor/modem_config
+           cp --preserve=m -d /vendor/modem_firmware/verinfo/ver_info.txt /data/vendor/modem_config/
+           cp --preserve=m -d /vendor/modem_firmware/image/modem_pr/mbn_ota.txt /data/vendor/modem_config/
+           # the group must be root, otherwise this script could not add "W" for group recursively
+           chown -hR radio.root /data/vendor/modem_config/*
+        fi
+    else
+        cur_version_info=`cat /vendor/firmware_mnt/verinfo/ver_info.txt`
+        if [ ! -f /vendor/firmware_mnt/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_version_info" ]; then
+           # add W for group recursively before delete
+           chmod g+w -R /data/vendor/modem_config/*
+           rm -rf /data/vendor/modem_config/*
+           # preserve the read only mode for all subdir and files
+           cp --preserve=m -dr /vendor/firmware_mnt/image/modem_pr/mcfg/configs/* /data/vendor/modem_config
+           cp --preserve=m -d /vendor/firmware_mnt/verinfo/ver_info.txt /data/vendor/modem_config/
+           cp --preserve=m -d /vendor/firmware_mnt/image/modem_pr/mbn_ota.txt /data/vendor/modem_config/
+           # the group must be root, otherwise this script could not add "W" for group recursively
+           chown -hR radio.root /data/vendor/modem_config/*
+        fi
     fi
 fi
 chmod g-w /data/vendor/modem_config

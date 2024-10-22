@@ -246,6 +246,13 @@ on boot
     chown system system /sys/class/sensors/apds9930-proximity/enable
     chown system system /sys/class/sensors/apds9930-proximity/poll_delay
 
+    # MIUI ADD: Power_LogEnhance
+    # Allow access to power_debug
+    chown system system /sys/class/power_debug/debug_suspend
+    chown system system /sys/class/power_debug/temp_aware
+    chown system system /sys/class/mi_power/temp_aware
+    # END Power_LogEnhance
+
      # MIUI ADD: Performance_LogEnhance
     chmod 0666 /dev/mi_exception_log
     chown system system /proc/mi_log/binder_delay
@@ -260,6 +267,8 @@ on boot
     # Create vpp directory
     mkdir /mnt/vendor/persist/vpp 0770 media media
 
+    # Create hexlp directory
+    mkdir /mnt/vendor/persist/hexlp 0770 media media
 
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
@@ -301,6 +310,10 @@ on post-fs-data
     chmod 0666 /dev/camlog
     #END Camera_CameraSkyNet
 
+    # MIUI ADD: Camera_Sched
+    chmod 0666 /dev/mi_cam_sched
+    # END Camera_Sched
+
     #Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
     mkdir /data/vendor/tombstones/rfs 0771 system system
@@ -333,6 +346,12 @@ on post-fs-data
 
     # Create directory used by video subsystem
     mkdir /data/vendor/video 0777 audio audio
+    write /data/vendor/video/videohalPid 0
+    chown audio audio /data/vendor/video/videohalPid
+    chmod 0777 /data/vendor/video/videohalPid
+    write /data/vendor/video/vppservicePid 0
+    chown audio audio /data/vendor/video/vppservicePid
+    chmod 0777 /data/vendor/video/vppservicePid
 
     # Create directory for audio delta files
     mkdir /data/vendor/audio/acdbdata 0770 media audio
@@ -341,6 +360,12 @@ on post-fs-data
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
     rm /data/vendor/radio/shmbus
+
+    #lwota
+    mkdir /data/vendor/radio/apkmbnconfig 0777 radio radio
+    mkdir /data/vendor/radio/sha256 0777 radio radio
+    mkdir /data/vendor/radio/efs 0777 radio radio
+    #lwota
 
     # Create directory for modem_config
     mkdir /data/vendor/modem_config 0570 radio root
@@ -444,6 +469,9 @@ on post-fs-data
     # Create vpp directory
     mkdir /data/vendor/vpp 0770 media media
 
+    # Create hexlp directory
+    mkdir /data/vendor/hexlp 0770 media media
+
     #Create dir for TUI
     mkdir /data/vendor/tui 0700 system drmrpc
 
@@ -469,7 +497,11 @@ service qcomsysd /system/vendor/bin/qcom-system-daemon
     group root diag oem_2901
     disabled
 
-on property:persist.vendor.qcomsysd.enabled=1
+# Not launch qcomsysd process in USER BUILD
+on property:persist.vendor.qcomsysd.enabled=1 && property:ro.build.type=userdebug
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=1 && property:ro.build.type=eng
     enable qcomsysd
 
 on property:persist.vendor.qcomsysd.enabled=0
@@ -700,7 +732,7 @@ service wifi_ftmd /system/vendor/bin/wifi_ftmd
 on property:vendor.wifi.ftmd.load=true
     insmod /system/lib/modules/pronto/pronto_wlan.ko con_mode=5
 
-service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
+service cnss-daemon /system/vendor/bin/cnss-daemon -n -l --max_file_count 3 --max_file_size 20
     class late_start
     user system
     group system inet net_admin wifi
@@ -833,7 +865,7 @@ service vendor.ssr_diag /system/vendor/bin/ssr_diag
     group system
     disabled
 
-service diag_mdlog_start /vendor/bin/diag_mdlog -q 0x2006 -j 1 -u -c -i -n 50
+service diag_mdlog_start /vendor/bin/diag_mdlog -q 0x2006 -j 1 -u -c -i -n 20 -s 300
     class late_start
     user shell
     group system oem_2902 oem_2905 sdcard_rw sdcard_r media_rw
@@ -993,6 +1025,19 @@ on property:sys.boot_completed=1 && property:ro.product.debugfs_restrictions.ena
 on late-init && property:ro.build.type=user && property:ro.debuggable=1
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+
+on property:sys.boot_completed=1 && property:ro.build.type=user && property:ro.debuggable=1
+    chmod 0666 /sys/class/thermal/thermal_zone75/temp
+    chmod 0666 /sys/class/thermal/thermal_zone74/temp
+    chmod 0666 /sys/class/thermal/thermal_zone73/temp
+    chmod 0666 /sys/class/thermal/thermal_zone72/temp
+    chmod 0666 /sys/class/thermal/thermal_zone71/temp
+    chmod 0666 /sys/class/thermal/thermal_zone70/temp
+    chmod 0666 /sys/class/thermal/thermal_zone69/temp
+    chmod 0666 /sys/class/thermal/thermal_zone68/temp
+    chmod 0666 /sys/class/thermal/thermal_zone67/temp
+    chmod 0666 /sys/class/thermal/thermal_zone66/temp
+    chmod 0666 /sys/class/thermal/thermal_zone65/temp
 
 service qrtr-lookup /vendor/bin/qrtr-lookup
     class core

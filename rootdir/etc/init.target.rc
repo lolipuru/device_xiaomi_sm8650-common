@@ -64,7 +64,6 @@ import /vendor/etc/init/hw/init.qti.kernel.rc
 import /vendor/etc/init/hw/init.batterysecret.rc
 import /vendor/etc/init/hw/init.charge_logger.rc
 import /vendor/etc/init/hw/init.mi_thermald.rc
-import /vendor/etc/init/hw/init.xiaomi.rc
 
 on early-init
     write /proc/sys/kernel/printk_devkmsg ratelimited
@@ -79,6 +78,14 @@ on init
     chown system system /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
     chmod 0660 /sys/devices/platform/soc/1d84000.ufshc/auto_hibern8
     start logd
+    mkdir /dev/cpuctl/general
+    copy_per_line /dev/cpuctl/tasks /dev/cpuctl/general/tasks
+    chown system system /dev/cpuctl/general
+    chown system system /dev/cpuctl/general/tasks
+    chmod 0644 /dev/cpuctl/general/tasks
+
+    # Initial uhid
+    chmod 0666 /dev/uhid
 
 # MIUI ADD: Performance_BoostFramework
     mkdir /dev/cpuctl/misc
@@ -92,6 +99,9 @@ on init
     mkdir /dev/cpuset/small-window
     mkdir /dev/cpuctl/small-window
 # END Game_SmallWindow
+
+on early-init && property:ro.baseband=apq
+    setprop ro.radio.noril yes
 
 on early-fs
     start vold
@@ -117,6 +127,8 @@ on post-fs
     start  vendor.qvirtservice_rs
 
 on late-fs
+    wait_for_prop hwservicemanager.ready true
+    #exec_start wait_for_keymaster
     mount_all /vendor/etc/fstab.qcom --late
 
 on post-fs-data
@@ -194,12 +206,16 @@ on post-fs-data
     restorecon /dev/metis
     chmod 0666 /sys/module/metis/parameters/mi_viptask
     restorecon /sys/module/metis/parameters/mi_viptask
+    chmod 0666 /sys/module/metis/parameters/mi_viptask_balance
+    restorecon /sys/module/metis/parameters/mi_viptask_balance
     chmod 0666 /sys/module/metis/parameters/mi_boost_duration
     restorecon /sys/module/metis/parameters/mi_boost_duration
     chmod 0666 /sys/class/thermal/thermal_message/boost
     restorecon /sys/class/thermal/thermal_message/boost
     chmod 0666 /sys/module/metis/parameters/vip_link_enable
     restorecon /sys/module/metis/parameters/vip_link_enable
+    chmod 0666 /sys/module/metis/parameters/vip_link_async_binder
+    restorecon /sys/module/metis/parameters/vip_link_async_binder
     chmod 0666 /sys/module/metis/parameters/mi_fboost_enable
     restorecon /sys/module/metis/parameters/mi_fboost_enable
     chmod 0666 /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
@@ -216,19 +232,55 @@ on post-fs-data
     restorecon /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
     chmod 0666 /sys/module/metis/parameters/is_break_enable
     restorecon /sys/module/metis/parameters/is_break_enable
+    chmod 0666 /sys/module/metis/parameters/cold_start_app_tgid
+    restorecon /sys/module/metis/parameters/cold_start_app_tgid
+    chmod 0666 /sys/module/metis/parameters/protect_cs
+    restorecon /sys/module/metis/parameters/protect_cs
+    chmod 0666 /sys/module/metis/parameters/trace_motion_event
+    restorecon /sys/module/metis/parameters/trace_motion_event
+    chown root system /sys/module/metis/parameters/trace_motion_event
 
     chmod 0666 /dev/metis_link
     restorecon /dev/metis_link
     chmod 0666 /sys/module/metis/parameters/mi_lock_blocked_pid
     restorecon /sys/module/metis/parameters/mi_lock_blocked_pid
 
+    chmod 0666 /sys/module/metis/parameters/stask_prefer_cluster
+    restorecon /sys/module/metis/parameters/stask_prefer_cluster
+    chmod 0666 /sys/module/metis/parameters/render_prefer_cluster
+    restorecon /sys/module/metis/parameters/render_prefer_cluster
+    chmod 0666 /sys/module/metis/parameters/vip_prefer_cluster
+    restorecon /sys/module/metis/parameters/vip_prefer_cluster
+    chmod 0666 /sys/module/metis/parameters/ip_prefer_cluster
+    restorecon /sys/module/metis/parameters/ip_prefer_cluster
+    chmod 0666 /sys/module/metis/parameters/force_forbidden_walt_lb
+    restorecon /sys/module/metis/parameters/force_forbidden_walt_lb
+    chmod 0666 /sys/module/metis/parameters/force_viptask_select_rq
+    restorecon /sys/module/metis/parameters/force_viptask_select_rq
+    chmod 0666 /sys/module/metis/parameters/force_cluster_sched_enable
+    restorecon /sys/module/metis/parameters/force_cluster_sched_enable
+
+    chmod 0666 /sys/module/speed_touch/parameters/speed_touch_enable
+    restorecon /sys/module/speed_touch/parameters/speed_touch_enable
+    chown root system /sys/module/speed_touch/parameters/speed_touch_enable
+    chmod 0666 /sys/module/speed_touch/parameters/cur_layer_name
+    restorecon /sys/module/speed_touch/parameters/cur_layer_name
+    chown root system /sys/module/speed_touch/parameters/cur_layer_name
+    chmod 0666 /sys/module/speed_touch/parameters/sf_available_buffer_size
+    restorecon /sys/module/speed_touch/parameters/sf_available_buffer_size
+    chown root system /sys/module/speed_touch/parameters/sf_available_buffer_size
+    chmod 0666 /sys/module/speed_touch/parameters/track_vsync_signal
+    restorecon /sys/module/speed_touch/parameters/track_vsync_signal
+    chown root system /sys/module/speed_touch/parameters/track_vsync_signal
+    chmod 0666 /sys/module/speed_touch/parameters/vsync_period
+    restorecon /sys/module/speed_touch/parameters/vsync_period
+    chown root system /sys/module/speed_touch/parameters/vsync_period
+
     mkdir /vendor/data/tombstones 0771 system system
     # add wlan log output path
     mkdir /data/vendor/wlan_logs 0777 root shell
     mkdir /data/vendor/mac_addr 0770 system wifi
-    mkdir /mnt/vendor/persist/kiwi_v2 0770 system wifi
-    # Enable WLAN cold boot calibration
-    write /sys/kernel/cnss/fs_ready 1
+    mkdir /mnt/vendor/persist/wlan 0770 system wifi
     chmod 0660 /dev/ir_spi
     chown system system /dev/ir_spi
 
@@ -271,6 +323,9 @@ on post-fs-data
     chmod 0664 /sys/class/leds/led:switch_2/trigger
     chmod 0664 /sys/class/leds/led:switch_3/trigger
     chmod 0664 /sys/class/leds/flashlight/brightness
+    
+    #QCC mode configuration
+    setprop vendor.qti.qcc.oper.mode 4 
 
     chmod 0662 /dev/miev
     restorecon /dev/miev
@@ -279,6 +334,8 @@ on post-fs-data
 # END Performance_BoostFramework
 
 on early-boot
+    # Enable WLAN cold boot calibration
+    write /sys/kernel/cnss/fs_ready 1
     verity_update_state
     #Enable WLAN SSR recovery
     write /sys/kernel/cnss/recovery 3
@@ -333,6 +390,8 @@ on boot
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/torch_real_level
     chown cameraserver cameraserver /sys/class/thermal/thermal_message/flash_state
     chown system system /sys/class/thermal/thermal_message/charger_temp
+    chown system system /sys/class/thermal/power_save/powersave_mode
+    chown system system /sys/class/thermal/power_save/power_level
     chown system system /sys/class/thermal/thermal_message/board_sensor_temp_comp
     chown system system /sys/class/thermal/thermal_message/cpu_nolimit_temp
     #END Thermal_NodeReq
@@ -349,19 +408,10 @@ on boot
     chmod 664 /sys/devices/platform/soc/1d84000.ufshc/ufscld/trigger
     #END Memory_CLD
 
-    # Xiaomi touch
-    chown system system /dev/xiaomi-touch
-    chmod 0660 /dev/xiaomi-touch
-
-on property:vendor.display.lcd_density=560
-   setprop dalvik.vm.heapgrowthlimit 256m
-
-on property:vendor.display.lcd_density=640
-   setprop dalvik.vm.heapgrowthlimit 512m
-
 on init && property:ro.boot.mode=charger
     wait_for_prop vendor.all.modules.ready 1
     mount_all /vendor/etc/charger_fw_fstab.qti --early
+    start vendor.pd_mapper
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
 
@@ -369,14 +419,11 @@ on charger
     start vendor.power_off_alarm
     write /sys/kernel/cnss/charger_mode 1
     chown system system /sys/class/backlight/panel0-backlight/brightness
+    chown system system /sys/class/backlight/panel1-backlight/brightness
     write /sys/devices/system/cpu/qcom_lpm/parameters/sleep_disabled n
     write /sys/bus/platform/devices/1d84000.ufshc/clkscale_enable 1
     write /sys/bus/platform/devices/1d84000.ufshc/auto_hibern8 5000
     write /sys/bus/platform/devices/1d84000.ufshc/clkgate_enable 1
-
-on property:vendor.post_boot.parsed=1
-    # Set default thermal profile
-    write /sys/class/thermal/thermal_message/sconfig 0
 
 #service vendor.lowi /vendor/bin/sscrpcd
 #   class core
@@ -502,6 +549,22 @@ service ufs_ffu_service /vendor/bin/sh /vendor/bin/ufs_ffu.sh
     user root
     oneshot
 
+service mi-serial-sh /vendor/odm/bin/init.mi.serial.sh
+     class late_start
+     user root
+     group root system radio
+     disabled
+     oneshot
+
+on post-fs && property:ro.product.device=uke
+    start mi-serial-sh
+
+on property:ro.product.device=uke && property:ro.vendor.ril.oem.sno=*
+    setprop ro.ril.oem.sno ${ro.vendor.ril.oem.sno}
+
+on property:ro.product.device=uke && property:ro.vendor.ril.oem.psno=*
+    setprop ro.ril.oem.psno ${ro.vendor.ril.oem.psno}
+
 on property:sys.boot_completed=1
     start ufs_ffu_service
 
@@ -545,15 +608,18 @@ service fan_control_turn_off /vendor/bin/fan_service 0
     disabled
     oneshot
 
-service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
-    override
-    class hal
-    user audioserver
-    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
-    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock oem_2912 system
-    capabilities BLOCK_SUSPEND SYS_NICE
-    # setting RLIMIT_RTPRIO allows binder RT priority inheritance
-    rlimit rtprio 10 10
-    ioprio rt 4
-    task_profiles ProcessCapacityHigh HighPerformance
-    onrestart restart audioserver
+#for cts-on-gsi test
+on boot && property:ro.product.system.manufacturer=Android
+    setprop debug.sf.set_idle_timer_ms 0
+
+on post-fs && property:ro.product.device=muyu
+    start mi-serial-sh
+on property:ro.product.device=muyu && property:ro.vendor.ril.oem.sno=*
+    setprop ro.ril.oem.sno ${ro.vendor.ril.oem.sno}
+on property:ro.product.device=muyu && property:ro.vendor.ril.oem.psno=*
+    setprop ro.ril.oem.psno ${ro.vendor.ril.oem.psno}
+
+#for online boot cpu
+on property:sys.boot_completed=1
+    wait /sys/class/thermal/thermal_message/boot_complete
+    write /sys/class/thermal/thermal_message/boot_complete 2

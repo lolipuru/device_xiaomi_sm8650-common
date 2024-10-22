@@ -73,6 +73,12 @@ function set_density_by_fb() {
     #put default density based on width
     if [ -z $fb_width ]; then
         case "$project" in
+            "uke")
+            setprop vendor.display.lcd_density 440
+            ;;
+            "muyu")
+            setprop vendor.display.lcd_density 440
+            ;;
             "houji")
             setprop vendor.display.lcd_density 480
             ;;
@@ -81,6 +87,12 @@ function set_density_by_fb() {
             ;;
             "manet")
             setprop vendor.display.lcd_density 560
+            ;;
+            "ruyi")
+            setprop vendor.display.lcd_density 520
+            ;;
+            "goku")
+            setprop vendor.display.lcd_density 480
             ;;
             *)
             setprop vendor.display.lcd_density 440
@@ -101,7 +113,22 @@ function set_density_by_fb() {
             setprop vendor.display.lcd_density 160
         fi
         case "$project" in
+            "uke")
+            setprop vendor.display.lcd_density 440
+            ;;
+            "muyu")
+            setprop vendor.display.lcd_density 440
+            ;;
             "houji")
+            setprop vendor.display.lcd_density 480
+            ;;
+            "suiren")
+            setprop vendor.display.lcd_density 360
+            ;;
+            "ruyi")
+            setprop vendor.display.lcd_density 520
+            ;;
+            "goku")
             setprop vendor.display.lcd_density 480
             ;;
         esac
