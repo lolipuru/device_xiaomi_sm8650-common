@@ -799,6 +799,9 @@ vendor/firmware/gen70900_sqe.fw
 vendor/firmware/gen70900_zap.mbn
 vendor/firmware/gmu_gen70900.bin
 
+# Identity service - from ctwo U3UV34.26-39-6-6
+vendor/bin/hw/android.hardware.identity-service-qti|91d9ddf84d994dc08990d4cda449be0ee45309fe
+
 # Identity service
 vendor/etc/init/android.hardware.identity-service-qti.rc
 vendor/etc/vintf/manifest/manifest_identity_credential.xml
