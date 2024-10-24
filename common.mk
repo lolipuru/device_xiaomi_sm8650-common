@@ -241,6 +241,7 @@ PRODUCT_PACKAGES += \
 
 # Keymint
 PRODUCT_PACKAGES += \
+    android.hardware.security.keymint-service.strongbox-nxp \
     android.hardware.hardware_keystore.xml
 
 PRODUCT_COPY_FILES += \
@@ -485,6 +486,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     hardware/xiaomi/aidl/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+
+# Weaver
+PRODUCT_PACKAGES += \
+    android.hardware.weaver-service.nxp
 
 # WiFi
 PRODUCT_PACKAGES += \
