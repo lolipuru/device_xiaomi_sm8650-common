@@ -1,21 +1,3 @@
-# Audio
-persist.vendor.audio.effectimplenter=dolby
-persist.vendor.audio.spatializer.enable=false
-ro.vendor.audio.camera.loopback.support=true
-ro.vendor.audio.dolby.spatial.profile=dynamic
-ro.vendor.audio.record.customized.support=true
-vendor.audio.compress_capture.aac.cut_off_freq=24000
-vendor.audio.cpu.sched.cpus=8
-vendor.audio.cpu.sched.cpuset.af=248
-vendor.audio.cpu.sched.cpuset.at=248
-vendor.audio.cpu.sched.cpuset.hb=254
-vendor.audio.cpu.sched.cpuset.he=248
-vendor.audio.cpu.sched.cpuset.hso=248
-vendor.audio.cpu.sched=31
-vendor.audio.mic.status=off
-vendor.audio.rt.mode.onlyfast=false
-vendor.audio.rt.mode=19
-
 # Camera
 debug.config.video.p3.encode.support=true
 debug.config.video.p3.decode.support=true

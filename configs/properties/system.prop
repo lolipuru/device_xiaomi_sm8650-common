@@ -1,7 +1,3 @@
-# Audio
-audio.sys.noisy.broadcast.delay=600
-audio.sys.offload.pstimeout.secs=3
-
 # Charger
 ro.charger.enable_suspend=1
 
