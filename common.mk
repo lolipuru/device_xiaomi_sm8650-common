@@ -262,6 +262,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
     CarrierConfig \
     FrameworksResXiaomi \
+    NcmTetheringOverlay \
     SettingsResXiaomi \
     TelephonyResCommon \
     WifiResCommon \
