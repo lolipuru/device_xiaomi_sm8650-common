@@ -6,6 +6,7 @@
 
 #define LOG_TAG "UdfpsHandler.xiaomi_sm8650"
 
+#include <aidl/android/hardware/biometrics/fingerprint/BnFingerprint.h>
 #include <android-base/logging.h>
 #include <android-base/unique_fd.h>
 
@@ -31,6 +32,8 @@
 #define DISP_PARAM_LOCAL_HBM_ON "1"
 
 #define FINGERPRINT_ACQUIRED_VENDOR 7
+
+using ::aidl::android::hardware::biometrics::fingerprint::AcquiredInfo;
 
 namespace {
 
@@ -62,7 +65,9 @@ class XiaomiSM8650UdfpsHander : public UdfpsHandler {
         LOG(INFO) << __func__ << " result: " << result << " vendorCode: " << vendorCode;
         if (result != FINGERPRINT_ACQUIRED_VENDOR) {
             setFingerDown(false);
-            if (result == FINGERPRINT_ACQUIRED_GOOD) setFodStatus(FOD_STATUS_OFF);
+            if (static_cast<AcquiredInfo>(result) == AcquiredInfo::GOOD) {
+                setFodStatus(FOD_STATUS_OFF);
+            }
         } else if (vendorCode == 21 || vendorCode == 23) {
             /*
              * vendorCode = 21 waiting for fingerprint authentication
