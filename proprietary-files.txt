@@ -80,8 +80,7 @@ vendor/lib64/libvmmem.so
 vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 
 # AGM
-vendor/lib64/libagm.so
-vendor/lib64/vendor.qti.hardware.AGMIPC@1.0-impl.so
+vendor/lib64/libagm.so;DISABLE_CHECKELF
 
 # Audio
 odm/etc/audio/silent-3sec.wav
@@ -94,30 +93,23 @@ vendor/etc/models/acd/environment.eai
 vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
-vendor/lib64/hw/audio.primary.pineapple.so
+vendor/lib64/hw/audio.primary.pineapple.so;DISABLE_CHECKELF
 vendor/lib64/hw/android.hardware.soundtrigger@2.3-impl.so
 vendor/lib64/hw/gyro_fusion_interface.so
 vendor/lib64/libVoiceSdk.so
 vendor/lib64/lib_misound_asc.so
-vendor/lib64/libadm.so
-vendor/lib64/libar-acdb.so
-vendor/lib64/libarmemlog.so
-vendor/lib64/libar-gpr.so
-vendor/lib64/libar-gsl.so
+vendor/lib64/libadm.so;DISABLE_CHECKELF
+vendor/lib64/libarmemlog.so;DISABLE_CHECKELF
 vendor/lib64/libar-pal.so;DISABLE_CHECKELF
-vendor/lib64/libats.so
 vendor/lib64/libaudio_log_utils.so
 vendor/lib64/libaudiocloudctrl.so
 vendor/lib64/libcapiv2svacnnvendor.so
 vendor/lib64/libcapiv2svarnnvendor.so
 vendor/lib64/libcapiv2udk7vendor.so
 vendor/lib64/libcapiv2uvvendor.so
-vendor/lib64/libcustomva_intf.so
 vendor/lib64/libdlbpreg.so
 vendor/lib64/libkaraokepal.so;DISABLE_CHECKELF
-vendor/lib64/liblx-ar_util.so
-vendor/lib64/liblx-osal.so
-vendor/lib64/libmcs.so
+vendor/lib64/libmcs.so;DISABLE_CHECKELF
 vendor/lib64/libmis6.so
 vendor/lib64/libmisight.so
 vendor/lib64/libmisfpsop.so
@@ -211,9 +203,6 @@ vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
 vendor/lib64/hw/vendor.qti.hardware.bttpi-impl.so
 vendor/lib64/btaudio_offload_if.so
-vendor/lib64/lib_bt_aptx.so
-vendor/lib64/lib_bt_ble.so
-vendor/lib64/lib_bt_bundle.so
 vendor/lib64/lib_bt_lhdc.so
 vendor/lib64/libbluetooth_audio_session_aidl_qti.so
 vendor/lib64/libbluetooth_audio_session_qti_2_1.so
@@ -939,7 +928,6 @@ vendor/lib64/vendor.qti.hardware.limits@1.2.so
 # Listen
 vendor/lib64/libeai_fixed.so
 vendor/lib64/libeai_float.so
-vendor/lib64/libhotword_intf.so
 vendor/lib64/liblistensoundmodel2vendor.so
 vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.ListenSoundModel@1.0.so
@@ -1115,7 +1103,7 @@ vendor/etc/libnfc-SN220_38_4MHZ.conf
 vendor/lib64/libsn100u_fw.so
 vendor/lib64/libsn220u_fw.so
 vendor/lib64/libvui_dmgr.so
-vendor/lib64/libvui_intf.so
+vendor/lib64/libvui_intf.so;DISABLE_CHECKELF
 vendor/lib64/vendor.nxp.hardware.nfc@2.0.so
 
 # OMX
