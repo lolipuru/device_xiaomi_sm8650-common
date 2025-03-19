@@ -326,7 +326,7 @@ subsystem mem_buf_vm
 /dev/dvb/adapter0/video*  0660   media       media
 
 # Battery
-/sys/class/qcom-battery  input_suspend  0660    system  system
+/sys/class/qcom-battery  night_charging  0660    system  system
 /sys/class/qcom-battery  reverse_chg_mode  0644    system  system
 
 # Broadcast devices
