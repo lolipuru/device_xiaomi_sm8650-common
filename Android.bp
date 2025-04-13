@@ -31,13 +31,6 @@ install_symlink {
     symlink_target: "/vendor/etc/wifi/kiwi_v2/WCNSS_qcom_cfg.ini",
 }
 
-install_symlink {
-    name: "rfs_msm_mpss_readonly_mbnconfig_symlink",
-    vendor: true,
-    installed_location: "rfs/msm/mpss/readonly/mbnconfig",
-    symlink_target: "/data/vendor/mbnconfig",
-}
-
 mkdir {
     name: "vendor_modem_firmware_mountpoint",
     dir: "modem_firmware",
