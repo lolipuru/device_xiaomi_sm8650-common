@@ -102,6 +102,17 @@ void vendor_load_properties() {
             set_ro_build_prop("model", "24072PX77C");
             set_ro_build_prop("name", "goku");
         }
+    }   else if (sku == "zorn") { // Xiaomi POCO F7 Pro / Redmi K80
+        if (region == "CN") { // China
+            set_ro_build_prop("model", "24117RK2CC");
+            set_ro_build_prop("name", "zorn");
+        } else if (region == "IN") { // Indian
+            set_ro_build_prop("model", "24117RK2CI");
+            set_ro_build_prop("name", "zorn_in");
+        } else {              // Global
+            set_ro_build_prop("model", "24117RK2CG");
+            set_ro_build_prop("name", "zorn_global");
+        }
     }
 
     // Override hardware revision
