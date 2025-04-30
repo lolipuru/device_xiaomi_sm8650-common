@@ -147,8 +147,9 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Fingerprint
+$(call soong_config_set,xiaomi_hardware_biometrics,use_new_impl,true)
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint-service.xiaomi-8650
+    android.hardware.biometrics.fingerprint-service.xiaomi
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
