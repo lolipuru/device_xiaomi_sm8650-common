@@ -70,7 +70,6 @@ TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
 TARGET_SCREEN_DENSITY := 480
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(COMMON_PATH):libinit_xiaomi_8650
 TARGET_RECOVERY_DEVICE_MODULES := libinit_xiaomi_8650
 
 # Init Boot
