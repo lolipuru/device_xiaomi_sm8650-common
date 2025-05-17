@@ -54,7 +54,6 @@ persist.vendor.dc_backlight.enable=false
 debug.sf.set_idle_timer_ms=110
 
 # Fingerprint
-persist.vendor.fingerprint.udfps.display_touch=false
 persist.vendor.sys.fp.expolevel=0x88
 ro.hardware.fp.fod.location=low
 ro.hardware.fp.fod.touch.ctl.version=2.0
