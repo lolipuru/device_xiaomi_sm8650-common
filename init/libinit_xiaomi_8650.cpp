@@ -58,6 +58,11 @@ void vendor_load_properties() {
     string region = GetProperty("ro.boot.hwc", "");
     string sku = GetProperty("ro.boot.hardware.sku", "");
 
+    // Normalize SKU
+    if (sku == "houjiin") {
+        sku = "houji";
+    }
+
     // Override device specific props
     set_build_prop("ro.build.product", sku);
     set_ro_build_prop("device", sku);
@@ -68,7 +73,7 @@ void vendor_load_properties() {
             set_ro_build_prop("name", "houji");
         } else if (region == "IN") { // Indian
             set_ro_build_prop("model", "23127PN0CG");
-            set_ro_build_prop("name", "houji_in");
+            set_ro_build_prop("name", "houji");
         } else {              // Global
             set_ro_build_prop("model", "23127PN0CG");
             set_ro_build_prop("name", "houji_global");
