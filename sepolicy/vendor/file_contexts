@@ -4,14 +4,14 @@
 
 # Battery secret
 /(vendor|system/vendor)/bin/batterysecret u:object_r:batterysecret_exec:s0
+/sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/typec/port0/data_role u:object_r:vendor_sysfs_usb_supply:s0
 
 # Camera
 /(odm|vendor)/bin/hw/vendor\.qti\.camera\.provider-service_64                 u:object_r:hal_camera_default_exec:s0
-/data/vendor/perfspy(/.*)?                                                    u:object_r:vendor_camera_data_file:s0
-/dev/stmvl53l5                                                                u:object_r:stmvl53l5_device:s0
 /mnt/vendor/persist/camera(/.*)?                                              u:object_r:camera_persist_file:s0
 /persist/camera(/.*)?                                                         u:object_r:camera_persist_file:s0
-/vendor/bin/dc_cal                                                            u:object_r:DualCameraCal_exec:s0
+/data/vendor/perfspy(/.*)?                                                    u:object_r:vendor_camera_data_file:s0
+/dev/stmvl53l5                                                                u:object_r:stmvl53l5_device:s0
 
 # Display
 /sys/class/backlight(/.*)?                                                                u:object_r:vendor_sysfs_graphics:s0
@@ -36,11 +36,8 @@
 
 # Fingerprint
 /data/vendor/misc/mi_fp(/.*)? u:object_r:vendor_fingerprint_data_file:s0
-/data/vendor/fpc(/.*)? u:object_r:vendor_fingerprint_data_file:s0
-/data/vendor/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0
 /dev/goodix_fp u:object_r:vendor_fingerprint_device:s0
 /mnt/vendor/persist/goodix(/.*)? u:object_r:vendor_fingerprint_data_file:s0
-/sys/devices/virtual/touch/tp_dev/fod_status u:object_r:sysfs_tp_fodstatus:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint-service\.xiaomi              u:object_r:hal_fingerprint_default_exec:s0
 
 # GNSS
@@ -65,6 +62,12 @@
 # NFC
 /(odm|vendor/odm|vendor|system/vendor)/bin/hw/android\.hardware\.nqnfc-service\.nxp       u:object_r:hal_nfc_default_exec:s0
 
+# Perf
+/sys/kernel/reserve_pool(/.*)?                    u:object_r:sysfs_perf:s0
+
+# Qrtr
+/(vendor|system/vendor)/bin/qrtr-lookup           u:object_r:vendor_qrtr_exec:s0
+
 # Sensors
 /(vendor|system/vendor)/bin/hw/android\.hardware\.sensors-service\.xiaomi-multihal     u:object_r:hal_sensors_default_exec:s0
 /(odm|vendor/odm|vendor|system/vendor)/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl u:object_r:vendor_hal_citsensorservice_xiaomi_default_exec:s0
@@ -76,32 +79,19 @@
 /data/vendor/touch(/.*)?                                    u:object_r:vendor_data_touchreport_file:s0
 /dev/xiaomi-touch                                           u:object_r:touchfeature_device:s0
 /sys/devices/virtual/touch/touch_dev/abnormal_event         u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/clicktouch_raw         u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/ear_sensor             u:object_r:sysfs_tp_virtual_prox:s0
-/sys/devices/virtual/touch/touch_dev/ear_sensor_data        u:object_r:sysfs_tp_virtual_prox:s0
-/sys/devices/virtual/touch/touch_dev/enable_touch_delta     u:object_r:sysfs_touch_hostprocess:s0
 /sys/devices/virtual/touch/touch_dev/enable_touch_raw       u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/force_calibration      u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/hold_sensor            u:object_r:sysfs_tp_virtual_prox:s0
+/sys/devices/virtual/touch/touch_dev/fod_press_status       u:object_r:sysfs_touch_hostprocess:s0
+/sys/devices/virtual/touch/touch_dev/fod_test               u:object_r:sysfs_touch_hostprocess:s0
 /sys/devices/virtual/touch/touch_dev/palm_sensor            u:object_r:sysfs_tp_virtual_prox:s0
 /sys/devices/virtual/touch/touch_dev/resolution_factor      u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/rx_num                 u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/suspend_state          u:object_r:sysfs_touch_suspend:s0
 /sys/devices/virtual/touch/touch_dev/touch_doze_analysis    u:object_r:sysfs_touch_hostprocess:s0
 /sys/devices/virtual/touch/touch_dev/touch_finger_status    u:object_r:sysfs_touch_hostprocess:s0
 /sys/devices/virtual/touch/touch_dev/touch_ic_buffer        u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/touch_sensor           u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/touch_sensor_ctrl      u:object_r:sysfs_touch_hostprocess:s0
+/sys/devices/virtual/touch/touch_dev/touch_log_level        u:object_r:sysfs_touch_hostprocess:s0
 /sys/devices/virtual/touch/touch_dev/touch_thp_(.*)         u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/tx_num                 u:object_r:sysfs_touch_hostprocess:s0
-/sys/devices/virtual/touch/touch_dev/update_rawdata         u:object_r:sysfs_touch_hostprocess:s0
+/sys/devices/virtual/touch/touch_dev/touch_vendor           u:object_r:sysfs_touch_hostprocess:s0
 /(vendor|odm)/etc/init.panel_info.sh                        u:object_r:vendor_touch_init_shell_exec:s0
-/(vendor|system/vendor|odm|vendor/odm)/bin/ear_sensor       u:object_r:touchreport_exec:s0
-/(vendor|system/vendor|odm|vendor/odm)/bin/touch_delta      u:object_r:touchreport_exec:s0
-/(vendor|system/vendor|odm|vendor/odm)/bin/touch_raw        u:object_r:touchreport_exec:s0
-/(vendor|system/vendor|odm|vendor/odm)/bin/touch_report     u:object_r:touchreport_exec:s0
 /(vendor|system/vendor|odm|vendor/odm)/bin/toucheventcheck  u:object_r:tpevent_exec:s0
-/(vendor|system/vendor|odm|vendor/odm)/bin/touchsensor      u:object_r:touchreport_exec:s0
 /(odm|vendor/odm|vendor|system/vendor)/bin/hw/vendor\.xiaomi\.hw\.touchfeature-service   u:object_r:hal_touchfeature_xiaomi_default_exec:s0
 
 # Wifi

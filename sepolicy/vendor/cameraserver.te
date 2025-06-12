@@ -1,0 +1,1 @@
+get_prop(cameraserver, exported_camera_prop)

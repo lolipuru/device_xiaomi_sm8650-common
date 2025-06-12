@@ -1,0 +1,10 @@
+type hal_camera_aon_service, hal_service_type, protected_service, service_manager_type;
+
+allow hal_camera_aon_client hal_camera_aon_server:binder { call transfer };
+allow hal_camera_aon_client hal_camera_aon_server:binder transfer;
+allow hal_camera_aon_client hal_camera_aon_server:fd *;
+allow hal_camera_aon_client hal_camera_aon_service:service_manager find;
+allow hal_camera_aon_server hal_camera_aon_client:binder transfer;
+allow hal_camera_aon_server hal_camera_aon_client:binder { call transfer };
+allow hal_camera_aon_server hal_camera_aon_client:fd *;
+add_service(hal_camera_aon_server, hal_camera_aon_service)

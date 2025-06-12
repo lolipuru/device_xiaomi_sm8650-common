@@ -1,3 +1,0 @@
-allow dumpstate vendor_sysfs_memory:dir r_dir_perms;
-allow dumpstate vendor_sysfs_memory:file r_file_perms;
-allow dumpstate ufs_sysfs:file r_file_perms;

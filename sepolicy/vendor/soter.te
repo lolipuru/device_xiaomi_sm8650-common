@@ -1,0 +1,1 @@
+add_service(vendor_hal_soter_server, vendor_hal_soteraidl_service)

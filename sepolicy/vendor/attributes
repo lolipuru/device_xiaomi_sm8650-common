@@ -15,6 +15,11 @@ attribute hal_aidlbgservice;
 attribute hal_aidlbgservice_client;
 attribute hal_aidlbgservice_server;
 
+# Displayfeature
+attribute vendor_hal_displayfeature_xiaomi;
+attribute vendor_hal_displayfeature_xiaomi_client;
+attribute vendor_hal_displayfeature_xiaomi_server;
+
 # Dolby
 attribute hal_dms;
 attribute hal_dms_client;
@@ -46,3 +51,8 @@ attribute vendor_hal_citsensorservice_xiaomi_server;
 attribute hal_slaservice;
 attribute hal_slaservice_client;
 attribute hal_slaservice_server;
+
+# Touchfeature
+attribute hal_touchfeature_xiaomi;
+attribute hal_touchfeature_xiaomi_client;
+attribute hal_touchfeature_xiaomi_server;

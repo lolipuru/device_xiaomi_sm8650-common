@@ -3,7 +3,6 @@ type sound_device, dev_type, mlstrustedobject;
 
 # Camera
 type camlog_device, dev_type;
-type migt_dev, dev_type, mlstrustedobject;
 type stmvl53l5_device, dev_type;
 
 # Displayfeature
@@ -15,5 +14,8 @@ type vendor_fingerprint_device, dev_type;
 # IR
 type ir_spi_device, dev_type;
 
-# Ril
-type vendor_radio_smd_device, dev_type;
+# Perf
+type sysfs_perf, sysfs_type, fs_type;
+
+# Touchfeature
+type touchfeature_device, dev_type;

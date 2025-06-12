@@ -1,2 +1,0 @@
-allow system_suspend_server charger:binder transfer;
-allow system_suspend_server healthd:binder transfer;

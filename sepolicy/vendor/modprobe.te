@@ -1,2 +1,0 @@
-allow vendor_modprobe block_device:dir search;
-allow vendor_modprobe self:key write;
