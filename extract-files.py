@@ -74,10 +74,19 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/etc/media_codecs_pinaepple_vendor.xml'
     ): blob_fixup()
         .regex_replace('.*media_codecs_(google_audio|google_c2|google_telephony|google_video|vendor_audio).*\n', ''),
-    'vendor/lib64/libqcodec2_core.so': blob_fixup()
-        .add_needed('libcodec2_shim.so'),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
-        .add_needed('libhidlbase_shim.so'),
+        .add_needed('libhidlbase_shim.so')
+        .add_needed('libbinder_shim.so'),
+    (
+        'vendor/lib64/libqcc_sdk.so', 
+        'vendor/lib64/libqms_xiaomi.so',
+        'vendor/lib64/libqms_client.so',
+        'vendor/bin/qcc-vendor',
+        'vendor/bin/xtra-daemon',
+        'vendor/bin/qms'
+        'vendor/bin/cnd'
+    ): blob_fixup()
+        .add_needed('libbinder_shim.so'),
     ('vendor/lib64/hw/audio.primary.pineapple.so', 'vendor/lib64/libaudioroute_ext.so'): blob_fixup()
         .add_needed('libaudioroute-v34.so'),
 }  # fmt: skip
