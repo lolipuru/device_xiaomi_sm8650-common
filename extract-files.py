@@ -78,6 +78,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libcodec2_shim.so'),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
+    ('vendor/lib64/hw/audio.primary.pineapple.so', 'vendor/lib64/libaudioroute_ext.so'): blob_fixup()
+        .add_needed('libaudioroute-v34.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
