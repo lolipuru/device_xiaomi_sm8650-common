@@ -1,5 +1,5 @@
 ## All proprietary files from this list, unless pinned and noted otherwise,
-## are from Xiaomi 14 (OS2.0.200.13.VNCCNXM). 
+## are from Xiaomi 14 (OS2.0.201.0.VNCMIXM). 
 
 # ACDB
 vendor/etc/acdbdata/IDP_UPD/IDP_UPD_acdb_cal.acdb
@@ -744,7 +744,7 @@ vendor/lib64/libhdcp2p2prov.so
 vendor/lib64/libhdcpsrm.so
 vendor/lib64/libmm-hdcpmgr.so
 
-# Hotword - from houji OS2.0.9.0.VNCMIXM
+# Hotword - from houji OS2.0.201.0.VNCMIXM
 product/priv-app/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND/HotwordEnrollmentXGoogleHEXAGON_WIDEBAND.apk|194bbcc27ebad3952294fc3617b2a23db92e767a
 product/priv-app/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND/HotwordEnrollmentYGoogleHEXAGON_WIDEBAND.apk|8eb57dcd535082ed41136383656d0c8b514b2213
 system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml|01b74943dc0ae9353883298d36fba94128536c9e
@@ -1251,11 +1251,11 @@ vendor/lib64/libsubsystem_control.so
 vendor/bin/init.qti.qcv.sh
 vendor/etc/init/init.qti.qcv.rc
 
-# QEGAHAL
-vendor/bin/vendor.qti.qegahal-service
-vendor/etc/init/vendor.qti.qegahal-service.rc
-vendor/etc/vintf/manifest/vendor.qti.qegahal-service.xml
-vendor/lib64/vendor.qti.qegahal-impl.so
+# QEGAHAL - from OS2.0.200.13.VNCCNXM
+vendor/bin/vendor.qti.qegahal-service|9ac085fb17f054e6481c42885c8caa6affe5ee0a
+vendor/etc/init/vendor.qti.qegahal-service.rc|6ee6201c409fac75928b066e6c7a3c2f61bd1a5d
+vendor/etc/vintf/manifest/vendor.qti.qegahal-service.xml|eba9760eb37deca60667e8c9a6892b81958ec802
+vendor/lib64/vendor.qti.qegahal-impl.so|b1035addb1cea5901ffa72396b70f6179702593b
 
 # QESDK
 vendor/bin/qesdk-manager
