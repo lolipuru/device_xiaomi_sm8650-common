@@ -301,6 +301,10 @@ endif
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
 
+# RIL modem_firmware symlink
+PRODUCT_PACKAGES += \
+    rfs_msm_mpss_readonly_mbnconfig_symlink
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.qcom \
