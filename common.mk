@@ -275,12 +275,6 @@ PRODUCT_PACKAGES += \
 # Partitions
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_PACKAGES += \
-    vendor_bt_firmware_mountpoint \
-    vendor_dsp_mountpoint \
-    vendor_firmware_mnt_mountpoint \
-    vendor_modem_firmware_mountpoint \
-    vendor_vm-system_mountpoint
 
 # Power
 PRODUCT_PACKAGES += \
@@ -300,10 +294,6 @@ endif
 # RIL
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
-
-# RIL modem_firmware symlink
-PRODUCT_PACKAGES += \
-    rfs_msm_mpss_readonly_mbnconfig_symlink
 
 # Rootdir
 PRODUCT_PACKAGES += \
@@ -330,6 +320,17 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_pineapple/android.hardware.sensor.proximity.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepcounter.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_pineapple/android.hardware.sensor.stepcounter.xml \
     frameworks/native/data/etc/android.hardware.sensor.stepdetector.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/sku_pineapple/android.hardware.sensor.stepdetector.xml
+
+# Symlink
+$(call soong_config_set,rfs,mpss_firmware_symlink_target,modem_firmware)
+
+PRODUCT_PACKAGES += \
+    rfs_msm_mpss_readonly_mbnconfig_symlink \
+    vendor_bt_firmware_mountpoint \
+    vendor_dsp_mountpoint \
+    vendor_firmware_mnt_mountpoint \
+    vendor_modem_firmware_mountpoint \
+    vendor_vm-system_mountpoint
 
 # Vndservice manager
 PRODUCT_PACKAGES += \
