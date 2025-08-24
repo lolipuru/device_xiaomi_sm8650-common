@@ -69,7 +69,6 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
-    audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default
 
@@ -117,6 +116,8 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_PACKAGES += \
+    audio.bluetooth.default \
+    android.hardware.bluetooth.audio-impl \
     lib_bt_aptx \
     lib_bt_ble \
     lib_bt_bundle
