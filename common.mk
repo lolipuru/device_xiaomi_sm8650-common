@@ -87,6 +87,7 @@ PRODUCT_PACKAGES += \
     libvolumelistener \
     libhfp_pal \
     libfmpal \
+    sound_trigger.primary.pineapple \
     vendor.qti.hardware.AGMIPC@1.0-impl
 
 PRODUCT_PACKAGES += \
