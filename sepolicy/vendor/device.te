@@ -1,5 +1,6 @@
 # Audio
 type sound_device, dev_type, mlstrustedobject;
+type vendor_miev_device, dev_type;
 
 # Camera
 type camlog_device, dev_type;
