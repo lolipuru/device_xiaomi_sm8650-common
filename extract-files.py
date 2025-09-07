@@ -83,8 +83,8 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libqms_client.so',
         'vendor/bin/qcc-vendor',
         'vendor/bin/xtra-daemon',
-        'vendor/bin/qms'
-        'vendor/bin/cnd'
+        'vendor/bin/qms',
+        'vendor/bin/cnd',
     ): blob_fixup()
         .add_needed('libbinder_shim.so'),
     ('vendor/lib64/hw/audio.primary.pineapple.so', 'vendor/lib64/libaudioroute_ext.so'): blob_fixup()
