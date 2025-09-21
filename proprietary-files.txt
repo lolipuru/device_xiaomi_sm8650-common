@@ -60,8 +60,6 @@ vendor/etc/acdbdata/pineapple_aim/AIM_acdb_cal.acdb
 vendor/etc/acdbdata/pineapple_aim/AIM_workspaceFileXml.qwsp
 vendor/etc/acdbdata/pineapple_cdp/CDP_acdb_cal.acdb
 vendor/etc/acdbdata/pineapple_cdp/CDP_workspaceFileXml.qwsp
-vendor/etc/acdbdata/pineapple_mtp/MTP_acdb_cal.acdb
-vendor/etc/acdbdata/pineapple_mtp/MTP_workspaceFileXml.qwsp
 vendor/etc/acdbdata/pineapple_qrd/QRD_acdb_cal.acdb
 vendor/etc/acdbdata/pineapple_qrd/QRD_workspaceFileXml.qwsp
 vendor/etc/acdbdata/pineapple_qrd_sku2/QRD_pineapple_sku2_acdb_cal.acdb
@@ -79,37 +77,20 @@ vendor/lib64/libvmmem.so
 # ANT+
 vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 
-# AGM
-vendor/lib64/libagm.so;DISABLE_CHECKELF
-
 # Audio
 odm/etc/audio/silent-3sec.wav
-odm/lib64/libaudioroute_ext.so
-odm/lib64/libcrussp.so;DISABLE_CHECKELF
-odm/lib64/libvoipspacespeech.so
 vendor/etc/audio_cloud_control_white_list.xml
 vendor/etc/mem_logger_config.xml
 vendor/etc/models/acd/environment.eai
 vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
-vendor/lib64/hw/audio.primary.pineapple.so;DISABLE_CHECKELF
-vendor/lib64/hw/android.hardware.soundtrigger@2.3-impl.so
-vendor/lib64/hw/gyro_fusion_interface.so
 vendor/lib64/libVoiceSdk.so
-vendor/lib64/lib_misound_asc.so
-vendor/lib64/libadm.so;DISABLE_CHECKELF
-vendor/lib64/libarmemlog.so;DISABLE_CHECKELF
-vendor/lib64/libar-pal.so;DISABLE_CHECKELF
-vendor/lib64/libaudio_log_utils.so
-vendor/lib64/libaudiocloudctrl.so
 vendor/lib64/libcapiv2svacnnvendor.so
 vendor/lib64/libcapiv2svarnnvendor.so
 vendor/lib64/libcapiv2udk7vendor.so
 vendor/lib64/libcapiv2uvvendor.so
 vendor/lib64/libdlbpreg.so
-vendor/lib64/libkaraokepal.so;DISABLE_CHECKELF
-vendor/lib64/libmcs.so;DISABLE_CHECKELF
 vendor/lib64/libmis6.so
 vendor/lib64/libmisight.so
 vendor/lib64/libmisfpsop.so

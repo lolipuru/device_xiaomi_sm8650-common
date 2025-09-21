@@ -50,9 +50,6 @@ AUDIO_FEATURE_ENABLED_SVA_MULTI_STAGE := true
 BOARD_SUPPORTS_OPENSOURCE_STHAL := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
-TARGET_PROVIDES_AUDIO_HAL := true
-TARGET_PROVIDES_LIBAR_PAL := true
-TARGET_PROVIDES_LIBAGM := true
 TARGET_USES_QCOM_MM_AUDIO := true
 
 # Boot
@@ -171,9 +168,7 @@ DEVICE_MATRIX_FILE := \
 DEVICE_MANIFEST_SKUS := pineapple
 DEVICE_MANIFEST_PINEAPPLE_FILES := \
     $(COMMON_PATH)/configs/vintf/manifest_xiaomi.xml \
-    $(COMMON_PATH)/configs/vintf/manifest_pineapple.xml \
-    hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa.xml \
-    hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa_extn.xml
+    $(COMMON_PATH)/configs/vintf/manifest_pineapple.xml
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
