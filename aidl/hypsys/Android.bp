@@ -1,0 +1,18 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_binary {
+    name: "xiaomi.system.hypsys.common-service",
+    srcs: ["service.cpp"],
+    vendor: true,
+    relative_install_path: "hw",
+    shared_libs: [
+        "libbinder_ndk",
+        "libbinder_ndk",
+        "xiaomi.system.hypsys.common-V1-ndk",
+    ],
+    vintf_fragments: ["xiaomi.system.hypsys.common-service.xml"],
+    init_rc: ["xiaomi.system.hypsys.common-service.rc"],
+}
