@@ -1,0 +1,29 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+aidl_interface {
+    name: "xiaomi.system.hypsys.common",
+    vendor_available: true,
+    srcs: ["xiaomi/system/hypsys/common/*.aidl"],
+    stability: "vintf",
+    owner: "xiaomi",
+    backend: {
+        ndk: { 
+            enabled: true,
+        },
+        cpp: {
+            enabled: true,
+        },
+        java: {
+            sdk_version: "module_current",
+        },
+    },
+    versions_with_info: [
+        {
+            version: "1",
+            imports: [],
+        },
+    ],
+}
