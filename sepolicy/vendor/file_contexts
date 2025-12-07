@@ -8,6 +8,7 @@
 /sys/devices/platform/soc/soc:qcom,pmic_glink/soc:qcom,pmic_glink:qcom,ucsi/typec/port0/data_role u:object_r:vendor_sysfs_usb_supply:s0
 
 # Camera
+/(odm|vendor/odm|vendor|system/vendor)/bin/hw/misensor_camera                 u:object_r:vendor_hal_misensor_camera_default_exec:s0
 /(odm|vendor)/bin/hw/vendor\.qti\.camera\.provider-service_64                 u:object_r:hal_camera_default_exec:s0
 /mnt/vendor/persist/camera(/.*)?                                              u:object_r:camera_persist_file:s0
 /persist/camera(/.*)?                                                         u:object_r:camera_persist_file:s0
@@ -50,6 +51,9 @@
 
 # IR
 /dev/ir_spi                               u:object_r:ir_spi_device:s0
+
+# Media
+/vendor/bin/hw/android\.hardware\.media\.c2-mi-service u:object_r:mediacodec_exec:s0
 
 # Mlipay
 /(odm|vendor/odm|vendor|system/vendor)/bin/fidoca        u:object_r:hal_mfidoca_default_exec:s0

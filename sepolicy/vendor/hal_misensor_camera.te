@@ -1,0 +1,28 @@
+type vendor_hal_misensor_camera_default, domain;
+type vendor_hal_misensor_camera_default_exec, exec_type, file_type, vendor_file_type;
+type vendor_hal_misensor_camera_service, hal_service_type, service_manager_type;
+
+binder_use(vendor_hal_misensor_camera_default)
+hal_client_domain(vendor_hal_misensor_camera_default, hal_graphics_allocator)
+hal_server_domain(vendor_hal_misensor_camera_default, vendor_hal_misensor_camera)
+init_daemon_domain(vendor_hal_misensor_camera_default)
+
+get_prop(vendor_hal_misensor_camera_default, vendor_display_prop)
+
+allow vendor_hal_misensor_camera_client vendor_hal_misensor_camera_server:binder { call transfer };
+allow vendor_hal_misensor_camera_client vendor_hal_misensor_camera_server:fd *;
+allow vendor_hal_misensor_camera_client vendor_hal_misensor_camera_service:service_manager find;
+allow vendor_hal_misensor_camera_default cameraserver:binder { call transfer };
+allow vendor_hal_misensor_camera_default cameraserver:fd *;
+allow vendor_hal_misensor_camera_default fwk_camera_hwservice:hwservice_manager find;
+allow vendor_hal_misensor_camera_default fwk_camera_service:service_manager find;
+allow vendor_hal_misensor_camera_default fwk_sensor_hwservice:hwservice_manager find;
+allow vendor_hal_misensor_camera_default hal_graphics_allocator_default:binder { call transfer };
+allow vendor_hal_misensor_camera_default hal_graphics_allocator_default:fd *;
+allow vendor_hal_misensor_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
+allow vendor_hal_misensor_camera_default hidl_token_hwservice:hwservice_manager find;
+allow vendor_hal_misensor_camera_server servicemanager:binder { call transfer };
+allow vendor_hal_misensor_camera_server servicemanager:fd *;
+allow vendor_hal_misensor_camera_server vendor_hal_misensor_camera_client:binder { call transfer };
+allow vendor_hal_misensor_camera_server vendor_hal_misensor_camera_client:fd *;
+allow vendor_hal_misensor_camera_server vendor_hal_misensor_camera_service:service_manager { add find };

@@ -1,4 +1,8 @@
 # Camera
+attribute vendor_hal_misensor_camera;
+attribute vendor_hal_misensor_camera_client;
+attribute vendor_hal_misensor_camera_server;
+
 attribute hal_quickcamera;
 attribute hal_quickcamera_client;
 attribute hal_quickcamera_server;

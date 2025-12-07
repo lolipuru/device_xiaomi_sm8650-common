@@ -4,6 +4,7 @@ vendor.camera.sensor.                           u:object_r:vendor_camera_sensor_
 vendor.video.scene.recognition                  u:object_r:vendor_camera_prop:s0
 persist.vendor.EnableP3ColorSpace               u:object_r:vendor_camera_p3enable_prop:s0
 persist.vendor.XDRVersion                       u:object_r:vendor_camera_prop:s0
+vendor.native_camera.control                    u:object_r:vendor_native_camera_control_prop:s0
 
 # Displayfeature
 init.svc.vendor.displayfeatureaidl-hal          u:object_r:vendor_displayfeature_prop:s0
