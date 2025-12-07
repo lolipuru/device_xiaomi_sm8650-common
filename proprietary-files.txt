@@ -113,7 +113,6 @@ vendor/lib64/vendor.qti.voiceprint@1.0.so
 odm/etc/audio/sku_pineapple/adsp_sleep_monitor.conf
 odm/etc/audio/sku_pineapple/audio_effects.xml
 odm/etc/audio/sku_pineapple/mixer_paths_overlay_dynamic.xml
-odm/etc/usecaseKvManager.xml
 vendor/etc/audio/sku_pineapple/adsp_sleep_monitor.conf
 vendor/etc/audio/sku_pineapple/audio_effects.conf
 vendor/etc/audio/sku_pineapple/audio_effects.xml
@@ -122,7 +121,6 @@ vendor/etc/batching.conf
 vendor/etc/card-defs.xml
 vendor/etc/kvh2xml.xml
 vendor/etc/microphone_characteristics.xml
-vendor/etc/usecaseKvManager.xml
 
 # Audio (Dolby)
 vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
