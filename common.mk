@@ -221,10 +221,6 @@ PRODUCT_COPY_FILES += \
 # Libinit
 $(call soong_config_set,libinit,vendor_init_lib,//$(LOCAL_PATH):libinit_xiaomi_8650)
 
-# Linker config
-PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
-    $(LOCAL_PATH)/configs/linker.config.json
-
 # Lineage Health
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
 $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
