@@ -84,6 +84,13 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libstagefright_foundation-v33.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
+    (
+        'vendor.qti.hardware.display.composer-service',
+        'vendor/lib64/libsnapdragoncolor-manager.so',
+        'vendor/lib64/libdpps.so',
+        'vendor/bin/poweropt-service',
+    ): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2_1.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
