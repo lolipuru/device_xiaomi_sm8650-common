@@ -91,6 +91,12 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/poweropt-service',
     ): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2_1.so'),
+    (
+        'vendor/lib64/libVoiceSdk.so',
+        'vendor/lib64/libcapiv2uvvendor.so',
+        'vendor/lib64/liblistensoundmodel2vendor.so',
+    ): blob_fixup()
+        .replace_needed('libtensorflowlite_c.so', 'libtensorflowlite_c_vendor.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
