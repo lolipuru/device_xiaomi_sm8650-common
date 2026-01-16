@@ -5,7 +5,7 @@
 //
 
 runtime_resource_overlay {
-    name: "CarrierConfig",
+    name: "CarrierConfigXiaomi",
     device_specific: true,
     aaptflags: ["--keep-raw-values"],
 }
