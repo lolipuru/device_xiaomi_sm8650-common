@@ -80,7 +80,7 @@ vendor/lib64/libvmmem.so
 vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 
 # AGM
-vendor/lib64/libagm.so;DISABLE_CHECKELF
+vendor/lib64/libagm.so
 
 # Audio
 odm/etc/audio/silent-3sec.wav
@@ -93,14 +93,14 @@ vendor/etc/models/acd/environment.eai
 vendor/etc/models/acd/event.eai
 vendor/etc/models/acd/music.eai
 vendor/etc/models/acd/speech.eai
-vendor/lib64/hw/audio.primary.pineapple.so;DISABLE_CHECKELF
+vendor/lib64/hw/audio.primary.pineapple.so
 vendor/lib64/hw/android.hardware.soundtrigger@2.3-impl.so
 vendor/lib64/hw/gyro_fusion_interface.so
 vendor/lib64/libVoiceSdk.so
 vendor/lib64/lib_misound_asc.so
-vendor/lib64/libadm.so;DISABLE_CHECKELF
-vendor/lib64/libarmemlog.so;DISABLE_CHECKELF
-vendor/lib64/libar-pal.so;DISABLE_CHECKELF
+vendor/lib64/libadm.so
+vendor/lib64/libarmemlog.so
+vendor/lib64/libar-pal.so
 vendor/lib64/libaudio_log_utils.so
 vendor/lib64/libaudiocloudctrl.so
 vendor/lib64/libcapiv2svacnnvendor.so
@@ -108,8 +108,8 @@ vendor/lib64/libcapiv2svarnnvendor.so
 vendor/lib64/libcapiv2udk7vendor.so
 vendor/lib64/libcapiv2uvvendor.so
 vendor/lib64/libdlbpreg.so
-vendor/lib64/libkaraokepal.so;DISABLE_CHECKELF
-vendor/lib64/libmcs.so;DISABLE_CHECKELF
+vendor/lib64/libkaraokepal.so
+vendor/lib64/libmcs.so
 vendor/lib64/libmis6.so
 vendor/lib64/libmisight.so
 vendor/lib64/libmisfpsop.so

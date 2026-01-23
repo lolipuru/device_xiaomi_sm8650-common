@@ -46,19 +46,8 @@ lib_fixups: lib_fixups_user_type = {
         'libmilut',
         'libmips',
         'libmisr',
-        'libagmclient',
         'libagmmixer',
-        'libar-acdb',
-        'libats',
-        'liblx-osal',
-        'liblx-ar_util',
-        'libar-gpr',
-        'libar-gsl',
-        'libpalclient',
-        'libwpa_client',
         'vendor.qti.hardware.display.composer3-V1-ndk',
-        'vendor.qti.hardware.AGMIPC@1.0-impl',
-        'vendor.qti.hardware.pal@1.0-impl',
     ): lib_fixup_remove,
 }
 
@@ -87,8 +76,12 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/bin/cnd',
     ): blob_fixup()
         .add_needed('libbinder_shim.so'),
-    ('vendor/lib64/hw/audio.primary.pineapple.so', 'vendor/lib64/libaudioroute_ext.so'): blob_fixup()
-        .add_needed('libaudioroute-v34.so'),
+    (
+        'vendor/lib64/hw/audio.primary.pineapple.so', 
+        'vendor/lib64/libaudioroute_ext.so',
+        'vendor/lib64/libar-pal.so',
+    ): blob_fixup()
+        .replace_needed('libaudioroute.so', 'libaudioroute-v34.so'),
     (
         'vendor/lib64/libdlbdsservice.so',
         'vendor/lib64/libdlbpreg.so',
