@@ -69,10 +69,8 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.3-impl
 
 PRODUCT_PACKAGES += \
-    audio.primary.pineapple \
     audio.r_submix.default \
-    audio.usb.default \
-    sound_trigger.primary.pineapple
+    audio.usb.default
 
 PRODUCT_PACKAGES += \
     audioadsprpcd \
@@ -88,9 +86,19 @@ PRODUCT_PACKAGES += \
     libsndcardparser \
     libvolumelistener \
     libhfp_pal \
-    libhotword_intf \
     libfmpal \
+    sound_trigger.primary.pineapple \
     vendor.qti.hardware.AGMIPC@1.0-impl
+
+PRODUCT_PACKAGES += \
+    libar-acdb \
+    libar-gpr \
+    libar-gsl \
+    libats \
+    libcustomva_intf \
+    libhotword_intf \
+    liblx-ar_util \
+    liblx-osal
 
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 

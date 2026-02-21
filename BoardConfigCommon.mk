@@ -225,7 +225,9 @@ DEVICE_MATRIX_FILE := \
 DEVICE_MANIFEST_SKUS := pineapple
 DEVICE_MANIFEST_PINEAPPLE_FILES := \
     $(COMMON_PATH)/configs/vintf/manifest_xiaomi.xml \
-    $(COMMON_PATH)/configs/vintf/manifest_pineapple.xml
+    $(COMMON_PATH)/configs/vintf/manifest_pineapple.xml \
+    hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa.xml \
+    hardware/qcom-caf/sm8650/audio/primary-hal/configs/common/manifest_non_qmaa_extn.xml
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
