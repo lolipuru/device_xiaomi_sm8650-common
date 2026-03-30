@@ -17,7 +17,7 @@ android_app {
         "org.lineageos.settings.resources",
         "SettingsLib",
         "vendor.xiaomi.hw.touchfeature-V1-java",
-        "vendor.xiaomi.hardware.displayfeature-V2-java"
+        "vendor.xiaomi.hardware.displayfeature_aidl-V2-java"
     ],
     required: [
         "privapp_whitelist_com.xiaomi.settings.xml",
