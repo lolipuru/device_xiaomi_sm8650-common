@@ -42,7 +42,6 @@ lib_fixups: lib_fixups_user_type = {
     (
         'android.hardware.graphics.allocator-V1-ndk',
         'android.hardware.graphics.composer3-V2-ndk',
-        'audio.primary.pineapple',
         'libmilut',
         'libmips',
         'libmisr',
@@ -91,6 +90,19 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libstagefright_foundation-v33.so'),
     'vendor/lib64/libqcodec2_core.so': blob_fixup()
         .add_needed('libcodec2_shim.so'),
+    (
+        'vendor.qti.hardware.display.composer-service',
+        'vendor/lib64/libsnapdragoncolor-manager.so',
+        'vendor/lib64/libdpps.so',
+        'vendor/bin/poweropt-service',
+    ): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2_1.so'),
+    (
+        'vendor/lib64/libVoiceSdk.so',
+        'vendor/lib64/libcapiv2uvvendor.so',
+        'vendor/lib64/liblistensoundmodel2vendor.so',
+    ): blob_fixup()
+        .replace_needed('libtensorflowlite_c.so', 'libtensorflowlite_c_vendor.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
