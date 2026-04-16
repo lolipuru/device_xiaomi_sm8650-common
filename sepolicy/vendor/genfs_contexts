@@ -1,6 +1,3 @@
-# Battery
-genfscon sysfs /class/qcom-battery u:object_r:vendor_sysfs_battery_supply:s0
-
 # Fingerprint
 genfscon sysfs "/devices/platform/soc/soc:xiaomi_fingerprint/fingerdown"    u:object_r:vendor_sysfs_displayfeature:s0
 genfscon sysfs "/devices/platform/soc/soc:xiaomi_fingerprint/actpower"      u:object_r:sysfs_wakeup:s0
