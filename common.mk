@@ -283,6 +283,10 @@ PRODUCT_PACKAGES += \
     vendor.lineage.powershare-service.default
 endif
 
+# QSPA
+PRODUCT_PACKAGES += \
+    vendor.qti.qspa-service
+
 # RIL
 PRODUCT_PACKAGES += \
     libprotobuf-cpp-full
