@@ -105,6 +105,8 @@ BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_USES_METADATA_PARTITION := true
 
 # Partitions
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
