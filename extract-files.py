@@ -76,7 +76,6 @@ blob_fixups: blob_fixups_user_type = {
     ): blob_fixup()
         .add_needed('libbinder_shim.so'),
     (
-        'vendor/lib64/hw/audio.primary.pineapple.so', 
         'vendor/lib64/libaudioroute_ext.so',
         'vendor/lib64/libar-pal.so',
     ): blob_fixup()
@@ -103,6 +102,12 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/liblistensoundmodel2vendor.so',
     ): blob_fixup()
         .replace_needed('libtensorflowlite_c.so', 'libtensorflowlite_c_vendor.so'),
+    (
+        'vendor/lib64/libdisplaydebug.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.graphics.composer3-V2-ndk.so', 'android.hardware.graphics.composer3-V3-ndk.so'),
+    'system_ext/etc/init/qspa_system.rc': blob_fixup()
+        .regex_replace(r'\$\{ro\.boot\.vendor\.qspa:-default\}', 'default'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

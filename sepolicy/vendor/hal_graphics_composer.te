@@ -3,7 +3,7 @@ allow hal_graphics_composer_default vendor_hal_citsensorservice_xiaomi_default:b
 allow hal_graphics_composer_default vendor_hal_citsensorservice_xiaomi_service:service_manager find;
 allow hal_graphics_composer_default vendor_hal_displayfeature_xiaomi_service:service_manager find;
 allow hal_graphics_composer_default vendor_hal_displayfeature_xiaomi_default:binder call;
-allow hal_graphics_composer_default vendor_sysfs_displayfeature:file { open read write };
+allow hal_graphics_composer_default vendor_sysfs_displayfeature:file { open read write ioctl };
 
 add_service(hal_graphics_composer_default, vendor_hal_hwcextension_xiaomi_service)
 add_service(hal_graphics_composer_default, vendor_mistcdisplay_service)
