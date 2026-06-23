@@ -2,6 +2,7 @@
 vendor.xiaomi.hardware.quickcamera.IQuickCameraService/default          u:object_r:hal_quickcamera_service:s0
 vendor.xiaomi.hardware.aidlbgservice.IBGService/default                 u:object_r:hal_aidlbgservice_service:s0
 vendor.xiaomi.hardware.aon.IAlwaysOn/miaonservicehal                    u:object_r:hal_camera_aon_service:s0
+vendor.xiaomi.sensor.camera.IMiCam/default                              u:object_r:vendor_hal_misensor_camera_service:s0
 
 # CIT
 vendor.xiaomi.sensor.citsensorservice.ICitSensorService/default   u:object_r:vendor_hal_citsensorservice_xiaomi_service:s0

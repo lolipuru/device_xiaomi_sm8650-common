@@ -88,17 +88,10 @@ PRODUCT_PACKAGES += \
     libhfp_pal \
     libfmpal \
     sound_trigger.primary.pineapple \
-    vendor.qti.hardware.AGMIPC@1.0-impl
 
 PRODUCT_PACKAGES += \
-    libar-acdb \
-    libar-gpr \
-    libar-gsl \
-    libats \
     libcustomva_intf \
-    libhotword_intf \
-    liblx-ar_util \
-    liblx-osal
+    libhotword_intf
 
 AUDIO_HAL_DIR := hardware/qcom-caf/sm8650/audio/primary-hal
 
