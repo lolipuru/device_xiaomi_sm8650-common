@@ -794,14 +794,14 @@ system_ext/lib64/lib-imsvt.so
 system_ext/lib64/lib-imsvtextutils.so
 system_ext/lib64/lib-imsvtutils.so
 system_ext/lib64/libdiag_system.so
-system_ext/lib64/libimscamera_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimscamera_jni.so
-system_ext/lib64/libimsmedia_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimsmedia_jni.so
+system_ext/lib64/libimscamera_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimscamera_jni.so|5324def15e250e1e4c87c2c8dc187ea062f6b09a
+system_ext/lib64/libimsmedia_jni.so;SYMLINK=system_ext/priv-app/ims/lib/arm64/libimsmedia_jni.so|d406a901f86e874c2f5ef2acd3436f7240c9e008
 system_ext/lib64/vendor.qti.ims.datachannelservice-V1-ndk.so
 system_ext/lib64/vendor.qti.ImsRtpService-V1-ndk.so
 system_ext/lib64/vendor.qti.ImsRtpService-V2-ndk.so
 system_ext/lib64/vendor.qti.imsrtpservice@3.0.so
 system_ext/lib64/vendor.qti.imsrtpservice@3.1.so
-system_ext/priv-app/ims/ims.apk;REQUIRED=QtiTelephonyCompat
+system_ext/priv-app/ims/ims.apk;REQUIRED=QtiTelephonyCompat|b9d37ac9098d58059c099d3757515ae7b8fcc0f1
 vendor/bin/ims-dataservice-daemon
 vendor/bin/ims_rtp_daemon
 vendor/bin/imsdaemon
@@ -1381,7 +1381,7 @@ system_ext/etc/permissions/qcrilhook.xml
 system_ext/etc/permissions/qti_libpermissions.xml
 system_ext/etc/permissions/qti_permissions.xml
 system_ext/etc/permissions/vendor.qti.imsdcservice.xml
-system_ext/framework/qcrilhook.jar
+system_ext/framework/qcrilhook.jar|0bf531be4af3c9958917ed215727fb6039056844
 system_ext/framework/vendor.qti.ims.callcapability-V1.0-java.jar
 system_ext/framework/vendor.qti.ims.callcapabilityaidlservice-V1-java.jar
 system_ext/framework/vendor.qti.ims.callinfo-V1.0-java.jar
