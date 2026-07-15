@@ -672,3 +672,10 @@ on property:ro.product.device=muyu && property:ro.vendor.ril.oem.psno=*
 on property:sys.boot_completed=1
     wait /sys/class/thermal/thermal_message/boot_complete
     write /sys/class/thermal/thermal_message/boot_complete 2
+
+service gnss_service /odm/bin/hw/android.hardware.gnss-aidl-service-qti
+    interface aidl android.hardware.gnss.IGnss/default
+    interface aidl vendor.qti.gnss.ILocAidlGnss/default
+    class hal
+    user gps
+    group system gps radio vendor_qti_diag vendor_ssgtzd

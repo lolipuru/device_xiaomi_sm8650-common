@@ -124,4 +124,9 @@
         <transport>hwbinder</transport>
         <fqname>@1.1::IImsFactory/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.gnss</name>
+        <version>3</version>
+        <fqname>IGnss/default</fqname>
+    </hal>
 </manifest>
