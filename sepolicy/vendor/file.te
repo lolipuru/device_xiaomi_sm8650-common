@@ -16,6 +16,13 @@ type sysfs_tp_fodstatus, fs_type, sysfs_type;
 type vendor_fingerprint_data_file, data_file_type, file_type;
 type vendor_fingerprint_data_file_fpdump, data_file_type, file_type;
 
+# GNSS
+type vendor_ins_vendor_data_file, data_file_type, file_type;
+
+# Metis/Migt
+type migt_dev, dev_type, mlstrustedobject;
+type sysfs_migt, fs_type, sysfs_type;
+
 # Ril
 type vendor_modem_data_file, data_file_type, file_type;
 

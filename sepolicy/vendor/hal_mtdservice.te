@@ -49,6 +49,20 @@ allow hal_mtdservice_client hal_mtdservice_service:service_manager find;
 allow hal_mtdservice_server hal_mtdservice_client:binder transfer;
 allow hal_mtdservice_server hal_mtdservice_client:binder { call transfer };
 allow hal_mtdservice_server hal_mtdservice_client:fd *;
+allow hal_mtdservice_default self:capability sys_nice;
+allow hal_mtdservice_default vendor_fingerprint_data_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_audio_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_hvdcp_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_rfs_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_haptics_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_time_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_sensors_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_vpp_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_rfs_shared_hlos_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_iar_db_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_display_file:dir getattr;
+allow hal_mtdservice_default camera_persist_file:dir getattr;
+allow hal_mtdservice_default vendor_persist_secnvm_file:dir getattr;
 type_transition hal_mtdservice mnt_vendor_file:dir vendor_persist_drm_file "fdsd";
 init_daemon_domain(hal_mtdservice_default)
 get_prop(hal_mtdservice_default, vendor_system_prop)

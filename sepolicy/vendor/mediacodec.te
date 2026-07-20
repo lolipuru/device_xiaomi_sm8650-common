@@ -2,3 +2,4 @@
 allow mediacodec hal_dms_hwservice:hwservice_manager find;
 hal_client_domain(mediacodec, hal_dms)
 get_prop(mediacodec, graphics_config_prop)
+get_prop(mediacodec, vendor_display_prop)

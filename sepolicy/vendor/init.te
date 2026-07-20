@@ -1,2 +1,5 @@
+set_prop(vendor_init, vendor_qcc_prop)
+
 allow init debugfs_tracing_debug:dir mounton;
 allow init sysfs_perf:file { open write };
+allow vendor_init vendor_miev_device:chr_file getattr;

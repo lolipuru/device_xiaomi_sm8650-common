@@ -3,6 +3,8 @@ typeattribute platform_app system_executes_vendor_violators;
 allow platform_app adsprpcd_file:dir { getattr search };
 allow platform_app hal_aidlbgservice_service:service_manager find;
 allow platform_app system_linker_exec:file execute_no_trans;
+allow platform_app proc_pressure_mem:file read;
+allow platform_app vendor_hal_camerapostproc_xiaomi_hwservice:hwservice_manager find;
 
 get_prop(platform_app, vendor_audio_prop)
 get_prop(platform_app, vendor_camera_sensor_prop)

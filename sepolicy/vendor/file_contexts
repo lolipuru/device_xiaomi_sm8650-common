@@ -14,6 +14,32 @@
 /persist/camera(/.*)?                                                         u:object_r:camera_persist_file:s0
 /data/vendor/perfspy(/.*)?                                                    u:object_r:vendor_camera_data_file:s0
 /dev/stmvl53l5                                                                u:object_r:stmvl53l5_device:s0
+/odm/lib(64)?/libmialgo_utils\.so u:object_r:same_process_hal_file:s0
+/odm/lib(64)?/libmiocr\.so u:object_r:same_process_hal_file:s0
+/odm/lib(64)?/libxmi_slow_motion_mein\.so u:object_r:same_process_hal_file:s0
+/odm/lib(64)?/rfsa/adsp/libmialgo_bokeh_effect_cdsp_skel\.so u:object_r:same_process_hal_file:s0
+/(odm|vendor)/lib(64)?/libcamxexternalformatutils\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/vendor.qti.qegahal-V1-ndk_platform\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/rfsa/adsp/libSnpeHtpV73Skel\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/rfsa/adsp/libSnpeHtpV75Skel\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/rfsa/adsp/libcalculator_skel\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/rfsa/adsp/libmialgo_basic_cdsp_skel\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libmialgo_ai_vision\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libhta_hexagon_runtime_snpe\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libc\+\+_shared\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libcalculator\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libcalculator_htp\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libSNPE\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libSnpeHta\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libSnpeHtpPrepare\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libSnpeHtpV73Stub\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libSnpeHtpV75Stub\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libPlatformValidatorShared\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libQEGA.qti\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/bin/hw/vendor\.qti\.camera\.provider-service_64 u:object_r:hal_camera_default_exec:s0
+/(vendor|odm)/lib(64)?/libanc_single_bokeh\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libmiaio_head_seg\.so u:object_r:same_process_hal_file:s0
+/(vendor|odm)/lib(64)?/libmiphone_capture_bokeh\.so u:object_r:same_process_hal_file:s0
 
 # Display
 /sys/class/backlight(/.*)?                                                                u:object_r:vendor_sysfs_graphics:s0
@@ -51,6 +77,11 @@
 
 # IR
 /dev/ir_spi                               u:object_r:ir_spi_device:s0
+
+# Metis/Migt
+/dev/metis u:object_r:migt_dev:s0
+/dev/migt u:object_r:migt_dev:s0
+/sys/module/metis/parameters(/.*)? u:object_r:sysfs_migt:s0
 
 # Mlipay
 /(odm|vendor/odm|vendor|system/vendor)/bin/fidoca        u:object_r:hal_mfidoca_default_exec:s0
