@@ -32,31 +32,9 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".edgesuppression.EdgeSuppressionSettingsActivity"
-            android:configChanges="orientation|screenSize"
-            android:exported="true"
-            android:label="@string/edgesuppression_name"
-            android:theme="@style/Theme.SubSettingsBase">
-            <intent-filter>
-                <action android:name="com.android.settings.action.IA_SETTINGS" />
-            </intent-filter>
-            <meta-data
-                android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.gestures" />
-            <meta-data
-                android:name="com.android.settings.summary"
-                android:value="@string/edgesuppression_summary" />
-        </activity>
-
         <service
             android:name=".display.ColorModeService"
             android:permission="ColorModeService">
-        </service>
-
-        <service
-            android:name=".edgesuppression.EdgeSuppressionService"
-            android:exported="true">
         </service>
 
     </application>
