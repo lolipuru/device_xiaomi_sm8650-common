@@ -1692,12 +1692,10 @@ vendor/lib64/libtime_genoff.so
 
 # TouchFeature
 odm/bin/hw/vendor.xiaomi.hw.touchfeature-service
-odm/bin/toucheventcheck
 odm/etc/init.panel_info.sh
 odm/etc/init/vendor.xiaomi.hw.touchfeature-service.rc
 odm/etc/vintf/manifest/vendor.xiaomi.hw.touchfeature-service.xml
 odm/lib64/libtensorflowlite_touch_c.so
-odm/lib64/libtouchreport.so
 odm/lib64/libtouchsensor.so
 vendor/lib64/vendor.xiaomi.hw.touchfeature-V1-ndk_platform.so
 
