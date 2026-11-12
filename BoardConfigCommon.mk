@@ -70,6 +70,13 @@ TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/configs/config.fs
 # Display
 TARGET_SCREEN_DENSITY := 480
 
+# Dtbo
+ifeq ($(TARGET_OPT_IN_OSS_KERNEL),true)
+BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
+BOARD_KERNEL_SEPARATED_DTBO := true
+TARGET_NEEDS_DTBOIMAGE := true
+endif
+
 # Init
 TARGET_RECOVERY_DEVICE_MODULES := libinit_xiaomi_8650
 
@@ -101,17 +108,13 @@ BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
-TARGET_OPT_IN_OSS_KERNEL ?= false
 ifeq ($(TARGET_OPT_IN_OSS_KERNEL),true)
-BOARD_USES_QCOM_MERGE_DTBS_SCRIPT := true
-TARGET_NEEDS_DTBOIMAGE := true
-
 TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8650
 TARGET_KERNEL_CONFIG := \
     gki_defconfig \
     vendor/pineapple_GKI.config \
     vendor/xiaomi/sm8650_GKI.config \
-    vendor/$(PRODUCT_DEVICE)_GKI.config
+    vendor/xiaomi/$(PRODUCT_DEVICE)_GKI.config
 
 TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/sm8650-modules
 TARGET_KERNEL_EXT_MODULES := \
@@ -137,6 +140,7 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/dsp-kernel \
     qcom/opensource/eva-kernel \
     qcom/opensource/video-driver \
+    qcom/opensource/touch-drivers \
     qcom/opensource/graphics-kernel \
     qcom/opensource/wlan/platform \
     qcom/opensource/wlan/qcacld-3.0/.kiwi_v2 \
@@ -146,14 +150,12 @@ TARGET_KERNEL_EXT_MODULES := \
     qcom/opensource/mm-sys-kernel/ubwcp \
     nxp/opensource/driver
 
-BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/configs/modules/modules.load.system_dlkm))
-BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(DEVICE_PATH)/configs/modules/modules.blocklist
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/configs/modules/modules.load.vendor_dlkm))
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/modules/modules.load))
+BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE := $(COMMON_PATH)/configs/modules/modules.blocklist
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/modules/modules.load.vendor_boot))
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_BLOCKLIST_FILE := $(BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE)
-BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/configs/modules/modules.load.first_stage))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD  := $(strip $(shell cat $(DEVICE_PATH)/configs/modules/modules.load.recovery))
-BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
-SYSTEM_KERNEL_MODULES := $(BOARD_SYSTEM_KERNEL_MODULES_LOAD)
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(COMMON_PATH)/configs/modules/modules.load.recovery))
+BOOT_KERNEL_MODULES += $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD)
 endif
 
 # Metadata
